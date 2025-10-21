@@ -1,7 +1,9 @@
 #include "Player.h"
 #include "Enemy.h"
 
-Player::Player()
+Player::Player():
+	x(0),
+	y(0)
 {
 }
 
