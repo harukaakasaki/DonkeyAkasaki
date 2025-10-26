@@ -1,13 +1,14 @@
 #pragma once
-class Enemy
+#include "Character.h"
+class Enemy:public Character
 {
 public:
 	Enemy();
-	~Enemy();
+	virtual ~Enemy()override;
 
-	void Init();
-	void Update();
-	void Draw();
+	virtual void Init()override;
+	virtual void Update()override;
+	virtual void Draw()override;
 
 private:
 
