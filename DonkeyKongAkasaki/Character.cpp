@@ -3,8 +3,7 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-Character::Character():
-	m_handle(0)
+Character::Character()
 {
 }
 

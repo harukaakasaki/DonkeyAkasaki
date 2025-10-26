@@ -9,7 +9,7 @@ public:
 	virtual void Update();
 	virtual void Draw();
 
-private:
+protected:
 	int m_handle;
 };
 
