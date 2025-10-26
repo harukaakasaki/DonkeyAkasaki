@@ -6,6 +6,7 @@
 /// </summary>
 Enemy::Enemy()
 {
+	m_handle = LoadGraph("data/bat.png"); 
 }
 
 /// <summary>
@@ -13,6 +14,7 @@ Enemy::Enemy()
 /// </summary>
 Enemy::~Enemy()
 {
+	DeleteGraph(m_handle);
 }
 
 /// <summary>
@@ -34,4 +36,5 @@ void Enemy::Update()
 /// </summary>
 void Enemy::Draw()
 {
+	DrawGraph(0, 150, m_handle, true);
 }

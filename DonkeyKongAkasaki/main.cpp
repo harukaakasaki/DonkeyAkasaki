@@ -2,6 +2,8 @@
 #include "Game.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "SceneMain.h"
+#include "Pad.h"
 
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -22,6 +24,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	SceneMain* m_pScene = new SceneMain;
+	m_pScene->Init();
 	
 	while (ProcessMessage() != -1)
 	{
@@ -30,6 +34,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// 前のフレーム描画を消す
 		ClearDrawScreen();
 		//（ゲーム内容）
+		
+		Pad::Update();
+		m_pScene->Update();
+		m_pScene->Draw();
+		
 
 		if (CheckHitKey(KEY_INPUT_ESCAPE))
 		{

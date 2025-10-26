@@ -13,5 +13,6 @@ public:
 private:
 	int x;
 	int y;
+	void Move();
 };
 

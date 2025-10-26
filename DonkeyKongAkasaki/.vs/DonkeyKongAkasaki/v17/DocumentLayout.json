@@ -3,32 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Vec2.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Vec2.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Character.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Character.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Pad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Pad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Pad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Pad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\SceneMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:SceneMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\SceneMain.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:SceneMain.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Character.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{09C43BE0-BD43-4CA7-89AD-9DEAF30C16BD}|DonkeyKongAkasaki.vcxproj|solutionrelative:Character.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,24 +58,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "Vec2.h",
+              "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Vec2.h",
+              "RelativeDocumentMoniker": "Vec2.h",
+              "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Vec2.h",
+              "RelativeToolTip": "Vec2.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAkwCcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-26T10:21:55.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Pad.cpp",
+              "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Pad.cpp",
+              "RelativeDocumentMoniker": "Pad.cpp",
+              "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Pad.cpp",
+              "RelativeToolTip": "Pad.cpp",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-26T08:55:43.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Pad.h",
+              "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Pad.h",
+              "RelativeDocumentMoniker": "Pad.h",
+              "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Pad.h",
+              "RelativeToolTip": "Pad.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-26T08:50:35.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SceneMain.cpp",
+              "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\SceneMain.cpp",
+              "RelativeDocumentMoniker": "SceneMain.cpp",
+              "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\SceneMain.cpp",
+              "RelativeToolTip": "SceneMain.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAQAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-26T07:13:46.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Character.cpp",
               "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Character.cpp",
               "RelativeDocumentMoniker": "Character.cpp",
               "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Character.cpp",
               "RelativeToolTip": "Character.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-26T06:09:53.578Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "Character.h",
               "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Character.h",
               "RelativeDocumentMoniker": "Character.h",
@@ -68,32 +140,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-21T07:10:17.785Z"
+              "WhenOpened": "2025-10-21T07:10:17.785Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.cpp",
               "RelativeDocumentMoniker": "Player.cpp",
               "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.cpp",
               "RelativeToolTip": "Player.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAB0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-21T07:08:16.493Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.h",
+              "RelativeDocumentMoniker": "Player.h",
+              "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.h",
+              "RelativeToolTip": "Player.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-21T06:59:03.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SceneMain.h",
+              "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\SceneMain.h",
+              "RelativeDocumentMoniker": "SceneMain.h",
+              "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\SceneMain.h",
+              "RelativeToolTip": "SceneMain.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-26T07:12:53.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Enemy.h",
               "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Enemy.h",
               "RelativeDocumentMoniker": "Enemy.h",
@@ -101,32 +200,21 @@
               "RelativeToolTip": "Enemy.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-21T07:03:05.734Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Player.h",
-              "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.h",
-              "RelativeDocumentMoniker": "Player.h",
-              "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.h",
-              "RelativeToolTip": "Player.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-21T06:59:03.857Z",
+              "WhenOpened": "2025-10-21T07:03:05.734Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "Enemy.cpp",
               "DocumentMoniker": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Enemy.cpp",
               "RelativeDocumentMoniker": "Enemy.cpp",
               "ToolTip": "C:\\Users\\remus\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\DonkeyAkasaki\\DonkeyKongAkasaki\\Enemy.cpp",
               "RelativeToolTip": "Enemy.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-21T07:03:15.846Z"
+              "WhenOpened": "2025-10-21T07:03:15.846Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -1,15 +1,15 @@
 #include "Player.h"
 #include "DxLib.h"
+#include "Pad.h"
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
 Player::Player():
 	x(0),
-	y(0),
-	m_handle(-1)
+	y(0)
 {
-	
+	m_handle = LoadGraph("data/player.png");
 }
 
 /// <summary>
@@ -17,6 +17,7 @@ Player::Player():
 /// </summary>
 Player::~Player()
 {
+	DeleteGraph(m_handle);
 }
 
 /// <summary>
@@ -37,5 +38,12 @@ void Player::Update()
 /// 描画
 /// </summary>
 void Player::Draw()
+{
+	DrawGraph(0, 0, m_handle, true);
+}
+/// <summary>
+/// プレイヤーを動かす
+/// </summary>
+void Player::Move()
 {
 }
