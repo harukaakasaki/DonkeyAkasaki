@@ -1,2 +1,9 @@
-﻿  SceneMain.cpp
-  DonkeyKongAkasaki.vcxproj -> C:\Users\remus\OneDrive\ドキュメント\GitHub\DonkeyAkasaki\DonkeyKongAkasaki\x64\Debug\DonkeyKongAkasaki.exe
+﻿  Character.cpp
+  Enemy.cpp
+  main.cpp
+  Pad.cpp
+  Player.cpp
+  SceneMain.cpp
+  Vec2.cpp
+  コードを生成中...
+  DonkeyKongAkasaki.vcxproj -> C:\Users\Akasakiharuka\DonkeyAkasaki\DonkeyKongAkasaki\x64\Debug\DonkeyKongAkasaki.exe
