@@ -4,7 +4,8 @@
 /// コンストラクタ
 /// </summary>
 Character::Character():
-	m_handle(-1)
+	m_handle(-1),
+	m_isRight(true)
 {
 }
 

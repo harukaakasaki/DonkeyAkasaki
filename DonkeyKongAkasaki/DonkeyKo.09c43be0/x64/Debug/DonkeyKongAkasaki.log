@@ -1,9 +1,2 @@
-﻿  Character.cpp
-  Enemy.cpp
-  main.cpp
-  Pad.cpp
-  Player.cpp
-  SceneMain.cpp
-  Vec2.cpp
-  コードを生成中...
+﻿  Player.cpp
   DonkeyKongAkasaki.vcxproj -> C:\Users\Akasakiharuka\DonkeyAkasaki\DonkeyKongAkasaki\x64\Debug\DonkeyKongAkasaki.exe

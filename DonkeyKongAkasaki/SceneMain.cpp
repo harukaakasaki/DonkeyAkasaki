@@ -1,6 +1,8 @@
 #include "SceneMain.h"
-#include "Player.h"
+#include "Game.h"
 #include "Enemy.h"
+#include "DxLib.h"
+#include "Player.h"
 
 /// <summary>
 /// コンストラクタ
@@ -23,6 +25,8 @@ SceneMain::~SceneMain()
 /// </summary>
 void SceneMain::Init()
 {
+	m_pPlayer->Init();
+	m_pEnemy->Init();
 }
 
 /// <summary>
@@ -39,6 +43,8 @@ void SceneMain::Update()
 /// </summary>
 void SceneMain::Draw()
 {
+	DrawLine(0, 640, Game::kScreenWidth, 640, GetColor(255, 255, 255));
 	m_pPlayer->Draw();
 	m_pEnemy->Draw();
+	
 }

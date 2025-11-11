@@ -1,4 +1,5 @@
 #pragma once
+#include "Vec2.h"
 class Character
 {
 public:
@@ -10,6 +11,15 @@ public:
 	virtual void Draw();
 
 protected:
+	// キャラクターの画像
 	int m_handle;
+
+protected:
+	// 座標
+	Vec2 m_pos;
+
+protected:
+	// 右を向いているのか
+	bool m_isRight;
 };
 
