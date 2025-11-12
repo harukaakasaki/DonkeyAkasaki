@@ -1,6 +1,9 @@
 #pragma once
+
+// プロトタイプ宣言
 class Player;
 class Enemy;
+
 class SceneMain
 {
 public:
@@ -27,7 +30,9 @@ public:
 	void Draw();
 
 private:
+	// Playerクラスのポインタを取得した
 	Player* m_pPlayer;
+	// Enemyクラスのポインタを取得した
 	Enemy* m_pEnemy;
 };
 

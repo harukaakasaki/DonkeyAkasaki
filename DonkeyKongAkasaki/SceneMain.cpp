@@ -1,8 +1,9 @@
 #include "SceneMain.h"
 #include "Game.h"
 #include "Enemy.h"
-#include "DxLib.h"
+#include <DxLib.h>
 #include "Player.h"
+#include "Vec2.h"
 
 /// <summary>
 /// コンストラクタ

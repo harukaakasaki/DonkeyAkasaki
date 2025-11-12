@@ -1,2 +1,8 @@
-﻿  Player.cpp
+﻿  Character.cpp
+  Player.cpp
+C:\Users\Akasakiharuka\DonkeyAkasaki\DonkeyKongAkasaki\Player.cpp(122,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\Akasakiharuka\DonkeyAkasaki\DonkeyKongAkasaki\Player.cpp(122,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\Akasakiharuka\DonkeyAkasaki\DonkeyKongAkasaki\Player.cpp(126,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\Akasakiharuka\DonkeyAkasaki\DonkeyKongAkasaki\Player.cpp(126,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
   DonkeyKongAkasaki.vcxproj -> C:\Users\Akasakiharuka\DonkeyAkasaki\DonkeyKongAkasaki\x64\Debug\DonkeyKongAkasaki.exe

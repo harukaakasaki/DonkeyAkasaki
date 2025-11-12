@@ -13,13 +13,14 @@ public:
 protected:
 	// キャラクターの画像
 	int m_handle;
-
-protected:
 	// 座標
 	Vec2 m_pos;
-
-protected:
+	// 移動量
+	Vec2 m_move;
 	// 右を向いているのか
 	bool m_isRight;
+	// 重力
+	void Gravity();
+
 };
 

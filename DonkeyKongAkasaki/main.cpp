@@ -1,4 +1,4 @@
-#include "DxLib.h"
+#include <DxLib.h>
 #include "Game.h"
 #include "Player.h"
 #include "Enemy.h"

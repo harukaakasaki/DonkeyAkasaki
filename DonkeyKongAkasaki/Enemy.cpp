@@ -1,5 +1,6 @@
 #include "Enemy.h"
-#include "DxLib.h"
+#include "Character.h"
+#include <DxLib.h>
 
 /// <summary>
 /// コンストラクタ
@@ -29,6 +30,7 @@ void Enemy::Init()
 /// </summary>
 void Enemy::Update()
 {
+	Character::Update();
 }
 
 /// <summary>
@@ -36,5 +38,5 @@ void Enemy::Update()
 /// </summary>
 void Enemy::Draw()
 {
-	DrawGraph(0, 150, m_handle, true);
+	Character::Draw();
 }
