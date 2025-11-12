@@ -154,9 +154,9 @@
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\Users\\Akasakiharuka\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.cpp",
               "RelativeDocumentMoniker": "Player.cpp",
-              "ToolTip": "C:\\Users\\Akasakiharuka\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.cpp*",
-              "RelativeToolTip": "Player.cpp*",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAUwFMAAAAFAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Akasakiharuka\\DonkeyAkasaki\\DonkeyKongAkasaki\\Player.cpp",
+              "RelativeToolTip": "Player.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-21T07:08:16.493Z",
               "EditorCaption": ""
@@ -171,8 +171,7 @@
               "RelativeToolTip": "Player.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-21T06:59:03.857Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T06:59:03.857Z"
             },
             {
               "$type": "Document",
