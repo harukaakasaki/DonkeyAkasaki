@@ -5,7 +5,7 @@
 #include"SceneMain.h"
 
 // 単純に四角(プレイヤーを動かす)
-
+// 地面に落ちたけど、常にプレイヤーが落ち続けてしまう。
 
 namespace
 {
@@ -86,7 +86,7 @@ void Player::Gravity()
 	if (m_y + m_vecY >= kGround)
 	{
 		// 地面にいる時の処理
-		m_y = kGround;
+		m_y = kGround - 32;
 		m_vecY = 0;
 		m_isGround = true;
 	}
