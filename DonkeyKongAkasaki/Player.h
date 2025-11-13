@@ -33,8 +33,6 @@ private:
 	float m_vecX;
 	float m_vecY;
 
-	// ’n–Ê‚É‚¢‚é‚©‚Ç‚¤‚©
-	bool m_isGround;
 
 	// ˆÚ“®
 	void Move();

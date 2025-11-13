@@ -19,6 +19,8 @@ protected:
 	Vec2 m_move;
 	// ‰E‚ğŒü‚¢‚Ä‚¢‚é‚Ì‚©
 	bool m_isRight;
+	// ’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚Ì‚©
+	bool m_isGround;
 	// d—Í
 	void Gravity();
 

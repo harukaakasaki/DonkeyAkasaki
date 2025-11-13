@@ -11,7 +11,7 @@
 namespace
 {
 	constexpr float kSpeed = 10.0f;   //スピード
-	constexpr float kGround = 640.0f; //地面の位置
+//	constexpr float kGround = 640.0f; //地面の位置
 
 	//constexpr int kPlayerAnimNum = 8; // プレイヤーのアニメーション
 	//constexpr int kAnimWaitFrame = 4; // ↑ 1コマ当たりのフレーム数
@@ -26,8 +26,8 @@ Player::Player():
 	m_x(0),
 	m_y(0),
 	m_vecX(0),
-	m_vecY(0),
-	m_isGround(false)
+	m_vecY(0)
+//	m_isGround(false)
 //	m_animFrame(0)
 {
 	m_handle = LoadGraph("data/player.png");
@@ -48,8 +48,8 @@ void Player::Init()
 {
 //	m_animFrame = 0;
 
-	m_x = 500;
-	m_y = 100;
+	/*m_x = 500;
+	m_y = 100;*/
 }
 
 /// <summary>

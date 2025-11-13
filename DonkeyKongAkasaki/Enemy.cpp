@@ -1,5 +1,7 @@
 #include "Enemy.h"
 #include "Character.h"
+#include "SceneMain.h"
+#include "Vec2.h"
 #include <DxLib.h>
 
 /// <summary>
