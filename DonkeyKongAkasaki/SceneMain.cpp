@@ -4,6 +4,7 @@
 #include <DxLib.h>
 #include "Player.h"
 #include "Vec2.h"
+#include <memory>
 
 /// <summary>
 /// コンストラクタ
@@ -19,6 +20,8 @@ SceneMain::SceneMain()
 /// </summary>
 SceneMain::~SceneMain()
 {
+	delete m_pPlayer;
+	delete m_pEnemy;
 }
 
 /// <summary>

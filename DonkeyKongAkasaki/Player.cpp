@@ -13,10 +13,12 @@ namespace
 	constexpr float kSpeed = 10.0f;   //スピード
 //	constexpr float kGround = 640.0f; //地面の位置
 
-	//constexpr int kPlayerAnimNum = 8; // プレイヤーのアニメーション
-	//constexpr int kAnimWaitFrame = 4; // ↑ 1コマ当たりのフレーム数
-	//constexpr int kGraphWidth    = 32;// プレイヤーのグラフィックサイズ（幅）
-	//constexpr int kGraphHeight   = 32;// プレイヤーのグラフィックサイズ（高さ）
+	constexpr int kIdleAnimNum = 7; // プレイヤーのIdleアニメーション
+	constexpr int kAnimWaitFrame = 4; // ↑ 1コマ当たりのフレーム数
+	constexpr float kGraphicsSize = 4.0f;// グラフィックサイズ
+	constexpr int kGraphicsAngle = 0;// グラフィックアングル
+	constexpr int kGraphWidth = 1008 / kIdleAnimNum;// プレイヤーのグラフィックサイズ（幅）
+	constexpr int kGraphHeight = 144;// プレイヤーのグラフィックサイズ（高さ）
 }
 
 /// <summary>
@@ -26,11 +28,11 @@ Player::Player():
 	m_x(0),
 	m_y(0),
 	m_vecX(0),
-	m_vecY(0)
+	m_vecY(0),
 //	m_isGround(false)
-//	m_animFrame(0)
+	m_animFrame(0)
 {
-	m_handle = LoadGraph("data/player.png");
+	m_handle = LoadGraph("data/player_anim.png");
 }
 
 /// <summary>
@@ -46,7 +48,7 @@ Player::~Player()
 /// </summary>
 void Player::Init()
 {
-//	m_animFrame = 0;
+	m_animFrame = 0;
 
 	/*m_x = 500;
 	m_y = 100;*/
@@ -59,12 +61,11 @@ void Player::Update()
 {
 	Character::Update();
 	// アニメーション
-	/*m_animFrame++;
-	if (m_animFrame >= kPlayerAnimNum * kAnimWaitFrame)
+	m_animFrame++;
+	if (m_animFrame >= kIdleAnimNum * kAnimWaitFrame)
 	{
 		m_animFrame = 0;
 	}
-	Character::Update();*/
 
 	// 移動する
 	Move();
@@ -115,33 +116,29 @@ void Player::Move()
 void Player::Draw()
 {
 	// プレイヤーを描画
-	// 入力した方向にプレイヤーが向く
-	if (m_isRight)
-	{
-		DrawGraph(m_pos.x, m_pos.y, m_handle, true);
-	}
-	else
-	{
-		DrawTurnGraph(m_pos.x, m_pos.y, m_handle, true);
-	}
+	// アニメーションのフレーム数から表示したいコマ番号
+	int animNo = m_animFrame / kAnimWaitFrame;
+	// アニメーションの進行に合わせてグラフィックを切り取る
+	int srcX = kGraphWidth * animNo;
+	int srcY = 0;
+	// アニメーションの描画
+	DrawRectRotaGraph(static_cast<int>(m_pos.x),
+		static_cast<int>(m_pos.y),
+		srcX, srcY, kGraphWidth, kGraphHeight, kGraphicsSize,0,
+		m_handle, true, !m_isRight);
+	/*DrawRectRotaGraph(static_cast<int>(m_pos.x),
+		static_cast<int>(m_pos.y),
+		srcX, srcY, kGraphWidth, kGraphHeight, 5.0f, 0,
+		m_handle, true, !m_isRight);*/
+
+
 
 	// プレイヤー（四角）を描画
 	/*DrawBox(static_cast<int>(m_x), static_cast<int>(m_y),
 		static_cast<int>(m_x + 32), static_cast<int>(m_y + 32),
 		GetColor(0, 255, 255), false);*/
 
-		//// アニメーションのフレーム数から表示したいコマ番号
-		//int animNo = m_animFrame / kAnimWaitFrame;
-		//// アニメーションの進行に合わせてグラフィックを切り取る
-		//int srcX = kGraphWidth * animNo;
-		//int srcY = 0;
-		//// アニメーションの描画
-		//DrawGraph(0, 0, m_handle, true);
-
-		/*DrawRectGraph(static_cast<int>(m_pos.x) - kGraphWidth / 2,
-			static_cast<int>(m_pos.y) - kGraphHeight / 2,
-			srcX, srcY, kGraphWidth, kGraphHeight,
-			m_handle, true, m_isRight);*/
+		
 }
 
 

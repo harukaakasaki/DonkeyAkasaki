@@ -40,6 +40,6 @@ private:
 	void Gravity();
 
 	// プレイヤーのアニメーション
-//	int m_animFrame;
+	int m_animFrame;
 };
 
