@@ -5,14 +5,12 @@
 #include"SceneMain.h"
 #include "Vec2.h"
 
-// 単純に四角(プレイヤーを動かす)
-// 地面に落ちたけど、常にプレイヤーが落ち続けてしまう。
+
 
 namespace
 {
-	constexpr float kSpeed = 10.0f;   //スピード
+	constexpr float kSpeed = 5.0f;   //スピード
 //	constexpr float kGround = 640.0f; //地面の位置
-
 	constexpr int kIdleAnimNum = 7; // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 4; // ↑ 1コマ当たりのフレーム数
 	constexpr float kGraphicsSize = 4.0f;// グラフィックサイズ
@@ -29,10 +27,9 @@ Player::Player():
 	m_y(0),
 	m_vecX(0),
 	m_vecY(0),
-//	m_isGround(false)
 	m_animFrame(0)
 {
-	m_handle = LoadGraph("data/player_anim.png");
+	m_handle = LoadGraph("data/player_img.png");
 }
 
 /// <summary>
@@ -49,9 +46,6 @@ Player::~Player()
 void Player::Init()
 {
 	m_animFrame = 0;
-
-	/*m_x = 500;
-	m_y = 100;*/
 }
 
 /// <summary>
@@ -91,24 +85,7 @@ void Player::Move()
 	}
 }
 
-//void Player::Gravity()
-//{
-//	m_move.y += kGravity;
-//	m_pos.y += m_move.y;
-//
-//	if (m_pos.y + m_move.y >= kGround)
-//	{
-//		// 地面にいる時の処理
-//		m_pos.y = kGround - 32;
-//		m_move.y = 0;
-//		m_isGround = true;
-//	}
-//	else
-//	{
-//		// 地面にいないときの処理
-//		m_isGround = false;
-//	}
-//}
+
 
 /// <summary>
 /// 描画
@@ -122,17 +99,10 @@ void Player::Draw()
 	int srcX = kGraphWidth * animNo;
 	int srcY = 0;
 	// アニメーションの描画
-	DrawRectRotaGraph(static_cast<int>(m_pos.x),
-		static_cast<int>(m_pos.y),
-		srcX, srcY, kGraphWidth, kGraphHeight, kGraphicsSize,0,
+	DrawRectRotaGraph(static_cast<int>(m_pos.x),static_cast<int>(m_pos.y-35),//-35は地面への位置調整
+		srcX, srcY, kGraphWidth, kGraphHeight, kGraphicsSize,kGraphicsAngle,
 		m_handle, true, !m_isRight);
-	/*DrawRectRotaGraph(static_cast<int>(m_pos.x),
-		static_cast<int>(m_pos.y),
-		srcX, srcY, kGraphWidth, kGraphHeight, 5.0f, 0,
-		m_handle, true, !m_isRight);*/
-
-
-
+	
 	// プレイヤー（四角）を描画
 	/*DrawBox(static_cast<int>(m_x), static_cast<int>(m_y),
 		static_cast<int>(m_x + 32), static_cast<int>(m_y + 32),

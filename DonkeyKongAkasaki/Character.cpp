@@ -4,8 +4,8 @@
 
 namespace
 {
-	constexpr float kGravity = 1.0f;
-	constexpr float kGround = 640.0f;
+	constexpr float kGravity = 1.0f;// 重力
+	constexpr float kGround = 640.0f;// 地面
 }
 
 /// <summary>
@@ -42,8 +42,12 @@ void Character::Update()
 	Gravity();
 }
 
+/// <summary>
+/// 重力
+/// </summary>
 void Character::Gravity()
 {
+	// 重力分、下に落ちる
 	m_move.y += kGravity;
 
 	if (m_pos.y >= kGround)
