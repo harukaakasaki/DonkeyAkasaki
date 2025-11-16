@@ -1,5 +1,6 @@
 #include "Character.h"
 #include <DxLib.h>
+#include "Player.h"
 
 
 namespace
@@ -13,8 +14,7 @@ namespace
 /// </summary>
 Character::Character() :
 	m_handle(-1),
-	m_isGround(false),
-	m_isRight(true)
+	m_isGround(false)
 {
 }
 
@@ -63,6 +63,9 @@ void Character::Gravity()
 		m_isGround = false;
 	}
 }
+
+
+
 
 /// <summary>
 /// •`‰æ

@@ -34,12 +34,24 @@ private:
 	float m_vecY;
 
 
-	// 移動
+	/// <summary>
+	/// 移動
+	/// </summary>
 	void Move();
-	// 重力
+	/// <summary>
+	/// 重力
+	/// </summary>
 	void Gravity();
+	/// <summary>
+	/// アニメーション
+	/// </summary>
+	void Animation();
+	/// <summary>
+	/// ジャンプ
+	/// </summary>
+	void Jump();
 
-	// プレイヤーのアニメーション
+	// アニメーションのフレーム数
 	int m_animFrame;
 };
 
