@@ -1,5 +1,17 @@
 #pragma once
 #include "Character.h"
+
+/// <summary>
+/// プレイヤーの状態
+/// </summary>
+enum class PlayerState
+{
+	Normal,// 通報
+	Move,  // 移動
+	Jump,  // ジャンプ
+	Attack // 攻撃
+};
+
 class Player: public Character
 {
 public:
@@ -33,6 +45,8 @@ private:
 	float m_vecX;
 	float m_vecY;
 
+	PlayerState m_state = PlayerState::Normal;
+
 
 	/// <summary>
 	/// 移動
@@ -45,13 +59,33 @@ private:
 	/// <summary>
 	/// アニメーション
 	/// </summary>
-	void Animation();
+	//void Animation();
 	/// <summary>
 	/// ジャンプ
 	/// </summary>
 	void Jump();
+	/// <summary>
+	/// 攻撃
+	/// </summary>
+	/*void Attack();*/
+
+	/// <summary>
+	/// キー入力処理
+	/// </summary>
+	void HandleInput();
+	/// <summary>
+	/// アニメーションの更新
+	/// </summary>
+	void UpdateState();
 
 	// アニメーションのフレーム数
-	int m_animFrame;
+	int m_animFrame = 0;
+	// コマ送りのカウンタ
+	int m_animCount = 0;
+
+	int normalAnim[7]; // 通常コマ数
+	int attackAnim[10];// 攻撃コマ数
+	int moveAnim[8];   // 移動コマ数
+	int jumpAnim[4];   // ジャンプコマ数
 };
 

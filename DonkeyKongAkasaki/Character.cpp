@@ -14,7 +14,11 @@ namespace
 /// </summary>
 Character::Character() :
 	m_handle(-1),
-	m_isGround(false)
+	m_attack(-1),
+	m_pos(),
+	m_move(),
+	m_isGround(false),
+	m_isRight(true)
 {
 }
 
@@ -54,7 +58,7 @@ void Character::Gravity()
 	{
 		// ’n–Ê‚É‚¢‚é‚Ìˆ—
 		m_pos.y = kGround;
-		m_move.y = 0;
+		m_move.y = 0.0f;
 		m_isGround = true;
 	}
 	else

@@ -47,8 +47,11 @@ void SceneMain::Update()
 /// </summary>
 void SceneMain::Draw()
 {
+	
+	DrawBox(Game::kScreenWidth,Game::kScreenHeight,
+		0, 0, GetColor(0, 100, 100), true);
 	DrawLine(0, 640, Game::kScreenWidth, 640, GetColor(255, 255, 255));
 	m_pPlayer->Draw();
 	m_pEnemy->Draw();
-	
+
 }
