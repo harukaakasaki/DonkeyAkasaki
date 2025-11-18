@@ -12,19 +12,6 @@ public:
 	/// </summary>
 	virtual ~Enemy()override;
 
-	/// <summary>
-	/// ‰Šú‰»
-	/// </summary>
-	virtual void Init()override;
-	/// <summary>
-	/// XV
-	/// </summary>
-	virtual void Update()override;
-	/// <summary>
-	/// •`‰æ
-	/// </summary>
-	virtual void Draw()override;
-
 private:
 
 };

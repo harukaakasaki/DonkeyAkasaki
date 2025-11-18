@@ -20,25 +20,4 @@ Enemy::~Enemy()
 	DeleteGraph(m_handle);
 }
 
-/// <summary>
-/// ‰Šú‰»
-/// </summary>
-void Enemy::Init()
-{
-}
 
-/// <summary>
-/// XV
-/// </summary>
-void Enemy::Update()
-{
-	Character::Update();
-}
-
-/// <summary>
-/// •`‰æ
-/// </summary>
-void Enemy::Draw()
-{
-	Character::Draw();
-}

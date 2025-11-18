@@ -4,6 +4,7 @@
 #include"Character.h"
 #include"SceneMain.h"
 #include "Vec2.h"
+#include "Camera.h"
 
 namespace
 {
@@ -20,8 +21,6 @@ namespace
 
 // コンストラクタ
 Player::Player() :
-	m_x(0),
-	m_y(0),
 	m_vecX(0),
 	m_vecY(0),
 	m_animFrame(0),
@@ -206,8 +205,13 @@ void Player::UpdateState()
 }
 
 // 描画
-void Player::Draw()
+void Player::Draw(Camera& camera)
 {
+	Vec2 cameraPos;
+
+	cameraPos = camera.GetPos();
+
+
 	// プレイヤーを描画
 	// アニメーションのフレーム数から表示したいコマ番号
 	int animNo = m_animFrame / kAnimWaitFrame;
@@ -217,14 +221,14 @@ void Player::Draw()
 	// 通常アニメーションの描画
 	if (m_state == PlayerState::Normal)
 	{
-		DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y - 35),//-35は地面への位置調整
+		DrawRectRotaGraph(static_cast<int>(m_pos.x)-cameraPos.x, static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
 			srcX, srcY, kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_handle, true, !m_isRight);
 		// デバッグの時のみ行う
 #ifdef _DEBUG
 		// 当たり判定（四角）の描画
-		DrawBox(static_cast<int>(m_pos.x - 40), static_cast<int>(m_pos.y - 90),
-			static_cast<int>(m_pos.x + 32), static_cast<int>(m_pos.y),
+		DrawBox(static_cast<int>(m_pos.x - 40) - cameraPos.x, static_cast<int>(m_pos.y - 90) - cameraPos.y,
+			static_cast<int>(m_pos.x + 32) - cameraPos.x, static_cast<int>(m_pos.y) - cameraPos.y,
 			GetColor(0, 255, 255), false);
 #endif // DEBUG
 	}
@@ -239,7 +243,7 @@ void Player::Draw()
 	// Zキーを押すと攻撃モーションに変わる
 	if (m_state == PlayerState::Attack)
 	{
-		DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y - 35),//-35は地面への位置調整
+		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x, static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
 			srcX, srcY, kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_attack, true, !m_isRight);
 #ifdef _DEBUG
@@ -258,7 +262,7 @@ void Player::Draw()
 		bottom = static_cast<int>(m_pos.y);
 
 		// 当たり判定（攻撃）の描画
-		DrawBox(left, top, right, bottom, GetColor(255, 0, 0), false);
+		DrawBox(left - cameraPos.x, top - cameraPos.y, right - cameraPos.x, bottom - cameraPos.y, GetColor(255, 0, 0), false);
 #endif // _DEBUG
 	}
 
@@ -266,5 +270,7 @@ void Player::Draw()
 
 
 }
+
+
 
 

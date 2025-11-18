@@ -1,6 +1,7 @@
 #include "Character.h"
 #include <DxLib.h>
 #include "Player.h"
+#include "Camera.h"
 
 
 namespace
@@ -74,7 +75,16 @@ void Character::Gravity()
 /// <summary>
 /// •`‰æ
 /// </summary>
-void Character::Draw()
+void Character::Draw(Camera& camera)
 {
-	//DrawGraphF(0, 50, m_handle, true);
+	Vec2 cameraPos;
+
+	cameraPos = camera.GetPos();
+
+
+
+	DrawGraphF(0-cameraPos.x, 50 - cameraPos.y, m_handle, true);
+	DrawGraphF(0 - cameraPos.x, 100 - cameraPos.y, m_handle, true);
+	DrawGraphF(0 - cameraPos.x, 150 - cameraPos.y, m_handle, true);
 }
+

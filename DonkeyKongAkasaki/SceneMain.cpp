@@ -4,6 +4,7 @@
 #include <DxLib.h>
 #include "Player.h"
 #include "Vec2.h"
+#include "Camera.h"
 #include <memory>
 
 /// <summary>
@@ -11,8 +12,10 @@
 /// </summary>
 SceneMain::SceneMain()
 {
+	
 	m_pPlayer = new Player;
-	m_pEnemy = new Enemy;
+	m_pCamera = new Camera;
+	m_pEnemys.resize(4);
 }
 
 /// <summary>
@@ -22,6 +25,7 @@ SceneMain::~SceneMain()
 {
 	delete m_pPlayer;
 	delete m_pEnemy;
+	delete m_pCamera;
 }
 
 /// <summary>
@@ -30,7 +34,8 @@ SceneMain::~SceneMain()
 void SceneMain::Init()
 {
 	m_pPlayer->Init();
-	m_pEnemy->Init();
+
+	m_pCamera->Init();
 }
 
 /// <summary>
@@ -39,7 +44,7 @@ void SceneMain::Init()
 void SceneMain::Update()
 {
 	m_pPlayer->Update();
-	m_pEnemy->Update();
+	m_pCamera->Update(*m_pPlayer);
 }
 
 /// <summary>
@@ -47,11 +52,12 @@ void SceneMain::Update()
 /// </summary>
 void SceneMain::Draw()
 {
-	
-	DrawBox(Game::kScreenWidth,Game::kScreenHeight,
+	Vec2 cameraPos;
+	cameraPos = m_pCamera->GetPos();
+
+	DrawBox(Game::kScreenWidth-cameraPos.x,Game::kScreenHeight - cameraPos.y,
 		0, 0, GetColor(0, 100, 100), true);
-	DrawLine(0, 640, Game::kScreenWidth, 640, GetColor(255, 255, 255));
-	m_pPlayer->Draw();
-	m_pEnemy->Draw();
+	DrawLine(0 - cameraPos.x, 640 - cameraPos.y, Game::kScreenWidth - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
+	m_pPlayer->Draw(*m_pCamera);
 
 }

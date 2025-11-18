@@ -1,8 +1,11 @@
 #pragma once
+#include <vector>
+#include <memory>
 
 // プロトタイプ宣言
 class Player;
 class Enemy;
+class Camera;
 
 class SceneMain
 {
@@ -34,5 +37,9 @@ private:
 	Player* m_pPlayer;
 	// Enemyクラスのポインタを取得した
 	Enemy* m_pEnemy;
+	// Cameraクラスのポインタを取得した
+	Camera* m_pCamera;
+
+	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
 };
 

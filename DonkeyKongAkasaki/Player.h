@@ -12,7 +12,7 @@ enum class PlayerState
 	Attack // 攻撃
 };
 
-class Player: public Character
+class Player : public Character
 {
 public:
 	/// <summary>
@@ -35,12 +35,11 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	virtual void Draw()override;
+	virtual void Draw(Camera&camera)override;
+
+	
 
 private:
-	// 座標X,Y
-	float m_x;
-	float m_y;
 	// 力X,Y
 	float m_vecX;
 	float m_vecY;
@@ -87,5 +86,6 @@ private:
 	int attackAnim[10];// 攻撃コマ数
 	int moveAnim[8];   // 移動コマ数
 	int jumpAnim[4];   // ジャンプコマ数
+
 };
 

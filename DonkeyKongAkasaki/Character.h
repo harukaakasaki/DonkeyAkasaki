@@ -1,5 +1,7 @@
 #pragma once
 #include "Vec2.h"
+
+class Camera;
 class Character
 {
 public:
@@ -8,7 +10,15 @@ public:
 
 	virtual void Init();
 	virtual void Update();
-	virtual void Draw();
+	virtual void Draw(Camera& camera);
+
+	/// <summary>
+	/// プレイヤーの現在の位置を取得
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
+	const Vec2 GetPos()const { return m_pos; }
 
 protected:
 	// キャラクターの画像
