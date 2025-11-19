@@ -20,4 +20,19 @@ Enemy::~Enemy()
 	DeleteGraph(m_handle);
 }
 
+void Enemy::Init()
+{
+
+}
+
+void Enemy::Update()
+{
+
+}
+
+void Enemy::Draw()
+{
+
+}
+
 

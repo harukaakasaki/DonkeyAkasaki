@@ -10,7 +10,10 @@ public:
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	virtual ~Enemy()override;
+	virtual ~Enemy();
+	virtual void Init();
+	virtual void Update();
+	virtual void Draw();
 
 private:
 
