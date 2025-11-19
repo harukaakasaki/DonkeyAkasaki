@@ -15,7 +15,8 @@ namespace
 /// </summary>
 Character::Character() :
 	m_handle(-1),
-	m_attack(-1),
+	m_attackHandle(-1),
+	m_moveHandle(-1),
 	m_pos(),
 	m_move(),
 	m_isGround(false),

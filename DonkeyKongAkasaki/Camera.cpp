@@ -5,6 +5,8 @@
 #include "Character.h"
 #include "Player.h"
 
+// ラープ
+// 滑らかに動くようにする
 Vec2 VLerp(Vec2 start, Vec2 end, float t)
 {
 	Vec2 ret;
@@ -35,9 +37,10 @@ void Camera::Update(Player& player)
 	// プレイヤー位置の取得
 	Vec2 playerPos = player.GetPos();
 
+	// カメラの次のポジション
 	Vec2 nextPos;
 	nextPos.x = playerPos.x - Game::kScreenWidth / 2;
-	nextPos.y = playerPos.y - (Game::kScreenHeight / 2 + 200);
+	nextPos.y = playerPos.y - (Game::kScreenHeight / 2 + 200);// プレイヤーの位置（真ん中）よりも少し下げる
 
 	m_pos = VLerp(m_pos,nextPos,0.08f);
 

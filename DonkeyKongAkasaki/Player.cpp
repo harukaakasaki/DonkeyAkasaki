@@ -30,13 +30,16 @@ Player::Player() :
 	jumpAnim()
 {
 	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像
-	m_attack = LoadGraph("data/player_attack_1.png");// アタック時の画像
+	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
+	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
 }
 
 // デストラクタ
 Player::~Player()
 {
 	DeleteGraph(m_handle);
+	DeleteGraph(m_attackHandle);
+	DeleteGraph(m_moveHandle);
 }
 
 // 初期化
@@ -123,10 +126,10 @@ void Player::Jump()
 void Player::HandleInput()
 {
 	// MoveStateに変更
-	//if (m_state == PlayerState::Move)
-	//{
-	//	return;
-	//}
+	/*if (m_state == PlayerState::Move)
+	{
+		return;
+	}*/
 
 	//if (Pad::IsPress(PAD_INPUT_LEFT))// 左入力で左方向に移動
 	//{
@@ -221,18 +224,31 @@ void Player::Draw(Camera& camera)
 	// 通常アニメーションの描画
 	if (m_state == PlayerState::Normal)
 	{
-		DrawRectRotaGraph(static_cast<int>(m_pos.x)-cameraPos.x, static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
-			srcX, srcY, kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+		DrawRectRotaGraph(static_cast<int>(m_pos.x)-cameraPos.x,
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_handle, true, !m_isRight);
 		// デバッグの時のみ行う
 #ifdef _DEBUG
 		// 当たり判定（四角）の描画
-		DrawBox(static_cast<int>(m_pos.x - 40) - cameraPos.x, static_cast<int>(m_pos.y - 90) - cameraPos.y,
-			static_cast<int>(m_pos.x + 32) - cameraPos.x, static_cast<int>(m_pos.y) - cameraPos.y,
+		DrawBox(static_cast<int>(m_pos.x - 40) - cameraPos.x,
+			static_cast<int>(m_pos.y - 90) - cameraPos.y,
+			static_cast<int>(m_pos.x + 32) - cameraPos.x,
+			static_cast<int>(m_pos.y) - cameraPos.y,
 			GetColor(0, 255, 255), false);
 #endif // DEBUG
 	}
 
+
+	if (m_state == PlayerState::Move)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_moveHandle, true, !m_isRight);
+	}
 	// 左右上下
 	int left, right, top, bottom;
 
@@ -240,12 +256,14 @@ void Player::Draw(Camera& camera)
 	int attackW = 160;
 	int attackH = 90;
 
-	// Zキーを押すと攻撃モーションに変わる
+	// 攻撃モーションの描画
 	if (m_state == PlayerState::Attack)
 	{
-		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x, static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
-			srcX, srcY, kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-			m_attack, true, !m_isRight);
+		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			srcX, srcY, 
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_attackHandle, true, !m_isRight);
 #ifdef _DEBUG
 		// 右を向いているとき、右にだけ攻撃判定
 		if (m_isRight)
@@ -253,6 +271,7 @@ void Player::Draw(Camera& camera)
 			left  = static_cast<int>(m_pos.x);
 			right = static_cast<int>(m_pos.x + attackW);
 		}
+		// 左を向いているとき、左にだけ攻撃判定
 		else
 		{
 			left = static_cast<int>(m_pos.x - attackW);
@@ -262,7 +281,9 @@ void Player::Draw(Camera& camera)
 		bottom = static_cast<int>(m_pos.y);
 
 		// 当たり判定（攻撃）の描画
-		DrawBox(left - cameraPos.x, top - cameraPos.y, right - cameraPos.x, bottom - cameraPos.y, GetColor(255, 0, 0), false);
+		DrawBox(left - cameraPos.x, top - cameraPos.y, 
+			right - cameraPos.x, bottom - cameraPos.y, 
+			GetColor(255, 0, 0), false);
 #endif // _DEBUG
 	}
 

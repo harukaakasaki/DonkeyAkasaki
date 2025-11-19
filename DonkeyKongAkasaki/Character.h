@@ -23,8 +23,10 @@ public:
 protected:
 	// キャラクターの画像
 	int m_handle;
+	// キャラクターの移動画像
+	int m_moveHandle;
 	// キャラクターの攻撃画像
-	int m_attack;
+	int m_attackHandle;
 	// 座標
 	Vec2 m_pos;
 	// 移動量
