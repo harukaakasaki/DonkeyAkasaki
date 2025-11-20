@@ -183,17 +183,18 @@ void Player::UpdateState()
 
 		}
 	}
-	else if (m_state == PlayerState::Move)
-	{
-		if (m_animFrame >= 8)// 移動 = 8
-		{
-		// 攻撃アニメーションが最後まで行ったら、
-		// 自動でNormal状態に戻す
-			m_state = PlayerState::Normal;
-			m_animFrame = 0;
+	//移動モーションの状態
 
-		}
-	}
+	//else if (m_state == PlayerState::Move)
+	//{
+	//	if (m_animFrame >= 8)// 移動 = 8
+	//	{
+	//	// 攻撃アニメーションが最後まで行ったら、
+	//	// 自動でNormal状態に戻す
+	//		m_state = PlayerState::Normal;
+	//		m_animFrame = 0;
+	//	}
+	//}
 	else if (m_state == PlayerState::Attack)
 	{
 		// 攻撃アニメーションが最後まで行ったら、
