@@ -203,7 +203,6 @@ void Player::UpdateState()
 		{
 			m_state = PlayerState::Normal;
 			m_animFrame = 0;
-
 		}
 	}
 }
