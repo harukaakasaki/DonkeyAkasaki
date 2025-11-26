@@ -154,7 +154,7 @@ void Player::HandleInput()
 		return;
 	}
 
-	if (Pad::IsTrigger(PAD_INPUT_2))
+	if (Pad::IsTrigger(PAD_INPUT_3))
 	{
 		// UŒ‚‚É•ÏX
 		m_state = PlayerState::Attack;
