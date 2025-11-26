@@ -6,6 +6,7 @@
 #include "Vec2.h"
 #include "Camera.h"
 #include <memory>
+#include "EnemyBat.h"
 
 /// <summary>
 /// コンストラクタ
@@ -47,6 +48,8 @@ void SceneMain::Update()
 	m_pPlayer->Update();
 	m_pCamera->Update(*m_pPlayer);
 }
+
+
 
 /// <summary>
 /// 描画
