@@ -231,7 +231,7 @@ void Player::Draw(Camera& camera)
 			m_handle, true, !m_isRight);
 		// デバッグの時のみ行う
 #ifdef _DEBUG
-		// 当たり判定（四角）の描画
+		// 当たり判定（自分）の描画
 		DrawBox(static_cast<int>(m_pos.x - 40) - cameraPos.x,
 			static_cast<int>(m_pos.y - 90) - cameraPos.y,
 			static_cast<int>(m_pos.x + 32) - cameraPos.x,
@@ -280,18 +280,18 @@ void Player::Draw(Camera& camera)
 		top = static_cast<int>(m_pos.y - attackH);
 		bottom = static_cast<int>(m_pos.y);
 
+		// 当たり判定（自分）の描画
+		DrawBox(static_cast<int>(m_pos.x - 40) - cameraPos.x,
+			static_cast<int>(m_pos.y - 90) - cameraPos.y,
+			static_cast<int>(m_pos.x + 32) - cameraPos.x,
+			static_cast<int>(m_pos.y) - cameraPos.y,
+			GetColor(0, 255, 255), false);
+
 		// 当たり判定（攻撃）の描画
 		DrawBox(left - cameraPos.x, top - cameraPos.y, 
 			right - cameraPos.x, bottom - cameraPos.y, 
 			GetColor(255, 0, 0), false);
+		
 #endif // _DEBUG
 	}
-
-
-
-
 }
-
-
-
-
