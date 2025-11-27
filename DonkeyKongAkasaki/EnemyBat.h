@@ -10,7 +10,9 @@ public:
 	void Draw(const Camera& camera)override;
 
 private:
+	// Batの位置
 	Vec2 m_pos;
-	float m_speed = 2.0f;
+	// アニメーションのフレーム数
+	int m_animFrame = 0;
 };
 

@@ -1,8 +1,8 @@
 #include "Player.h"
 #include <DxLib.h>
 #include "Pad.h"
-#include"Character.h"
-#include"SceneMain.h"
+#include "Character.h"
+#include "SceneMain.h"
 #include "Vec2.h"
 #include "Camera.h"
 
@@ -29,7 +29,7 @@ Player::Player() :
 	moveAnim(),
 	jumpAnim()
 {
-	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像
+	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
 }
