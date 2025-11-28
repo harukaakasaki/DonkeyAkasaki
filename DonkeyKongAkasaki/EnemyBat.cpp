@@ -5,7 +5,7 @@
 
 namespace
 {
-	constexpr int kIdleAnimNum = 7;                  // プレイヤーのIdleアニメーション
+	constexpr int kIdleAnimNum = 9;                  // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
 	constexpr int kGraphWidth = 1008 / kIdleAnimNum; // プレイヤーのグラフィックサイズ（幅）
