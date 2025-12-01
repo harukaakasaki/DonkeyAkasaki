@@ -78,14 +78,12 @@ void Character::Gravity()
 /// </summary>
 void Character::Draw(Camera& camera)
 {
-	Vec2 cameraPos;
-
-	cameraPos = camera.GetPos();
+	Vec2 cameraPos= camera.GetPos();
 
 
 
-	DrawGraphF(0 - cameraPos.x,  50 - cameraPos.y, m_handle, true);
-	DrawGraphF(0 - cameraPos.x, 100 - cameraPos.y, m_handle, true);
-	DrawGraphF(0 - cameraPos.x, 150 - cameraPos.y, m_handle, true);
+	DrawGraphF(m_pos.x - cameraPos.x, m_pos.y - cameraPos.y, m_handle, true);
+	DrawGraphF(m_pos.x - cameraPos.x, m_pos.y - cameraPos.y, m_handle, true);
+	DrawGraphF(m_pos.x - cameraPos.x, m_pos.y - cameraPos.y, m_handle, true);
 }
 

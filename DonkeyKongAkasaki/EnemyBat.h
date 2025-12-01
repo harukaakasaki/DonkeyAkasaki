@@ -17,7 +17,7 @@ private:
 	// コマ送りのカウンタ
 	int m_animCount = 0;
 
-	int normalAnim[9]; // 通常コマ数
+	int m_normalAnim[9]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数
 	//int moveAnim[8];   // 移動コマ数
 	//int jumpAnim[4];   // ジャンプコマ数

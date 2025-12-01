@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "EnemyBat.h"
 #include "Character.h"
 #include "SceneMain.h"
 #include "Vec2.h"

@@ -36,7 +36,7 @@ SceneMain::~SceneMain()
 void SceneMain::Init()
 {
 	m_pPlayer->Init();
-
+	m_pEnemy->Init();
 	m_pCamera->Init();
 }
 
@@ -46,6 +46,7 @@ void SceneMain::Init()
 void SceneMain::Update()
 {
 	m_pPlayer->Update();
+	m_pEnemy->Update();
 	m_pCamera->Update(*m_pPlayer);
 }
 
@@ -69,5 +70,7 @@ void SceneMain::Draw()
 
 	// プレイヤーの描画
 	m_pPlayer->Draw(*m_pCamera);
+	// エネミーの描画
+	m_pEnemy->Draw(*m_pCamera);
 
 }
