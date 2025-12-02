@@ -9,6 +9,7 @@
 /// コンストラクタ
 /// </summary>
 Enemy::Enemy()
+	
 {
 }
 

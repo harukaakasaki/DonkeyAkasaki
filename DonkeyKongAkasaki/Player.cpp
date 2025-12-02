@@ -20,7 +20,7 @@ namespace
 }
 
 // コンストラクタ
-Player::Player() :
+Player::Player():
 	m_vecX(0),
 	m_vecY(0),
 	m_animFrame(0),
