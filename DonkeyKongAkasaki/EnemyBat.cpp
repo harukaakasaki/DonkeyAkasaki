@@ -2,6 +2,7 @@
 #include <DxLib.h>
 
 // 普通に動くけど、描画がされない...SceneMainに入ってない&namespaceあたりがプレイヤーから持ってきただけ
+// SceneMainにも反映されてない
 
 namespace
 {

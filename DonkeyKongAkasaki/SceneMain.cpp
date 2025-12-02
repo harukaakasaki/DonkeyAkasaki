@@ -17,7 +17,7 @@ SceneMain::SceneMain()
 	m_pPlayer = new Player;
 	m_pEnemy = new Enemy;
 	m_pCamera = new Camera;
-	m_pEnemys.resize(4);
+
 }
 
 /// <summary>
