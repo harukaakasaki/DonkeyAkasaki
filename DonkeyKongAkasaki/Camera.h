@@ -10,7 +10,7 @@ public:
 	void Init();
 	void Update(Player& player);
 	
-	Vec2 GetPos() { return m_pos; };
+	Vec2 GetPos() const{ return m_pos; };
 
 private:
 	Vec2 m_pos;

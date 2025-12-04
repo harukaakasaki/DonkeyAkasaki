@@ -16,6 +16,7 @@ SceneMain::SceneMain()
 	
 	m_pPlayer = new Player;
 	m_pEnemy = new Enemy;
+	m_pEnemyBat = new EnemyBat;
 	m_pCamera = new Camera;
 
 }
@@ -27,6 +28,7 @@ SceneMain::~SceneMain()
 {
 	delete m_pPlayer;
 	delete m_pEnemy;
+	delete m_pEnemyBat;
 	delete m_pCamera;
 }
 
@@ -37,6 +39,7 @@ void SceneMain::Init()
 {
 	m_pPlayer->Init();
 	m_pEnemy->Init();
+	m_pEnemyBat->Init();
 	m_pCamera->Init();
 }
 
@@ -47,6 +50,7 @@ void SceneMain::Update()
 {
 	m_pPlayer->Update();
 	m_pEnemy->Update();
+	m_pEnemyBat->Update();
 	m_pCamera->Update(*m_pPlayer);
 }
 
@@ -72,5 +76,7 @@ void SceneMain::Draw()
 	m_pPlayer->Draw(*m_pCamera);
 	// エネミーの描画
 	m_pEnemy->Draw(*m_pCamera);
+	// コウモリの描画
+	m_pEnemyBat->Draw(*m_pCamera);
 
 }

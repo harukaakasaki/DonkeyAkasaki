@@ -5,6 +5,7 @@
 // プロトタイプ宣言
 class Player;
 class Enemy;
+class EnemyBat;
 class Camera;
 
 class SceneMain
@@ -37,9 +38,11 @@ private:
 	Player* m_pPlayer;
 	// Enemyクラスのポインタを取得した
 	Enemy* m_pEnemy;
+	// EnemyBatクラスのポインタを取得した
+	EnemyBat* m_pEnemyBat;
 	// Cameraクラスのポインタを取得した
 	Camera* m_pCamera;
 
-	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
+//	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
 };
 

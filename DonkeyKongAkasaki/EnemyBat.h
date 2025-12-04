@@ -10,8 +10,6 @@ public:
 	void Draw(const Camera& camera)override;
 
 private:
-	// Batの位置
-	Vec2 m_pos;
 	// アニメーションのフレーム数
 	int m_animFrame = 0;
 	// コマ送りのカウンタ
