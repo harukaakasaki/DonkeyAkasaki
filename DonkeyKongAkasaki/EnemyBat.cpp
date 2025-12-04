@@ -12,7 +12,7 @@ namespace
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
 	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
-	constexpr float kGraphicsSize = 4.0f;            // グラフィックサイズ
+	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
 }
 
 EnemyBat::EnemyBat():
@@ -30,6 +30,7 @@ EnemyBat::~EnemyBat()
 void EnemyBat::Init()
 {
 	m_handle = LoadGraph("data/bat.png");
+	m_pos = { 100.0f,500.0f };
 }
 
 void EnemyBat::Update()
@@ -47,6 +48,9 @@ void EnemyBat::Draw(const Camera& camera)
 	int srcX = kGraphWidth * animNo;
 	int srcY = 0;
 
+	int w = kGraphWidth * kGraphicsSize;
+	int h = kGraphHeight * kGraphicsSize;
+
 
 	DrawRectRotaGraph(static_cast<int>(m_pos.x-cam.x),
 		static_cast<int>(m_pos.y-cam.y),//-35は地面への位置調整
@@ -54,11 +58,11 @@ void EnemyBat::Draw(const Camera& camera)
 		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 		m_handle, true);
 #ifdef _DEBUG
-	// 当たり判定（自分）の描画
-	DrawBox(static_cast<int>(m_pos.x),
-		static_cast<int>(m_pos.y),
-		static_cast<int>(m_pos.x + 32),
-		static_cast<int>(m_pos.y),
-		GetColor(0, 255, 255), false);
+	// 当たり判定（コウモリ）の描画
+	DrawBox(static_cast<int>(m_pos.x - cam.x - w/2),
+		static_cast<int>(m_pos.y - cam.y - 35 - h/2),
+		static_cast<int>(m_pos.x - cam.x + w/2),
+		static_cast<int>(m_pos.y - cam.y - 35 + h/2),
+		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }
