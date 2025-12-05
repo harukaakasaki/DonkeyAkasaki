@@ -10,6 +10,7 @@ public:
 	void Draw(const Camera& camera)override;
 
 private:
+
 	// アニメーションのフレーム数
 	int m_animFrame = 0;
 	// コマ送りのカウンタ
