@@ -33,6 +33,8 @@ public:
 	/// </summary>
 	void Draw();
 
+	
+
 private:
 	// Playerクラスのポインタを取得した
 	Player* m_pPlayer;

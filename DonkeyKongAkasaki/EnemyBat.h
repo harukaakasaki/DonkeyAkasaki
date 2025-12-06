@@ -9,6 +9,8 @@ public:
 	void Update()override;
 	void Draw(const Camera& camera)override;
 
+	Rect EnemyBatHitBox()const;
+
 private:
 
 	// アニメーションのフレーム数

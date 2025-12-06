@@ -36,10 +36,14 @@ void EnemyBat::Init()
 void EnemyBat::Update()
 {
 	Character::Update();
+	m_pos.x -= 1;
 }
 
 void EnemyBat::Draw(const Camera& camera)
 {
+	// コウモリが死んでいたら何もしない
+	if (!m_isAlive)return;
+
 	Vec2 cam = camera.GetPos();
 
 	// アニメーションのフレーム数から表示したいコマ番号
@@ -65,5 +69,19 @@ void EnemyBat::Draw(const Camera& camera)
 		static_cast<int>(m_pos.y - cam.y - 35 + h/3),
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
+}
+
+Rect EnemyBat::EnemyBatHitBox() const
+{
+	float w = kGraphWidth * kGraphicsSize;
+	float h = kGraphHeight * kGraphicsSize;
+
+	Rect r;
+	r.left = m_pos.x - w / 3;
+	r.top = m_pos.y - 35 - h / 10;
+	r.right = m_pos.x + w / 3;
+	r.bottom = m_pos.y - 35 + h / 3;
+
+	return r;
 }
 

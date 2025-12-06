@@ -37,6 +37,24 @@ public:
 	/// </summary>
 	virtual void Draw(Camera&camera)override;
 
+	/// <summary>
+	/// 攻撃判定
+	/// </summary>
+	/// <returns></returns>
+	bool IsAttack()const { return m_state == PlayerState::Attack; }
+
+	/// <summary>
+	/// 攻撃当たり判定
+	/// </summary>
+	/// <returns></returns>
+	Rect AttackHitBox() const;
+
+	/// <summary>
+	/// 当たり判定
+	/// </summary>
+	/// <returns></returns>
+	Rect PlayerHitBox() const;
+
 	
 
 private:
@@ -76,6 +94,8 @@ private:
 	/// アニメーションの更新
 	/// </summary>
 	void UpdateState();
+
+	
 
 	// アニメーションのフレーム数
 	int m_animFrame = 0;

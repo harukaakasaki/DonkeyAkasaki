@@ -1,5 +1,15 @@
 #pragma once
 #include <cmath>
+
+// ‹éŒ`‚Ì“–‚½‚è”»’è
+struct Rect
+{
+	float left;
+	float top;
+	float right;
+	float bottom;
+};
+
 class Vec2
 {
 public:
@@ -40,6 +50,5 @@ public:
 		y += vec.y;
 		return *this;
 	}
-
 };
 

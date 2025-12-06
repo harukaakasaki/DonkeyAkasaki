@@ -8,6 +8,17 @@
 #include <memory>
 #include "EnemyBat.h"
 
+namespace
+{
+	bool IsHitRect(const Rect& a, const Rect& b)
+	{
+		return !(a.right < b.left ||
+			a.left > b.right ||
+			a.bottom < b.top ||
+			a.top > b.bottom);
+	}
+}
+
 /// <summary>
 /// コンストラクタ
 /// </summary>
@@ -43,6 +54,8 @@ void SceneMain::Init()
 	m_pCamera->Init();
 }
 
+
+
 /// <summary>
 /// 更新
 /// </summary>
@@ -52,6 +65,24 @@ void SceneMain::Update()
 	m_pEnemy->Update();
 	m_pEnemyBat->Update();
 	m_pCamera->Update(*m_pPlayer);
+
+	Rect playerHitBox = m_pPlayer->PlayerHitBox();
+	Rect batBox       = m_pEnemyBat->EnemyBatHitBox();
+	Rect playerAttack = m_pPlayer->AttackHitBox();
+
+	if (IsHitRect(playerHitBox, batBox))
+	{
+		DrawString(50, 50, "当たってる！", GetColor(255, 0, 0));
+	}
+
+	if (m_pPlayer->IsAttack())
+	{
+		if (IsHitRect(playerAttack, batBox))
+		{
+			m_pEnemyBat->Kill(); // Enemy
+			DrawString(100,100,"当たってる！",0U);
+		}
+	}
 }
 
 

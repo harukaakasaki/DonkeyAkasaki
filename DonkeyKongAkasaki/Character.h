@@ -38,5 +38,7 @@ protected:
 	// d—Í
 	void Gravity();
 
+	
+
 };
 

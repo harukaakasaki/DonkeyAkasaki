@@ -4,7 +4,7 @@
 #include "Character.h"
 #include "SceneMain.h"
 #include "Vec2.h"
-#include "Camera.h"
+#include "Camera.h" 
 
 namespace
 {
@@ -205,6 +205,45 @@ void Player::UpdateState()
 			m_animFrame = 0;
 		}
 	}
+}
+
+// UŒ‚“–‚½‚è”»’è
+Rect Player::AttackHitBox() const
+{
+	Rect r;
+
+	int attackW = 160;
+	int attackH = 90;
+
+	if (m_isRight)
+	{
+		r.left = m_pos.x;
+		r.right = m_pos.x + attackW;
+	}
+	else
+	{
+		r.left = m_pos.x - attackW;
+		r.right = m_pos.x;
+	}
+
+	r.top = m_pos.y - attackW;
+	r.bottom = m_pos.y;
+
+	return r;
+}
+
+// Player©g‚Ì“–‚½‚è”»’è
+Rect Player::PlayerHitBox() const
+{
+	Rect r;
+
+	
+	r.left = m_pos.x-40;
+	r.right = m_pos.x+32;
+	r.top = m_pos.y-90;
+	r.bottom = m_pos.y;
+
+	return r;
 }
 
 // •`‰æ
