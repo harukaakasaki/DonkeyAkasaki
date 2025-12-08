@@ -1,7 +1,6 @@
-#include "EnemyBat.h"
+#include "EnemyGolem.h"
 #include "Character.h"
 #include <DxLib.h>
-// Enemyが消えているはずなのに、透明になったまま存在している
 
 namespace
 {
@@ -12,50 +11,60 @@ namespace
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kSpeed = 3;                        // コウモリのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
-	
+
 }
 
-EnemyBat::EnemyBat():
+EnemyGolem::EnemyGolem():
 	m_animFrame(0),
 	m_animCount(0),
 	m_normalAnim(0)
 {
 }
 
-EnemyBat::~EnemyBat()
+EnemyGolem::~EnemyGolem()
 {
 	DeleteGraph(m_handle);
 }
 
-void EnemyBat::Init()
+void EnemyGolem::Init()
 {
-	m_handle = LoadGraph("data/bat.png");
-	m_pos = { 100.0f,400.0f };
+	m_handle = LoadGraph("data/Golem.png");
+	m_pos = { 300.0f,550.0f };
 }
 
-void EnemyBat::Update()
+void EnemyGolem::Update()
 {
 	Character::Update();
 	m_moveTimer++;
-	if (m_moveTimer >= 100)
+	if (m_moveTimer >= 300)
 	{
 		m_moveLeft = !m_moveLeft;
 		m_moveTimer = 0;
 	}
-	if(m_moveLeft)
+	if (m_moveLeft)
 	{
-		m_pos.x -= 3;
+		m_pos.x -= 4;
 	}
 	else
 	{
-		m_pos.x += 3;
+		m_pos.x += 4;
 	}
-	
+
 }
 
-void EnemyBat::Draw(const Camera& camera)
+void EnemyGolem::Damage()
 {
-	// コウモリが死んでいたら何もしない
+	m_hp--;
+
+	if (m_hp <= 0)
+	{
+		Kill();
+	}
+}
+
+void EnemyGolem::Draw(const Camera& camera)
+{
+	// キノコが死んでいたら何もしない
 	if (!m_isAlive)return;
 
 	Vec2 cam = camera.GetPos();
@@ -76,26 +85,18 @@ void EnemyBat::Draw(const Camera& camera)
 		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 		m_handle, true);
 #ifdef _DEBUG
-	// 当たり判定（コウモリ）の描画
-	DrawBox(static_cast<int>(m_pos.x - cam.x - w/3),
-		static_cast<int>(m_pos.y - cam.y - 35 - h/10),
-		static_cast<int>(m_pos.x - cam.x + w/3),
-		static_cast<int>(m_pos.y - cam.y - 35 + h/3),
+	// 当たり判定（キノコ）の描画
+	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 3),
+		static_cast<int>(m_pos.y - cam.y - 35 - h / 10),
+		static_cast<int>(m_pos.x - cam.x + w / 3),
+		static_cast<int>(m_pos.y - cam.y - 35 + h / 3),
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }
 
-void EnemyBat::Damage()
-{
-	m_hp--;
 
-	if (m_hp <= 0)
-	{
-		Kill();
-	}
-}
 
-Rect EnemyBat::EnemyBatHitBox() const
+Rect EnemyGolem::EnemyGolemHitBox() const
 {
 	float w = kGraphWidth * kGraphicsSize;
 	float h = kGraphHeight * kGraphicsSize;
@@ -108,4 +109,3 @@ Rect EnemyBat::EnemyBatHitBox() const
 
 	return r;
 }
-

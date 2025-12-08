@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "EnemyBat.h"
 #include "EnemyMush.h"
+#include "EnemyGolem.h"
 #include <DxLib.h>
 #include "Player.h"
 #include "Vec2.h"
@@ -31,6 +32,7 @@ SceneMain::SceneMain()
 	m_pEnemy = new Enemy;
 	m_pEnemyBat = new EnemyBat;
 	m_pEnemyMush = new EnemyMush;
+	m_pEnemyGolem = new EnemyGolem;
 	m_pCamera = new Camera;
 
 }
@@ -44,6 +46,7 @@ SceneMain::~SceneMain()
 	delete m_pEnemy;
 	delete m_pEnemyBat;
 	delete m_pEnemyMush;
+	delete m_pEnemyGolem;
 	delete m_pCamera;
 }
 
@@ -56,6 +59,7 @@ void SceneMain::Init()
 	m_pEnemy->Init();
 	m_pEnemyBat->Init();
 	m_pEnemyMush->Init();
+	m_pEnemyGolem->Init();
 	m_pCamera->Init();
 }
 
@@ -70,11 +74,13 @@ void SceneMain::Update()
 	m_pEnemy->Update();
 	m_pEnemyBat->Update();
 	m_pEnemyMush->Update();
+	m_pEnemyGolem->Update();
 	m_pCamera->Update(*m_pPlayer);
 
 	Rect playerHitBox = m_pPlayer->PlayerHitBox();
 	Rect batBox       = m_pEnemyBat->EnemyBatHitBox();
-	Rect mushBox       = m_pEnemyMush->EnemyMushHitBox();
+	Rect mushBox      = m_pEnemyMush->EnemyMushHitBox();
+	Rect golemBox     = m_pEnemyGolem->EnemyGolemHitBox();
 	Rect playerAttack = m_pPlayer->AttackHitBox();
 
 	if (IsHitRect(playerHitBox, batBox))
@@ -82,6 +88,10 @@ void SceneMain::Update()
 		m_isHitPlayer = true;
 	}
 	if (IsHitRect(playerHitBox, mushBox))
+	{
+		m_isHitPlayer = true;
+	}
+	if (IsHitRect(playerHitBox, golemBox))
 	{
 		m_isHitPlayer = true;
 	}
@@ -99,6 +109,14 @@ void SceneMain::Update()
 		if (IsHitRect(playerAttack, mushBox))
 		{
 			m_pEnemyMush->Damage(); // Enemy
+		}
+	}
+
+	if (m_pPlayer->IsAttack())
+	{
+		if (IsHitRect(playerAttack, golemBox))
+		{
+			m_pEnemyGolem->Damage(); // Enemy
 		}
 	}
 }
@@ -129,10 +147,12 @@ void SceneMain::Draw()
 	m_pEnemyBat->Draw(*m_pCamera);
 	// ƒLƒmƒR‚Ì•`‰æ
 	m_pEnemyMush->Draw(*m_pCamera);
+	// ƒS[ƒŒƒ€‚Ì•`‰æ
+	m_pEnemyGolem->Draw(*m_pCamera);
 
 	if (m_isHitPlayer)
 	{
-		DrawString(800, 300, "€", GetColor(255, 0, 0)); // DrawŠÖ”‚É‘‚¯‚¥
+		DrawString(800, 300, "‚ß‚Á‚¿‚á’É‚¢", GetColor(255, 0, 0));
 	}
 
 }

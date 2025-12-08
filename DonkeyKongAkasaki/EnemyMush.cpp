@@ -11,7 +11,7 @@ namespace
 	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kSpeed = 3;                        // コウモリのスピード
-	constexpr float kGraphicsSize = 5.0f;            // グラフィックサイズ
+	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
 
 }
 
@@ -29,8 +29,8 @@ EnemyMush::~EnemyMush()
 
 void EnemyMush::Init()
 {
-	m_handle = LoadGraph("data/bat.png");
-	m_pos = { 500.0f,600.0f };
+	m_handle = LoadGraph("data/Mush.png");
+	m_pos = { 500.0f,550.0f };
 }
 
 void EnemyMush::Update()
@@ -65,7 +65,7 @@ void EnemyMush::Damage()
 
 void EnemyMush::Draw(const Camera& camera)
 {
-	// コウモリが死んでいたら何もしない
+	// キノコが死んでいたら何もしない
 	if (!m_isAlive)return;
 
 	Vec2 cam = camera.GetPos();
@@ -86,7 +86,7 @@ void EnemyMush::Draw(const Camera& camera)
 		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 		m_handle, true);
 #ifdef _DEBUG
-	// 当たり判定（コウモリ）の描画
+	// 当たり判定（キノコ）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 3),
 		static_cast<int>(m_pos.y - cam.y - 35 - h / 10),
 		static_cast<int>(m_pos.x - cam.x + w / 3),
@@ -94,6 +94,8 @@ void EnemyMush::Draw(const Camera& camera)
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }
+
+
 
 Rect EnemyMush::EnemyMushHitBox() const
 {

@@ -7,6 +7,7 @@ class Player;
 class Enemy;
 class EnemyBat;
 class EnemyMush;
+class EnemyGolem;
 class Camera;
 
 class SceneMain
@@ -45,6 +46,8 @@ private:
 	EnemyBat* m_pEnemyBat;
 	// EnemyMushクラスのポインタを取得した
 	EnemyMush* m_pEnemyMush;
+	// EnemyGolemクラスのポインタを取得した
+	EnemyGolem* m_pEnemyGolem;
 	// Cameraクラスのポインタを取得した
 	Camera* m_pCamera;
 
