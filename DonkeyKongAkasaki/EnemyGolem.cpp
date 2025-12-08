@@ -64,7 +64,7 @@ void EnemyGolem::Damage()
 
 void EnemyGolem::Draw(const Camera& camera)
 {
-	// キノコが死んでいたら何もしない
+	// ゴーレムが死んでいたら何もしない
 	if (!m_isAlive)return;
 
 	Vec2 cam = camera.GetPos();
@@ -85,7 +85,7 @@ void EnemyGolem::Draw(const Camera& camera)
 		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 		m_handle, true);
 #ifdef _DEBUG
-	// 当たり判定（キノコ）の描画
+	// 当たり判定（ゴーレム）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 3),
 		static_cast<int>(m_pos.y - cam.y - 35 - h / 10),
 		static_cast<int>(m_pos.x - cam.x + w / 3),

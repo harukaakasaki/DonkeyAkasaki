@@ -19,11 +19,11 @@ private:
 	int m_animFrame = 0;
 	// コマ送りのカウンタ
 	int m_animCount = 0;
-	// キノコの移動時間
+	// ゴーレムの移動時間
 	int m_moveTimer = 0;
 	// 左に動いているか
 	bool m_moveLeft = false;
-	// キノコのHP
+	// ゴーレムのHP
 	int m_hp = 50;
 
 	int m_normalAnim[9]; // 通常コマ数
