@@ -17,6 +17,10 @@ private:
 	int m_animFrame = 0;
 	// コマ送りのカウンタ
 	int m_animCount = 0;
+	// コウモリの移動時間
+	int m_moveTimer = 0;
+	// 左に動いているか
+	bool m_moveLeft = false;
 
 	int m_normalAnim[9]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数

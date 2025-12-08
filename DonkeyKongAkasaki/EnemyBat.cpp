@@ -2,9 +2,6 @@
 #include "Character.h"
 #include <DxLib.h>
 
-// 普通に動くけど、描画がされない...SceneMainに入ってない&namespaceあたりがプレイヤーから持ってきただけ
-// SceneMainにも反映されてない
-
 namespace
 {
 	constexpr int kIdleAnimNum = 9;                  // プレイヤーのIdleアニメーション
@@ -12,7 +9,9 @@ namespace
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
 	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
+	constexpr int kSpeed = 3;                        // コウモリのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
+	
 }
 
 EnemyBat::EnemyBat():
@@ -30,13 +29,27 @@ EnemyBat::~EnemyBat()
 void EnemyBat::Init()
 {
 	m_handle = LoadGraph("data/bat.png");
-	m_pos = { 100.0f,500.0f };
+	m_pos = { 100.0f,400.0f };
 }
 
 void EnemyBat::Update()
 {
 	Character::Update();
-	m_pos.x -= 1;
+	m_moveTimer++;
+	if (m_moveTimer >= 100)
+	{
+		m_moveLeft = !m_moveLeft;
+		m_moveTimer = 0;
+	}
+	if(m_moveLeft)
+	{
+		m_pos.x -= 3;
+	}
+	else
+	{
+		m_pos.x += 3;
+	}
+	
 }
 
 void EnemyBat::Draw(const Camera& camera)
