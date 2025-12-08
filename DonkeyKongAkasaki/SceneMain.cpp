@@ -1,12 +1,14 @@
 #include "SceneMain.h"
 #include "Game.h"
 #include "Enemy.h"
+#include "EnemyBat.h"
+#include "EnemyMush.h"
 #include <DxLib.h>
 #include "Player.h"
 #include "Vec2.h"
 #include "Camera.h"
 #include <memory>
-#include "EnemyBat.h"
+
 
 namespace
 {
@@ -28,6 +30,7 @@ SceneMain::SceneMain()
 	m_pPlayer = new Player;
 	m_pEnemy = new Enemy;
 	m_pEnemyBat = new EnemyBat;
+	m_pEnemyMush = new EnemyMush;
 	m_pCamera = new Camera;
 
 }
@@ -40,6 +43,7 @@ SceneMain::~SceneMain()
 	delete m_pPlayer;
 	delete m_pEnemy;
 	delete m_pEnemyBat;
+	delete m_pEnemyMush;
 	delete m_pCamera;
 }
 
@@ -51,6 +55,7 @@ void SceneMain::Init()
 	m_pPlayer->Init();
 	m_pEnemy->Init();
 	m_pEnemyBat->Init();
+	m_pEnemyMush->Init();
 	m_pCamera->Init();
 }
 
@@ -64,15 +69,17 @@ void SceneMain::Update()
 	m_pPlayer->Update();
 	m_pEnemy->Update();
 	m_pEnemyBat->Update();
+	m_pEnemyMush->Update();
 	m_pCamera->Update(*m_pPlayer);
 
 	Rect playerHitBox = m_pPlayer->PlayerHitBox();
 	Rect batBox       = m_pEnemyBat->EnemyBatHitBox();
+	Rect mushBox       = m_pEnemyMush->EnemyMushHitBox();
 	Rect playerAttack = m_pPlayer->AttackHitBox();
 
 	if (IsHitRect(playerHitBox, batBox))
 	{
-		DrawString(50, 50, "当たってる！", GetColor(255, 0, 0));
+		DrawString(50, 50, "当たってる！", GetColor(255, 0, 0)); // Draw関数に書く
 	}
 
 	if (m_pPlayer->IsAttack())
@@ -80,7 +87,16 @@ void SceneMain::Update()
 		if (IsHitRect(playerAttack, batBox))
 		{
 			m_pEnemyBat->Kill(); // Enemy
-			DrawString(100,100,"当たってる！",0U);
+			DrawString(100,100,"当たってる！",0U); // Draw関数に書く
+		}
+	}
+
+	if (m_pPlayer->IsAttack())
+	{
+		if (IsHitRect(playerAttack, mushBox))
+		{
+			m_pEnemyMush->Kill(); // Enemy
+			DrawString(100, 100, "当たってる！", 0U); // Draw関数に書く
 		}
 	}
 }
@@ -109,5 +125,7 @@ void SceneMain::Draw()
 	m_pEnemy->Draw(*m_pCamera);
 	// コウモリの描画
 	m_pEnemyBat->Draw(*m_pCamera);
+	// キノコの描画
+	m_pEnemyMush->Draw(*m_pCamera);
 
 }
