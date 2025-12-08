@@ -8,6 +8,8 @@ public:
 	void Init() override;
 	void Update()override;
 	void Draw(const Camera& camera)override;
+	
+	void Damage(); // ダメージ
 
 	Rect EnemyBatHitBox()const;
 
@@ -21,6 +23,8 @@ private:
 	int m_moveTimer = 0;
 	// 左に動いているか
 	bool m_moveLeft = false;
+	// コウモリのHP
+	int m_hp;
 
 	int m_normalAnim[9]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数

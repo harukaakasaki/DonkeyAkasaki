@@ -84,6 +84,16 @@ void EnemyBat::Draw(const Camera& camera)
 #endif // DEBUG
 }
 
+void EnemyBat::Damage()
+{
+	m_hp--;
+
+	if (m_hp <= 0)
+	{
+		Kill();
+	}
+}
+
 Rect EnemyBat::EnemyBatHitBox() const
 {
 	float w = kGraphWidth * kGraphicsSize;

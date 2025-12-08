@@ -9,6 +9,8 @@ public:
 	void Update()override;
 	void Draw(const Camera& camera)override;
 
+	void Damage(); // ダメージ
+
 	Rect EnemyMushHitBox()const;
 
 private:
@@ -21,6 +23,8 @@ private:
 	int m_moveTimer = 0;
 	// 左に動いているか
 	bool m_moveLeft = false;
+	// キノコのHP
+	int m_hp = 50;
 
 	int m_normalAnim[9]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数

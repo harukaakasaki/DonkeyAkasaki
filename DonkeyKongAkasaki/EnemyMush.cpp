@@ -11,7 +11,7 @@ namespace
 	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kSpeed = 3;                        // コウモリのスピード
-	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
+	constexpr float kGraphicsSize = 5.0f;            // グラフィックサイズ
 
 }
 
@@ -51,6 +51,16 @@ void EnemyMush::Update()
 		m_pos.x += 1;
 	}
 
+}
+
+void EnemyMush::Damage()
+{
+	m_hp--;
+
+	if (m_hp <= 0)
+	{
+		Kill();
+	}
 }
 
 void EnemyMush::Draw(const Camera& camera)

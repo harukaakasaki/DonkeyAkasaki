@@ -48,6 +48,8 @@ private:
 	// Cameraクラスのポインタを取得した
 	Camera* m_pCamera;
 
+	bool m_isHitPlayer = false; 
+
 //	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
 };
 

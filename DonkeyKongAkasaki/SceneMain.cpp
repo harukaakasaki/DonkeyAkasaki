@@ -79,15 +79,18 @@ void SceneMain::Update()
 
 	if (IsHitRect(playerHitBox, batBox))
 	{
-		DrawString(50, 50, "当たってる！", GetColor(255, 0, 0)); // Draw関数に書く
+		m_isHitPlayer = true;
+	}
+	if (IsHitRect(playerHitBox, mushBox))
+	{
+		m_isHitPlayer = true;
 	}
 
 	if (m_pPlayer->IsAttack())
 	{
 		if (IsHitRect(playerAttack, batBox))
 		{
-			m_pEnemyBat->Kill(); // Enemy
-			DrawString(100,100,"当たってる！",0U); // Draw関数に書く
+			m_pEnemyBat->Damage(); // Enemy
 		}
 	}
 
@@ -95,8 +98,7 @@ void SceneMain::Update()
 	{
 		if (IsHitRect(playerAttack, mushBox))
 		{
-			m_pEnemyMush->Kill(); // Enemy
-			DrawString(100, 100, "当たってる！", 0U); // Draw関数に書く
+			m_pEnemyMush->Damage(); // Enemy
 		}
 	}
 }
@@ -127,5 +129,10 @@ void SceneMain::Draw()
 	m_pEnemyBat->Draw(*m_pCamera);
 	// キノコの描画
 	m_pEnemyMush->Draw(*m_pCamera);
+
+	if (m_isHitPlayer)
+	{
+		DrawString(800, 300, "死", GetColor(255, 0, 0)); // Draw関数に書けぇ
+	}
 
 }
