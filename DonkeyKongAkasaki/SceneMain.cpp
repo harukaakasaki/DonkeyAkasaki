@@ -83,20 +83,32 @@ void SceneMain::Update()
 	Rect golemBox     = m_pEnemyGolem->EnemyGolemHitBox();
 	Rect playerAttack = m_pPlayer->AttackHitBox();
 
-	if (IsHitRect(playerHitBox, batBox))
+	if (m_pEnemyBat->IsAlive())
 	{
-		m_isHitPlayer = true;
+		if (IsHitRect(playerHitBox, batBox))
+		{
+			m_isHitPlayer = true;
+		}
 	}
-	if (IsHitRect(playerHitBox, mushBox))
+	
+	if (m_pEnemyMush->IsAlive())
 	{
-		m_isHitPlayer = true;
+		if (IsHitRect(playerHitBox, mushBox))
+		{
+			m_isHitPlayer = true;
+		}
 	}
-	if (IsHitRect(playerHitBox, golemBox))
+	
+	if (m_pEnemyGolem->IsAlive())
 	{
-		m_isHitPlayer = true;
+		if (IsHitRect(playerHitBox, golemBox))
+		{
+			m_isHitPlayer = true;
+		}
 	}
+	
 
-	if (m_pPlayer->IsAttack())
+	if (m_pPlayer->IsAttack()&&m_pEnemyBat->IsAlive())
 	{
 		if (IsHitRect(playerAttack, batBox))
 		{
@@ -104,7 +116,7 @@ void SceneMain::Update()
 		}
 	}
 
-	if (m_pPlayer->IsAttack())
+	if (m_pPlayer->IsAttack() && m_pEnemyMush->IsAlive())
 	{
 		if (IsHitRect(playerAttack, mushBox))
 		{
@@ -112,7 +124,7 @@ void SceneMain::Update()
 		}
 	}
 
-	if (m_pPlayer->IsAttack())
+	if (m_pPlayer->IsAttack() && m_pEnemyGolem->IsAlive())
 	{
 		if (IsHitRect(playerAttack, golemBox))
 		{

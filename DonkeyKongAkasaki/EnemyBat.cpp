@@ -31,10 +31,14 @@ void EnemyBat::Init()
 {
 	m_handle = LoadGraph("data/bat.png");
 	m_pos = { 100.0f,400.0f };
+	m_hp = 2;
+	m_isAlive = true;
 }
 
 void EnemyBat::Update()
 {
+	if (!m_isAlive)return;
+
 	Character::Update();
 	m_moveTimer++;
 	if (m_moveTimer >= 100)
