@@ -6,10 +6,20 @@
 /// </summary>
 enum class PlayerState
 {
-	Normal,// ’Ê•ñ
+	Normal,// ’Êí
 	Move,  // ˆÚ“®
 	Jump,  // ƒWƒƒƒ“ƒv
-	Attack // UŒ‚
+	Attack,// UŒ‚
+	Death  // €
+};
+/// <summary>
+/// ƒvƒŒƒCƒ„[‚ÌLeveló‘Ô
+/// </summary>
+enum class LevelState
+{
+	Level1,// “G‚ğ1‘Ì“|‚µ‚½
+	Level2,// “G‚ğ2‘Ì“|‚µ‚½
+	Level3 // “G‚ğ3‘Ì“|‚µ‚½
 };
 
 class Player : public Character
