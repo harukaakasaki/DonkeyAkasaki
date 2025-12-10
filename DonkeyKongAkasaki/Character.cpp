@@ -79,11 +79,5 @@ void Character::Gravity()
 void Character::Draw(Camera& camera)
 {
 	Vec2 cameraPos= camera.GetPos();
-
-
-
-	DrawGraphF(m_pos.x - cameraPos.x, m_pos.y - cameraPos.y, m_handle, true);
-	DrawGraphF(m_pos.x - cameraPos.x, m_pos.y - cameraPos.y, m_handle, true);
-	DrawGraphF(m_pos.x - cameraPos.x, m_pos.y - cameraPos.y, m_handle, true);
 }
 
