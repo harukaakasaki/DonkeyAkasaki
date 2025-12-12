@@ -9,6 +9,7 @@
 #include "Vec2.h"
 #include "Camera.h"
 #include <memory>
+#include "Bg.h"
 
 
 namespace
@@ -34,6 +35,7 @@ SceneMain::SceneMain()
 	m_pEnemyMush = new EnemyMush;
 	m_pEnemyGolem = new EnemyGolem;
 	m_pCamera = new Camera;
+	m_pBg = new Bg;
 
 }
 
@@ -76,6 +78,7 @@ void SceneMain::Update()
 	m_pEnemyMush->Update();
 	m_pEnemyGolem->Update();
 	m_pCamera->Update(*m_pPlayer);
+	m_pBg->Update();
 
 	Rect playerHitBox = m_pPlayer->PlayerHitBox();
 	Rect batBox       = m_pEnemyBat->EnemyBatHitBox();
@@ -134,7 +137,6 @@ void SceneMain::Update()
 }
 
 
-
 /// <summary>
 /// •`‰æ
 /// </summary>
@@ -142,10 +144,12 @@ void SceneMain::Draw()
 {
 	Vec2 cameraPos;
 	cameraPos = m_pCamera->GetPos();
+	// ”wŒi‚Ì•\Ž¦
+	m_pBg->Draw();
 
     // ”wŒi‚Ì•\Ž¦iŽlŠp‚ÅF‚ð•t‚¯‚Ä‚¢‚é‚¾‚¯j
-	DrawBox(Game::kScreenWidth-cameraPos.x,Game::kScreenHeight - cameraPos.y,
-		0, 0, GetColor(0, 100, 100), true);
+	/*DrawBox(Game::kScreenWidth-cameraPos.x,Game::kScreenHeight - cameraPos.y,
+		0, 0, GetColor(0, 100, 100), true);*/
 	// “Vˆä‚Ìü
 	DrawLine(0 - cameraPos.x, 640 - cameraPos.y, Game::kScreenWidth - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
 	// ’n–Ê‚Ìü
@@ -161,6 +165,7 @@ void SceneMain::Draw()
 	m_pEnemyMush->Draw(*m_pCamera);
 	// ƒS[ƒŒƒ€‚Ì•`‰æ
 	m_pEnemyGolem->Draw(*m_pCamera);
+	
 
 	if (m_isHitPlayer)
 	{

@@ -9,6 +9,7 @@ class EnemyBat;
 class EnemyMush;
 class EnemyGolem;
 class Camera;
+class Bg;
 
 class SceneMain
 {
@@ -50,6 +51,8 @@ private:
 	EnemyGolem* m_pEnemyGolem;
 	// Cameraクラスのポインタを取得した
 	Camera* m_pCamera;
+	// Bgクラスのポインタを取得した
+	Bg* m_pBg;
 
 	bool m_isHitPlayer = false; 
 
