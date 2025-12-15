@@ -17,6 +17,7 @@ enum class PlayerState
 /// </summary>
 enum class LevelState
 {
+	Level0,// “G‚ğ0‘Ì“|‚µ‚½iLevelƒŠƒZƒbƒgj
 	Level1,// “G‚ğ1‘Ì“|‚µ‚½
 	Level2,// “G‚ğ2‘Ì“|‚µ‚½
 	Level3 // “G‚ğ3‘Ì“|‚µ‚½
@@ -72,7 +73,8 @@ private:
 	float m_vecX;
 	float m_vecY;
 
-	PlayerState m_state = PlayerState::Normal;
+	PlayerState m_state = PlayerState::Normal;// ’Êíó‘Ô
+	LevelState m_level = LevelState::Level0;  // Å‰‚Ìó‘Ô
 
 
 	/// <summary>
