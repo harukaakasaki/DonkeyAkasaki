@@ -4,7 +4,7 @@
 
 namespace
 {
-	constexpr float kMapWidth = 5000.0f;// マップ全体の幅
+	constexpr float kMapWidth = 8000.0f;// マップ全体の幅
 	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
 	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
 	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
