@@ -146,10 +146,6 @@ void SceneMain::Draw()
 	cameraPos = m_pCamera->GetPos();
 	// 背景の表示
 	m_pBg->Draw();
-
-    // 背景の表示（四角で色を付けているだけ）
-	/*DrawBox(Game::kScreenWidth-cameraPos.x,Game::kScreenHeight - cameraPos.y,
-		0, 0, GetColor(0, 100, 100), true);*/
 	// 天井の線
 	DrawLine(0 - cameraPos.x, 640 - cameraPos.y, 5000 - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
 	// 地面の線

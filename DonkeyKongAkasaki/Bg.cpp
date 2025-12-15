@@ -95,7 +95,7 @@ void Bg::DrawBg()
 	{
 		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg1Handle, true);
 		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg2Handle, true);
-		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg3Handle, true);
+		//DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg3Handle, true);
 	}
 
 	/*DrawGraph(-scrollBg, m_pos.y, m_bg1Handle, true);
