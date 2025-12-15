@@ -35,7 +35,7 @@ SceneMain::SceneMain()
 	m_pEnemyMush = new EnemyMush;
 	m_pEnemyGolem = new EnemyGolem;
 	m_pCamera = new Camera;
-	m_pBg = new Bg;
+	m_pBg = new Bg(m_pPlayer);
 
 }
 
@@ -151,9 +151,9 @@ void SceneMain::Draw()
 	/*DrawBox(Game::kScreenWidth-cameraPos.x,Game::kScreenHeight - cameraPos.y,
 		0, 0, GetColor(0, 100, 100), true);*/
 	// 天井の線
-	DrawLine(0 - cameraPos.x, 640 - cameraPos.y, Game::kScreenWidth - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
+	DrawLine(0 - cameraPos.x, 640 - cameraPos.y, 5000 - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
 	// 地面の線
-	DrawLine(0 - cameraPos.x, -10 - cameraPos.y, Game::kScreenWidth - cameraPos.x, -10 - cameraPos.y, GetColor(255, 255, 255));
+	DrawLine(0 - cameraPos.x, -10 - cameraPos.y, 5000 - cameraPos.x, -10 - cameraPos.y, GetColor(255, 255, 255));
 
 	// プレイヤーの描画
 	m_pPlayer->Draw(*m_pCamera);
