@@ -21,6 +21,9 @@ public:
 
 private:
 	void DrawBg();
+	// 画像に含まれるマップチップの数
+	int m_mapChipNumX;// X
+	int m_mapChipNumY;// Y
 
 private:
 	int m_bg1Handle;// 背景1の画像

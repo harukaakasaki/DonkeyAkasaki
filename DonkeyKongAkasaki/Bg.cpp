@@ -1,13 +1,40 @@
 #include "Bg.h"
 #include <DxLib.h>
 #include "Player.h"
+#include "Game.h"
 
 namespace
 {
+	constexpr int kChipSize = 64;// マップチップの大きさ
+	// マップチップを置く数
+	constexpr int kChipNumX = 7;
+	constexpr int kChipNumY = 16;
+
 	constexpr float kMapWidth = 8000.0f;// マップ全体の幅
 	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
 	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
 	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
+	constexpr float kChipScale = 1.0f;// マップチップの大きさ
+
+	constexpr int kChipData[kChipNumY][kChipNumX] =
+	{
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,1,1},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,0,0,0},
+		{3,0,0,0,1,1,1},
+		{3,0,0,1,2,2,2},
+		{3,1,1,2,2,2,2},
+		{3,2,2,2,2,2,2}
+	};
 }
 
 struct Size
@@ -18,13 +45,23 @@ struct Size
 
 Bg::Bg(Player* pPlayer):
 	m_pos{0,0},
-	m_pPlayer(pPlayer)
+	m_pPlayer(pPlayer),
+	m_mapChipNumX(0),
+	m_mapChipNumY(0)
 {
 	// 背景のイラスト
 	m_bg1Handle = LoadGraph("data/bg_1.png");
 	m_bg2Handle = LoadGraph("data/bg_2.png");
 	m_bg3Handle = LoadGraph("data/bg_3.png");
 	m_mapHandle = LoadGraph("data/mapChip.png");
+	// 画像マップチップ数を数える
+	int graphW = 0;
+	int graphH = 0;
+	GetGraphSize(m_mapHandle, &graphW, &graphH);
+
+	m_mapChipNumX = graphW / kChipSize;
+	m_mapChipNumY = graphH / kChipSize;
+	
 }
 
 Bg::~Bg()
@@ -52,7 +89,35 @@ void Bg::Draw()
 
 void Bg::DrawMapChip()
 {
-	DrawGraph(0, 0, m_mapHandle, true);
+	/*DrawGraph(0, 0, m_mapHandle, true);*/
+
+	for (int y = 0; y < kChipNumY; y++)
+	{
+		for (int x = 0; x < kChipNumX; x++)
+		{
+			int posX = static_cast<int>(x * kChipSize * kChipScale - GetScrollX());
+			int posY = static_cast<int>(y * kChipSize * kChipScale - GetScrollY());
+
+			// 設置するチップ
+			int chipNo = kChipData[y][x];
+
+			// マップチップのグラフィック切り出し位置//反応していない
+			int srcX = (chipNo % m_mapChipNumX) * kChipSize;
+			int srcY = (chipNo / m_mapChipNumY) * kChipSize;
+			// 描画
+			DrawRectRotaGraph(posX, posY, srcX, srcY,
+				kChipSize, kChipSize, kChipScale, 0.0f,
+				m_mapHandle, true);
+
+
+#ifdef _DEBUG
+
+			DrawBoxAA(posX, posY, posX + kChipSize * kChipScale, posY + kChipScale, 0x00ff00, false);
+
+#endif // _DEBUG
+
+		}
+	}
 }
 
 int Bg::GetScrollX()
