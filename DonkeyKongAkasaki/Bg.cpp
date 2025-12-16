@@ -24,6 +24,7 @@ Bg::Bg(Player* pPlayer):
 	m_bg1Handle = LoadGraph("data/bg_1.png");
 	m_bg2Handle = LoadGraph("data/bg_2.png");
 	m_bg3Handle = LoadGraph("data/bg_3.png");
+	m_mapHandle = LoadGraph("data/mapChip.png");
 }
 
 Bg::~Bg()
@@ -31,6 +32,7 @@ Bg::~Bg()
 	DeleteGraph(m_bg1Handle);
 	DeleteGraph(m_bg2Handle);
 	DeleteGraph(m_bg3Handle);
+	DeleteGraph(m_mapHandle);
 }
 
 void Bg::Init()
@@ -45,6 +47,12 @@ void Bg::Update()
 void Bg::Draw()
 {
 	DrawBg();
+	DrawMapChip();
+}
+
+void Bg::DrawMapChip()
+{
+	DrawGraph(0, 0, m_mapHandle, true);
 }
 
 int Bg::GetScrollX()
