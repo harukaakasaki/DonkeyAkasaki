@@ -44,6 +44,4 @@ void Camera::Update(Player& player)
 
 	m_pos = VLerp(m_pos,nextPos,0.08f);
 
-	
-
 }
