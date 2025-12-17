@@ -5,35 +5,33 @@
 
 namespace
 {
-	constexpr int kChipSize = 64;// マップチップの大きさ
+	constexpr int kChipSize = 32;// マップチップの大きさ
 	// マップチップを置く数
 	constexpr int kChipNumX = 7;
-	constexpr int kChipNumY = 16;
+	constexpr int kChipNumY = 14;
 
 	constexpr float kMapWidth = 8000.0f;// マップ全体の幅
 	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
 	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
 	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
-	constexpr float kChipScale = 1.0f;// マップチップの大きさ
+	constexpr float kChipScale = 2.0f;// マップチップの大きさ
 
 	constexpr int kChipData[kChipNumY][kChipNumX] =
 	{
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,1,1},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,0,0,0},
-		{3,0,0,0,1,1,1},
-		{3,0,0,1,2,2,2},
-		{3,1,1,2,2,2,2},
-		{3,2,2,2,2,2,2}
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{21,21,21,21,21,21,21},
+		{4,4,4,4,4,4,4},
+		{0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0}
 	};
 }
 
@@ -103,16 +101,18 @@ void Bg::DrawMapChip()
 
 			// マップチップのグラフィック切り出し位置//反応していない
 			int srcX = (chipNo % m_mapChipNumX) * kChipSize;
-			int srcY = (chipNo / m_mapChipNumY) * kChipSize;
+			int srcY = (chipNo / m_mapChipNumX) * kChipSize;
 			// 描画
-			DrawRectRotaGraph(posX, posY, srcX, srcY,
+			DrawRectRotaGraph(static_cast<int>(posX + kChipSize * kChipScale * 0.5f),
+				static_cast<int>(posY + kChipSize * kChipScale * 0.5f),
+				srcX, srcY,
 				kChipSize, kChipSize, kChipScale, 0.0f,
 				m_mapHandle, true);
 
 
 #ifdef _DEBUG
 
-			DrawBoxAA(posX, posY, posX + kChipSize * kChipScale, posY + kChipScale, 0x00ff00, false);
+			DrawBoxAA(posX, posY, posX + kChipSize * kChipScale, posY + kChipSize * kChipScale, 0x00ff00, false);
 
 #endif // _DEBUG
 
