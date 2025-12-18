@@ -29,7 +29,6 @@ Camera::~Camera()
 
 void Camera::Init()
 {
-	m_pos = { 0, 0 };
 }
 
 void Camera::Update(Player& player)
