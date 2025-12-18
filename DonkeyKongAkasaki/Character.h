@@ -1,6 +1,7 @@
 #pragma once
 #include "Vec2.h"
 
+class Rect;
 class Camera;
 class Character
 {
@@ -37,6 +38,8 @@ protected:
 	bool m_isGround;
 	// 重力
 	void Gravity();
+	// マップチップとの当たり判定
+	void CheckHitMap(Rect& chipRect);
 
 	
 

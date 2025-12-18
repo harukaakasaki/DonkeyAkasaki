@@ -19,6 +19,14 @@ public:
 
 	int GetScrollY();
 
+	/// <summary>
+	/// マップチップの矩形の当たり判定
+	/// </summary>
+	/// <param name="rect"></param>
+	/// <param name="chipRect"></param>
+	/// <returns></returns>
+	bool IsCollision(Rect rect, Rect& chipRect);
+
 private:
 	void DrawBg();
 	// 画像に含まれるマップチップの数

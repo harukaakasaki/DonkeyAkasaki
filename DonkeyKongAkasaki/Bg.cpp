@@ -15,7 +15,7 @@ namespace
 	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
 	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
 	constexpr float kChipScale = 2.0f;// マップチップの大きさ
-	constexpr float kMapWidth = 8000.0f;// マップ全体の幅
+	constexpr float kMapWidth = 5000.0f;// マップ全体の幅
 	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
 
 	constexpr int kChipData[kChipNumY][kChipNumX] =
@@ -154,6 +154,39 @@ int Bg::GetScrollY()
 
 	return result;
 
+}
+
+bool Bg::IsCollision(Rect rect, Rect& chipRect)
+{
+	for (int y = 0; y < kChipNumY; y++)
+	{
+		for (int x = 0; x < kChipNumX; x++)
+		{
+			if (kChipData[y][x] == 0)continue;// 0番は当たり判定がない。
+
+			int chipLeft = static_cast<int>(x * kChipSize * kChipScale);
+			int chipRight = static_cast<int>(chipLeft * kChipSize * kChipScale);
+			int chipTop = static_cast<int>(y * kChipSize * kChipScale);
+			int chipBottom = static_cast<int>(chipTop * kChipSize * kChipScale);
+
+			// 絶対に当たらない場合
+			if (chipLeft > rect.right)continue;
+			if (chipRight > rect.left)continue;
+			if (chipTop > rect.bottom)continue;
+			if (chipBottom > rect.top)continue;
+
+			// ぶつかったマップチップの矩形を設定
+			chipRect.left = static_cast<float>(chipLeft);
+			chipRect.right = static_cast<float>(chipRight);
+			chipRect.top = static_cast<float>(chipTop);
+			chipRect.bottom = static_cast<float>(chipBottom);
+
+			// どれかのチップに当たっていたら、終了
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void Bg::DrawBg()

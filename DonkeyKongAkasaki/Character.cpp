@@ -2,6 +2,7 @@
 #include <DxLib.h>
 #include "Player.h"
 #include "Camera.h"
+#include "Vec2.h"
 
 
 namespace
@@ -46,6 +47,10 @@ void Character::Update()
 {
 	// 重力
 	Gravity();
+
+	Rect chipRect;// 当たったマップチップの矩形
+	CheckHitMap(chipRect);
+
 }
 
 /// <summary>
@@ -68,6 +73,13 @@ void Character::Gravity()
 		// 地面にいないときの処理
 		m_isGround = false;
 	}
+}
+
+void Character::CheckHitMap(Rect& chipRect)
+{
+	// 横から当たったかチェックする
+	//m_pos.x += m_move.x;
+	
 }
 
 
