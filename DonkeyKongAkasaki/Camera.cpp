@@ -38,11 +38,13 @@ void Camera::Update(Player& player)
 	Vec2 playerPos = player.GetPos();
 
 	// カメラの次のポジション
-	Vec2 nextPos;
-	nextPos.x = playerPos.x - Game::kScreenWidth / 2;
-	nextPos.y = playerPos.y - (Game::kScreenHeight / 2 + 200);// プレイヤーの位置（真ん中）よりも少し下げる
+	//Vec2 nextPos;
+	//nextPos.x = playerPos.x - Game::kScreenWidth / 2;
+	//nextPos.y = playerPos.y - (Game::kScreenHeight / 2 + 200);// プレイヤーの位置（真ん中）よりも少し下げる
 
+	m_pos.x = playerPos.x - Game::kScreenWidth / 2;
+	m_pos.y = 0;
 
-	m_pos = VLerp(m_pos,nextPos,1.0f);
+//	m_pos = VLerp(m_pos,nextPos,1.0f);
 
 }
