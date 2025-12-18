@@ -1,12 +1,12 @@
 #pragma once
 #include "Vec2.h"
 
-class Player;
+class Camera;
 
 class Bg
 {
 public:
-	Bg(Player* pPlayer);
+	Bg(Camera* pCamera);
 	~Bg();
 
 	void Init();
@@ -32,6 +32,6 @@ private:
 	int m_mapHandle;// マップチップ画像
 	Vec2 m_pos;// 背景の位置
 
-	Player* m_pPlayer;
+	Camera* m_pCamera;
 };
 

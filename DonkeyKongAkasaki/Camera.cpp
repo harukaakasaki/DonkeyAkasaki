@@ -42,6 +42,7 @@ void Camera::Update(Player& player)
 	nextPos.x = playerPos.x - Game::kScreenWidth / 2;
 	nextPos.y = playerPos.y - (Game::kScreenHeight / 2 + 200);// プレイヤーの位置（真ん中）よりも少し下げる
 
-	m_pos = VLerp(m_pos,nextPos,0.08f);
+
+	m_pos = VLerp(m_pos,nextPos,1.0f);
 
 }

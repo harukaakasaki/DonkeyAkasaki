@@ -35,7 +35,7 @@ SceneMain::SceneMain()
 	m_pEnemyMush = new EnemyMush;
 	m_pEnemyGolem = new EnemyGolem;
 	m_pCamera = new Camera;
-	m_pBg = new Bg(m_pPlayer);
+	m_pBg = new Bg(m_pCamera);
 
 }
 

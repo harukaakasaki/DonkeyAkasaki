@@ -1,6 +1,7 @@
 #include "Bg.h"
 #include <DxLib.h>
 #include "Player.h"
+#include "Camera.h"
 #include "Game.h"
 
 namespace
@@ -10,11 +11,12 @@ namespace
 	constexpr int kChipNumX = 21;
 	constexpr int kChipNumY = 14;
 
-	constexpr float kMapWidth = 8000.0f;// マップ全体の幅
-	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
+	
 	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
 	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
 	constexpr float kChipScale = 2.0f;// マップチップの大きさ
+	constexpr float kMapWidth = 8000.0f;// マップ全体の幅
+	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
 
 	constexpr int kChipData[kChipNumY][kChipNumX] =
 	{
@@ -41,9 +43,9 @@ struct Size
 	int height;
 };
 
-Bg::Bg(Player* pPlayer):
+Bg::Bg(Camera* pCamera):
 	m_pos{0,0},
-	m_pPlayer(pPlayer),
+	m_pCamera(pCamera),
 	m_mapChipNumX(0),
 	m_mapChipNumY(0)
 {
@@ -99,7 +101,7 @@ void Bg::DrawMapChip()
 			// 設置するチップ
 			int chipNo = kChipData[y][x];
 
-			// マップチップのグラフィック切り出し位置//反応していない
+			// マップチップのグラフィック切り出し位置
 			int srcX = (chipNo % m_mapChipNumX) * kChipSize;
 			int srcY = (chipNo / m_mapChipNumX) * kChipSize;
 			// 描画
@@ -122,7 +124,7 @@ void Bg::DrawMapChip()
 
 int Bg::GetScrollX()
 {
-	int result = static_cast<int>(m_pPlayer->GetPos().x - kScreenWidth * 0.5);
+	int result = static_cast<int>(/*m_pPlayer*/m_pCamera->GetPos().x - kScreenWidth * 0.5);
 	if (result < 0)
 	{
 		result = 0;
@@ -139,7 +141,7 @@ int Bg::GetScrollX()
 
 int Bg::GetScrollY()
 {
-	int result = static_cast<int>(m_pPlayer->GetPos().y - kScreenHeight * 0.5);
+	int result = static_cast<int>(/*m_pPlayer*/m_pCamera->GetPos().y - kScreenHeight * 0.5);
 	if (result < 0)
 	{
 		result = 0;
@@ -168,7 +170,7 @@ void Bg::DrawBg()
 	{
 		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg1Handle, true);
 		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg2Handle, true);
-		//DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg3Handle, true);
+		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg3Handle, true);
 	}
 
 	/*DrawGraph(-scrollBg, m_pos.y, m_bg1Handle, true);
