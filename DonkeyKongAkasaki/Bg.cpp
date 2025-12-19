@@ -5,7 +5,7 @@
 #include "Game.h"
 
 /// <summary>
-/// 現在、IsColisionを作成中。
+/// 現在、Character.cppを作成中。
 /// </summary>
 
 namespace
