@@ -19,7 +19,7 @@ namespace
 	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
 	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
 	constexpr float kChipScale = 2.0f;// マップチップの大きさ
-	constexpr float kMapWidth = 5000.0f;// マップ全体の幅
+	constexpr float kMapWidth = 8000.0f;// マップ全体の幅
 	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
 
 	constexpr int kChipData[kChipNumY][kChipNumX] =
@@ -100,7 +100,7 @@ void Bg::DrawMapChip()
 		for (int x = 0; x < kChipNumX; x++)
 		{
 			int posX = static_cast<int>(x * kChipSize * kChipScale - GetScrollX());
-			int posY = static_cast<int>(y * kChipSize * kChipScale - GetScrollY());
+			int posY = static_cast<int>(y * kChipSize * kChipScale /*- GetScrollY()*/);
 
 			// 設置するチップ
 			int chipNo = kChipData[y][x];
