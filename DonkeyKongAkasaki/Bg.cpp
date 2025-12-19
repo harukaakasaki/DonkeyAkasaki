@@ -4,6 +4,10 @@
 #include "Camera.h"
 #include "Game.h"
 
+/// <summary>
+/// 現在、IsColisionを作成中。
+/// </summary>
+
 namespace
 {
 	constexpr int kChipSize = 32;// マップチップの大きさ
@@ -124,11 +128,11 @@ void Bg::DrawMapChip()
 
 int Bg::GetScrollX()
 {
-	int result = static_cast<int>(/*m_pPlayer*/m_pCamera->GetPos().x - kScreenWidth * 0.5);
-	if (result < 0)
-	{
-		result = 0;
-	}
+	int result = static_cast<int>(m_pCamera->GetPos().x - kScreenWidth * 0.5);
+	//if (result < 0)
+	//{
+	//	result = 0;// ← はじめはスクロールしないようにしている
+	//}
 
 	if (result > kMapWidth - kScreenWidth)
 	{
@@ -141,7 +145,7 @@ int Bg::GetScrollX()
 
 int Bg::GetScrollY()
 {
-	int result = static_cast<int>(/*m_pPlayer*/m_pCamera->GetPos().y - kScreenHeight * 0.5);
+	int result = static_cast<int>(m_pCamera->GetPos().y - kScreenHeight * 0.5);
 	if (result < 0)
 	{
 		result = 0;

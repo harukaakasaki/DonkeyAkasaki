@@ -36,6 +36,7 @@ void Camera::Update(Player& player)
 	// プレイヤー位置の取得
 	Vec2 playerPos = player.GetPos();
 
+	// 滑らかな動きにする場合
 	// カメラの次のポジション
 	//Vec2 nextPos;
 	//nextPos.x = playerPos.x - Game::kScreenWidth / 2;
