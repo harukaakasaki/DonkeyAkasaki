@@ -47,9 +47,10 @@ void Character::Update()
 {
 	// 重力
 	Gravity();
+	m_pos += m_move;
 
 	Rect chipRect;// 当たったマップチップの矩形
-	CheckHitMap(chipRect);
+	/*CheckHitMap(chipRect);*/
 
 }
 
@@ -91,5 +92,31 @@ void Character::CheckHitMap(Rect& chipRect)
 void Character::Draw(Camera& camera)
 {
 	Vec2 cameraPos= camera.GetPos();
+}
+
+// 矩形
+Rect Character::GetRect() const
+{
+	constexpr float kWidth = 64.0f;
+	constexpr float kHeight = 64.0f;
+
+	return
+	{
+		m_pos.x,
+		m_pos.y,
+		m_pos.x + kWidth,
+		m_pos.y + kHeight,
+	};
+}
+
+// 地面のマップチップの当たり判定
+void Character::ResolveCollision(const Rect& chipRect)
+{
+	if (m_move.y > 0.0f)
+	{
+		m_pos.y = chipRect.top - 64.0f;
+		m_move.y = 0.0f;
+		m_isGround = true;
+	}
 }
 

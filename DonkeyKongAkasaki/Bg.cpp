@@ -160,30 +160,36 @@ int Bg::GetScrollY()
 
 }
 
-bool Bg::IsCollision(Rect rect, Rect& chipRect)
+bool Bg::IsCollision(const Rect& rect, Rect& chipRect)
 {
+	constexpr float chipW = kChipSize * kChipScale;
+
 	for (int y = 0; y < kChipNumY; y++)
 	{
 		for (int x = 0; x < kChipNumX; x++)
 		{
-			if (kChipData[y][x] == 0)continue;// 0番は当たり判定がない。
+			int chipNo = kChipData[y][x];
 
-			int chipLeft = static_cast<int>(x * kChipSize * kChipScale);
-			int chipRight = static_cast<int>(chipLeft * kChipSize * kChipScale);
-			int chipTop = static_cast<int>(y * kChipSize * kChipScale);
-			int chipBottom = static_cast<int>(chipTop * kChipSize * kChipScale);
+			if (chipNo != 4)continue;
+
+			float left = x * chipW;
+			float top = y * chipW;
+			float right = left + chipW;
+			float bottom = top + chipW;
 
 			// 絶対に当たらない場合
-			if (chipLeft > rect.right)continue;
-			if (chipRight > rect.left)continue;
-			if (chipTop > rect.bottom)continue;
-			if (chipBottom > rect.top)continue;
+			if (left > rect.right)continue;
+			if (right < rect.left)continue;
+			if (top > rect.bottom)continue;
+			if (bottom < rect.top)continue;
 
 			// ぶつかったマップチップの矩形を設定
-			chipRect.left = static_cast<float>(chipLeft);
+			/*chipRect.left = static_cast<float>(chipLeft);
 			chipRect.right = static_cast<float>(chipRight);
 			chipRect.top = static_cast<float>(chipTop);
-			chipRect.bottom = static_cast<float>(chipBottom);
+			chipRect.bottom = static_cast<float>(chipBottom);*/
+
+			chipRect = { left,top,right,bottom };
 
 			// どれかのチップに当たっていたら、終了
 			return true;
@@ -209,7 +215,7 @@ void Bg::DrawBg()
 		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg2Handle, true);
 		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg3Handle, true);
 	}
-
+	 
 	/*DrawGraph(-scrollBg, m_pos.y, m_bg1Handle, true);
 	DrawGraph(-scrollBg, m_pos.y, m_bg2Handle, true);
 	DrawGraph(-scrollBg, m_pos.y, m_bg3Handle, true);*/

@@ -25,7 +25,7 @@ public:
 	/// <param name="rect"></param>
 	/// <param name="chipRect"></param>
 	/// <returns></returns>
-	bool IsCollision(Rect rect, Rect& chipRect);
+	bool IsCollision(const Rect& rect, Rect& chipRect);
 
 private:
 	void DrawBg();

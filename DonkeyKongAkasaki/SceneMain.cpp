@@ -80,6 +80,14 @@ void SceneMain::Update()
 	m_pCamera->Update(*m_pPlayer);
 	m_pBg->Update();
 
+	Rect playerRect = m_pPlayer->GetRect();
+	Rect chipRect;
+
+	if (m_pBg->IsCollision(playerRect, chipRect))
+	{
+		m_pPlayer->ResolveCollision(chipRect);
+	}
+
 	Rect playerHitBox = m_pPlayer->PlayerHitBox();
 	Rect batBox       = m_pEnemyBat->EnemyBatHitBox();
 	Rect mushBox      = m_pEnemyMush->EnemyMushHitBox();

@@ -237,7 +237,6 @@ Rect Player::PlayerHitBox() const
 {
 	Rect r;
 
-	
 	r.left = m_pos.x-40;
 	r.right = m_pos.x+32;
 	r.top = m_pos.y-90;

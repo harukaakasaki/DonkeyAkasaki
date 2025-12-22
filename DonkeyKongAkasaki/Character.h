@@ -21,6 +21,9 @@ public:
 	/// <returns></returns>
 	const Vec2 GetPos()const { return m_pos; }
 
+	Rect GetRect() const;
+	void ResolveCollision(const Rect& chipRect);
+
 protected:
 	// キャラクターの画像
 	int m_handle;
