@@ -100,7 +100,7 @@ void Bg::DrawMapChip()
 		for (int x = 0; x < kChipNumX; x++)
 		{
 			int posX = static_cast<int>(x * kChipSize * kChipScale - GetScrollX());
-			int posY = static_cast<int>(y * kChipSize * kChipScale /*- GetScrollY()*/);
+			int posY = static_cast<int>(y * kChipSize * kChipScale - GetScrollY());
 
 			// 設置するチップ
 			int chipNo = kChipData[y][x];
@@ -129,10 +129,10 @@ void Bg::DrawMapChip()
 int Bg::GetScrollX()
 {
 	int result = static_cast<int>(m_pCamera->GetPos().x - kScreenWidth * 0.5);
-	//if (result < 0)
-	//{
-	//	result = 0;// ← はじめはスクロールしないようにしている
-	//}
+	if (result < 0)
+	{
+		result = 0;// ← はじめはスクロールしないようにしている
+	}
 
 	if (result > kMapWidth - kScreenWidth)
 	{
