@@ -47,10 +47,8 @@ void Character::Update()
 {
 	// 重力
 	Gravity();
-	m_pos += m_move;
 
 	Rect chipRect;// 当たったマップチップの矩形
-	/*CheckHitMap(chipRect);*/
 
 }
 
@@ -74,13 +72,6 @@ void Character::Gravity()
 		// 地面にいないときの処理
 		m_isGround = false;
 	}
-}
-
-void Character::CheckHitMap(Rect& chipRect)
-{
-	// 横から当たったかチェックする
-	//m_pos.x += m_move.x;
-	
 }
 
 
