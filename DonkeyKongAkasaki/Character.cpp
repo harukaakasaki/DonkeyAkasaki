@@ -70,7 +70,7 @@ void Character::Gravity()
 	else
 	{
 		// ’n–Ê‚É‚¢‚È‚¢‚Æ‚«‚Ìˆ—
-		m_isGround = false;
+		/*m_isGround = false;*/
 	}
 }
 
