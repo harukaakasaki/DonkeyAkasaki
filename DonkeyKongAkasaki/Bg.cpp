@@ -128,11 +128,11 @@ void Bg::DrawMapChip()
 
 int Bg::GetScrollX()
 {
-	int result = static_cast<int>(m_pCamera->GetPos().x - kScreenWidth * 0.5);
-	if (result < 0)
-	{
-		result = 0;// ← はじめはスクロールしないようにしている
-	}
+	int result = static_cast<int>(m_pCamera->GetPos().x);
+	//if (result < 0)
+	//{
+	//	result = 0;// ← はじめはスクロールしないようにしている
+	//}
 
 	if (result > kMapWidth - kScreenWidth)
 	{
@@ -145,7 +145,7 @@ int Bg::GetScrollX()
 
 int Bg::GetScrollY()
 {
-	int result = static_cast<int>(m_pCamera->GetPos().y - kScreenHeight * 0.5);
+	int result = static_cast<int>(m_pCamera->GetPos().y);
 	if (result < 0)
 	{
 		result = 0;

@@ -4,7 +4,8 @@
 #include "Character.h"
 #include "SceneMain.h"
 #include "Vec2.h"
-#include "Camera.h" 
+#include "Camera.h"
+#include "Game.h"
 
 namespace
 {
@@ -46,6 +47,9 @@ Player::~Player()
 void Player::Init()
 {
 	m_animFrame = 0;
+	
+	m_pos.x = Game::kScreenWidth * 0.5f;
+	m_pos.y = 550.0f;
 }
 
 // çXêV
