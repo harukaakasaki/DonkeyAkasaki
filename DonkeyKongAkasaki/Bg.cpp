@@ -100,7 +100,7 @@ void Bg::DrawMapChip()
 		for (int x = 0; x < kChipNumX; x++)
 		{
 			int posX = static_cast<int>(x * kChipSize * kChipScale - GetScrollX());
-			int posY = static_cast<int>(y * kChipSize * kChipScale - GetScrollY());
+			int posY = static_cast<int>((y-0.5) * kChipSize * kChipScale - GetScrollY());
 
 			// 設置するチップ
 			int chipNo = kChipData[y][x];
@@ -108,11 +108,14 @@ void Bg::DrawMapChip()
 			// マップチップのグラフィック切り出し位置
 			int srcX = (chipNo % m_mapChipNumX) * kChipSize;
 			int srcY = (chipNo / m_mapChipNumX) * kChipSize;
+
+			float half = kChipSize * kChipScale * 0.05f;
+
 			// 描画
-			DrawRectRotaGraph(static_cast<int>(posX + kChipSize * kChipScale * 0.5f),
-				static_cast<int>(posY + kChipSize * kChipScale * 0.5f),
+			DrawRectRotaGraph(static_cast<int>(posX + half),
+				static_cast<int>(posY + half),
 				srcX, srcY,
-				kChipSize, kChipSize, kChipScale, 0.0f,
+				kChipSize, kChipSize,kChipScale, 0.0f,
 				m_mapHandle, true);
 
 
