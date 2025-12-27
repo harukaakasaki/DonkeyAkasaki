@@ -29,7 +29,8 @@ EnemyGolem::~EnemyGolem()
 void EnemyGolem::Init()
 {
 	m_handle = LoadGraph("data/Golem.png");
-	m_pos = { 300.0f,550.0f };
+	m_pos = { 300.0f,485.0f };
+	m_isAlive = true;
 }
 
 void EnemyGolem::Update()
