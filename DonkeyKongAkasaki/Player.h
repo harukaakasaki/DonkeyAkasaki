@@ -10,7 +10,7 @@ enum class PlayerState
 	Move,  // 移動
 	Jump,  // ジャンプ
 	Attack,// 攻撃
-	Death  // 死
+	Death  // 死s
 };
 /// <summary>
 /// プレイヤーのLevel状態

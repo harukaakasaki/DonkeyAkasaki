@@ -8,7 +8,7 @@
 namespace
 {
 	constexpr float kGravity = 1.0f;// èdóÕ
-	constexpr float kGround = 640.0f;// ínñ 
+	constexpr float kGround = 700.0f;// ínñ 
 }
 
 /// <summary>

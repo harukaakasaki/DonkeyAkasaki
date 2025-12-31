@@ -155,7 +155,7 @@ void SceneMain::Draw()
 	// îwåiÇÃï\é¶
 	m_pBg->Draw();
 	// ìVà‰ÇÃê¸
-	DrawLine(0 - cameraPos.x, 640 - cameraPos.y, 5000 - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
+	//DrawLine(0 - cameraPos.x, 640 - cameraPos.y, 5000 - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
 	// ínñ ÇÃê¸
 	DrawLine(0 - cameraPos.x, -10 - cameraPos.y, 5000 - cameraPos.x, -10 - cameraPos.y, GetColor(255, 255, 255));
 

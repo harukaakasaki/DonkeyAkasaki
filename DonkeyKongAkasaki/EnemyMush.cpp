@@ -30,7 +30,7 @@ EnemyMush::~EnemyMush()
 void EnemyMush::Init()
 {
 	m_handle = LoadGraph("data/Mush.png");
-	m_pos = { 500.0f,485.0f };
+	m_pos = { 500.0f,545.0f };
 	m_isAlive = true;
 }
 
