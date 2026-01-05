@@ -81,10 +81,8 @@ void EnemyGolem::Damage()
 	m_stopTimer = 30;
 
 	// –³“GŽžŠÔ
-	m_damageCoolTime = 60;
+	m_damageCoolTime = 30;
 
-	// –³“GŽžŠÔ
-	m_damageCoolTime = 60;
 
 	if (m_hp <= 0)
 	{
