@@ -38,6 +38,12 @@ void EnemyGolem::Update()
 {
 	Character::Update();
 
+	if (m_stopTimer > 0)
+	{
+		m_stopTimer--;
+		return;
+	}
+
 
 	m_moveTimer++;
 	if (m_moveTimer >= 300)
@@ -64,14 +70,18 @@ void EnemyGolem::Update()
 void EnemyGolem::Damage()
 {
 
-
-
 	if (m_damageCoolTime > 0)
 	{
 		return;
 	}
 
 	m_hp--;
+
+	// Ž~‚Ü‚é
+	m_stopTimer = 60;
+
+	// –³“GŽžŠÔ
+	m_damageCoolTime = 60;
 
 	// –³“GŽžŠÔ
 	m_damageCoolTime = 60;

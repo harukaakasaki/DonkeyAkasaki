@@ -27,6 +27,8 @@ private:
 	int m_hp;
 	// –³“GŠÔ
 	int m_damageCoolTime = 0;
+	// UŒ‚‚³‚ê‚½‚ç~‚Ü‚é
+	int m_stopTimer = 0;
 
 	int m_normalAnim[9]; // ’ÊíƒRƒ}”
 	//int attackAnim[10];// UŒ‚ƒRƒ}”

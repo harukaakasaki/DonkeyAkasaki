@@ -39,6 +39,11 @@ void EnemyMush::Update()
 {
 	Character::Update();
 
+	if (m_stopTimer > 0)
+	{
+		m_stopTimer--;
+		return;
+	}
 
 	m_moveTimer++;
 	if (m_moveTimer >= 180)
@@ -70,6 +75,9 @@ void EnemyMush::Damage()
 	}
 
 	m_hp--;
+
+	// Ž~‚Ü‚é
+	m_stopTimer = 60;
 
 	// –³“GŽžŠÔ
 	m_damageCoolTime = 60;
