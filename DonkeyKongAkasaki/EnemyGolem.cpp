@@ -78,7 +78,7 @@ void EnemyGolem::Damage()
 	m_hp--;
 
 	// Ž~‚Ü‚é
-	m_stopTimer = 60;
+	m_stopTimer = 30;
 
 	// –³“GŽžŠÔ
 	m_damageCoolTime = 60;
