@@ -20,6 +20,7 @@ EnemyMush::EnemyMush():
 	m_animCount(0),
 	m_normalAnim(0)
 {
+	m_hp = 2;
 }
 
 EnemyMush::~EnemyMush()
@@ -37,6 +38,8 @@ void EnemyMush::Init()
 void EnemyMush::Update()
 {
 	Character::Update();
+
+
 	m_moveTimer++;
 	if (m_moveTimer >= 180)
 	{
@@ -52,11 +55,25 @@ void EnemyMush::Update()
 		m_pos.x += 1;
 	}
 
+	if (m_damageCoolTime > 0)
+	{
+		m_damageCoolTime--;
+	}
+
 }
 
 void EnemyMush::Damage()
 {
+	if (m_damageCoolTime > 0)
+	{
+		return;
+	}
+
 	m_hp--;
+
+	// –³“GŽžŠÔ
+	m_damageCoolTime = 60;
+
 
 	if (m_hp <= 0)
 	{

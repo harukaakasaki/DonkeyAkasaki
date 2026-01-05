@@ -24,7 +24,7 @@ private:
 	// 左に動いているか
 	bool m_moveLeft = false;
 	// コウモリのHP
-	int m_hp;
+	int m_hp = 1;
 
 	int m_normalAnim[9]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数

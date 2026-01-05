@@ -91,7 +91,7 @@ void EnemyBat::Draw(const Camera& camera)
 
 void EnemyBat::Damage()
 {
-	m_hp--;
+	m_hp = -1;
 
 	if (m_hp <= 0)
 	{

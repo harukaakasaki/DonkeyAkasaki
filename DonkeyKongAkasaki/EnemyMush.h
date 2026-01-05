@@ -24,7 +24,9 @@ private:
 	// 左に動いているか
 	bool m_moveLeft = false;
 	// キノコのHP
-	int m_hp = 50;
+	int m_hp;
+	// 無敵時間
+	int m_damageCoolTime = 0;
 
 	int m_normalAnim[9]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数

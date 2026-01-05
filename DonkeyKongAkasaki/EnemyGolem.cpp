@@ -19,6 +19,7 @@ EnemyGolem::EnemyGolem():
 	m_animCount(0),
 	m_normalAnim(0)
 {
+	m_hp = 3;
 }
 
 EnemyGolem::~EnemyGolem()
@@ -36,6 +37,8 @@ void EnemyGolem::Init()
 void EnemyGolem::Update()
 {
 	Character::Update();
+
+
 	m_moveTimer++;
 	if (m_moveTimer >= 300)
 	{
@@ -51,11 +54,27 @@ void EnemyGolem::Update()
 		m_pos.x += 4;
 	}
 
+	if (m_damageCoolTime > 0)
+	{
+		m_damageCoolTime--;
+	}
+
 }
 
 void EnemyGolem::Damage()
 {
+
+
+
+	if (m_damageCoolTime > 0)
+	{
+		return;
+	}
+
 	m_hp--;
+
+	// –³“GŽžŠÔ
+	m_damageCoolTime = 60;
 
 	if (m_hp <= 0)
 	{
