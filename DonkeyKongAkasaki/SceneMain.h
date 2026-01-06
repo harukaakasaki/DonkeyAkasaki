@@ -58,6 +58,7 @@ private:
 	void CheckPlayerAttackCollision();
 
 	bool m_isHitPlayer = false; 
+	bool m_isGoal = false;
 
 //	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
 };

@@ -14,6 +14,9 @@
 
 namespace
 {
+	constexpr float kGoalX = 6200.0f;// ゴールの場所
+	constexpr float kGoalWidth = 128.0f;// ゴール幅
+
 	bool IsHitRect(const Rect& a, const Rect& b)
 	{
 		return !(a.right < b.left ||
@@ -127,10 +130,19 @@ void SceneMain::Update()
 	m_pCamera->Update(*m_pPlayer);
 	m_pBg->Update();
 
-
+	Rect goalRect;
+	goalRect.left = kGoalX;
+	goalRect.right = kGoalX + kGoalWidth;
+	goalRect.top = 0.0f;
+	goalRect.bottom = 1080.0f;
 
 	Rect playerRect = m_pPlayer->GetRect();
 	Rect chipRect;
+
+	if (IsHitRect(playerRect, goalRect))
+	{
+		m_isGoal = true;
+	}
 
 	if (m_pBg->IsCollision(playerRect, chipRect))
 	{
@@ -178,6 +190,16 @@ void SceneMain::Draw()
 	{
 		golem->Draw(*m_pCamera);
 	}
+
+	int drawX = static_cast<int>(kGoalX - cameraPos.x);
+
+	DrawBox(drawX, 0, drawX + kGoalWidth, 1080, GetColor(255, 255, 0),false);
+
+	if (m_isGoal)
+	{
+		DrawString(drawX - 10, 200, "クリア！！！", GetColor(255, 255, 0));
+	}
+	
 	
 #ifdef _DEBUG
 
