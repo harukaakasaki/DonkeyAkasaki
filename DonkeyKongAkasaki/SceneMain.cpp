@@ -98,8 +98,12 @@ void SceneMain::Update()
 	{
 		if (IsHitRect(playerHitBox, batBox))
 		{
+			float dir = (m_pPlayer->GetPos().x < m_pEnemyBat->GetPos().x)
+				? -1.0f
+				: 1.0f;
+
 			m_isHitPlayer = true;
-			m_pPlayer->Damage();
+			m_pPlayer->Damage(dir);
 		}
 	}
 	
@@ -107,8 +111,12 @@ void SceneMain::Update()
 	{
 		if (IsHitRect(playerHitBox, mushBox))
 		{
+			float dir = (m_pPlayer->GetPos().x < m_pEnemyMush->GetPos().x)
+				? -1.0f
+				: 1.0f;
+
 			m_isHitPlayer = true;
-			m_pPlayer->Damage();
+			m_pPlayer->Damage(dir);
 		}
 	}
 	
@@ -116,8 +124,12 @@ void SceneMain::Update()
 	{
 		if (IsHitRect(playerHitBox, golemBox))
 		{
+			float dir = (m_pPlayer->GetPos().x < m_pEnemyGolem->GetPos().x)
+				? -1.0f
+				: 1.0f;
+
 			m_isHitPlayer = true;
-			m_pPlayer->Damage();
+			m_pPlayer->Damage(dir);
 		}
 	}
 	

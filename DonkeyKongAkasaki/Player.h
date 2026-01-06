@@ -50,7 +50,7 @@ public:
 	/// <summary>
 	/// ダメージ
 	/// </summary>
-	void Damage();
+	void Damage(float hitDir);
 	/// <summary>
 	/// リスポーン
 	/// </summary>

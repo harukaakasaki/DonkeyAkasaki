@@ -18,6 +18,8 @@ namespace
 	constexpr float kSpeed = 7.0f;                   // スピード
 	constexpr float kJumpPower = 20.0f;              // ジャンプ力
 	constexpr float kAnimSpeed = 2.0f;               // アニメーションスピード
+	constexpr float knockBackX = 12.0f;               // ノックバックX
+	constexpr float knockBackY = 15.0f;               // ノックバックY
 }
 
 // コンストラクタ
@@ -269,9 +271,8 @@ Rect Player::PlayerHitBox() const
 	return r;
 }
 
-void Player::Damage()
+void Player::Damage(float hitDir)
 {
-	m_pos.y -= 20;
 	
 	if (m_damageCoolTime > 0)
 	{
@@ -279,8 +280,12 @@ void Player::Damage()
 	}
 
 	m_hp--;
-
 	m_damageCoolTime = 60;
+
+	m_move.x = knockBackX * hitDir;
+	m_move.y = -knockBackY;
+
+	m_isGround = false;
 
 	if (m_hp <= 0)
 	{
