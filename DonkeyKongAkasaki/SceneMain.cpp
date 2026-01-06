@@ -63,7 +63,8 @@ void SceneMain::Init()
 	{
 		{400.0f,400.0f},
 		{800.0f,420.0f},
-		{1200.0f,450.0f}
+		{1200.0f,450.0f},
+		{2500.0f,300.0f}
 	};
 
 	for (auto& pos : batPosition)
