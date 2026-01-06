@@ -31,9 +31,6 @@ SceneMain::SceneMain()
 	
 	m_pPlayer = new Player;
 	m_pEnemy = new Enemy;
-	m_pEnemyBat = new EnemyBat;
-	m_pEnemyMush = new EnemyMush;
-	m_pEnemyGolem = new EnemyGolem;
 	m_pCamera = new Camera;
 	m_pBg = new Bg(m_pCamera);
 
@@ -46,9 +43,6 @@ SceneMain::~SceneMain()
 {
 	delete m_pPlayer;
 	delete m_pEnemy;
-	delete m_pEnemyBat;
-	delete m_pEnemyMush;
-	delete m_pEnemyGolem;
 	delete m_pCamera;
 }
 
@@ -59,10 +53,36 @@ void SceneMain::Init()
 {
 	m_pPlayer->Init();
 	m_pEnemy->Init();
-	m_pEnemyBat->Init();
-	m_pEnemyMush->Init();
-	m_pEnemyGolem->Init();
 	m_pCamera->Init();
+	for (int i = 0; i < 3; i++)
+	{
+		auto bat = std::make_unique<EnemyBat>();
+		bat->Init();
+
+		bat->SetPos({ 400.0f + i * 300.0f, 400.0f });
+
+		m_enemyBats.push_back(std::move(bat));
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		auto mush = std::make_unique<EnemyMush>();
+		mush->Init();
+
+		mush->SetPos({ 600.0f + i * 350.0f, 550.0f });
+
+		m_enemyMushes.push_back(std::move(mush));
+	}
+
+	for (int i = 0; i < 1; i++)
+	{
+		auto golem = std::make_unique<EnemyGolem>();
+		golem->Init();
+
+		golem->SetPos({ 1200.0f,550.0f });
+
+		m_enemyGolems.push_back(std::move(golem));
+	}
 }
 
 
@@ -74,11 +94,24 @@ void SceneMain::Update()
 {
 	m_pPlayer->Update();
 	m_pEnemy->Update();
-	m_pEnemyBat->Update();
-	m_pEnemyMush->Update();
-	m_pEnemyGolem->Update();
+	for (auto& bat : m_enemyBats)
+	{
+		bat->Update();
+	}
+
+	for (auto& mush : m_enemyMushes)
+	{
+		mush->Update();
+	}
+
+	for (auto& golem : m_enemyGolems)
+	{
+		golem->Update();
+	}
 	m_pCamera->Update(*m_pPlayer);
 	m_pBg->Update();
+
+
 
 	Rect playerRect = m_pPlayer->GetRect();
 	Rect chipRect;
@@ -88,86 +121,18 @@ void SceneMain::Update()
 		m_pPlayer->ResolveCollision(chipRect);
 	}
 
-	Rect playerHitBox = m_pPlayer->PlayerHitBox();
-	Rect batBox       = m_pEnemyBat->EnemyBatHitBox();
-	Rect mushBox      = m_pEnemyMush->EnemyMushHitBox();
-	Rect golemBox     = m_pEnemyGolem->EnemyGolemHitBox();
-	Rect playerAttack = m_pPlayer->AttackHitBox();
+	// ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+	CheckPlayerEnemyCollision();
+	// ƒvƒŒƒCƒ„[‚ÌUŒ‚”»’è
+	CheckPlayerAttackCollision();
 
-	if (m_pEnemyBat->IsAlive())
-	{
-		if (IsHitRect(playerHitBox, batBox))
-		{
-			float dir = (m_pPlayer->GetPos().x < m_pEnemyBat->GetPos().x)
-				? -1.0f
-				: 1.0f;
-
-			m_isHitPlayer = true;
-			m_pPlayer->Damage(dir);
-		}
-	}
-	
-	if (m_pEnemyMush->IsAlive())
-	{
-		if (IsHitRect(playerHitBox, mushBox))
-		{
-			float dir = (m_pPlayer->GetPos().x < m_pEnemyMush->GetPos().x)
-				? -1.0f
-				: 1.0f;
-
-			m_isHitPlayer = true;
-			m_pPlayer->Damage(dir);
-		}
-	}
-	
-	if (m_pEnemyGolem->IsAlive())
-	{
-		if (IsHitRect(playerHitBox, golemBox))
-		{
-			float dir = (m_pPlayer->GetPos().x < m_pEnemyGolem->GetPos().x)
-				? -1.0f
-				: 1.0f;
-
-			m_isHitPlayer = true;
-			m_pPlayer->Damage(dir);
-		}
-	}
-	
-
-	if (m_pPlayer->IsAttack()&&m_pEnemyBat->IsAlive())
-	{
-		if (IsHitRect(playerAttack, batBox))
-		{
-			m_pEnemyBat->Damage(); // Enemy
-		}
-	}
-
-	if (m_pPlayer->IsAttack() && m_pEnemyMush->IsAlive())
-	{
-		if (IsHitRect(playerAttack, mushBox))
-		{
-			m_pEnemyMush->Damage(); // Enemy
-		}
-	}
-
-	if (m_pPlayer->IsAttack() && m_pEnemyGolem->IsAlive())
-	{
-		if (IsHitRect(playerAttack, golemBox))
-		{
-			m_pEnemyGolem->Damage(); // Enemy
-		}
-	}
 }
-
 
 /// <summary>
 /// •`‰æ
 /// </summary>
 void SceneMain::Draw()
 {
-
-	
-
 	Vec2 cameraPos;
 	cameraPos = m_pCamera->GetPos();
 	// ”wŒi‚Ì•\Ž¦
@@ -183,11 +148,20 @@ void SceneMain::Draw()
 	// ƒGƒlƒ~[‚Ì•`‰æ
 	m_pEnemy->Draw(*m_pCamera);
 	// ƒRƒEƒ‚ƒŠ‚Ì•`‰æ
-	m_pEnemyBat->Draw(*m_pCamera);
+	for (auto& bat : m_enemyBats)
+	{
+		bat->Draw(*m_pCamera);
+	}
 	// ƒLƒmƒR‚Ì•`‰æ
-	m_pEnemyMush->Draw(*m_pCamera);
+	for (auto& mush : m_enemyMushes)
+	{
+		mush->Draw(*m_pCamera);
+	}
 	// ƒS[ƒŒƒ€‚Ì•`‰æ
-	m_pEnemyGolem->Draw(*m_pCamera);
+	for (auto& golem : m_enemyGolems)
+	{
+		golem->Draw(*m_pCamera);
+	}
 	
 #ifdef _DEBUG
 
@@ -197,4 +171,95 @@ void SceneMain::Draw()
 	}
 
 #endif
+}
+
+void SceneMain::CheckPlayerEnemyCollision()
+{
+	Rect playerBox = m_pPlayer->PlayerHitBox();
+
+	// ƒRƒEƒ‚ƒŠ
+	for (auto& bat : m_enemyBats)
+	{
+		if (!bat->IsAlive())continue;
+
+		if (IsHitRect(playerBox, bat->EnemyBatHitBox()))
+		{
+			float dir = (m_pPlayer->GetPos().x < bat->GetPos().x)
+				? -1.0f
+				: 1.0f;
+
+			m_isHitPlayer = true;
+			m_pPlayer->Damage(dir);
+		}
+	}
+
+	// ƒLƒmƒR
+	for (auto& mush : m_enemyMushes)
+	{
+		if (!mush->IsAlive())continue;
+
+		if (IsHitRect(playerBox, mush->EnemyMushHitBox()))
+		{
+			float dir = (m_pPlayer->GetPos().x < mush->GetPos().x)
+				? -1.0f
+				: 1.0f;
+
+			m_isHitPlayer = true;
+			m_pPlayer->Damage(dir);
+		}
+	}
+
+	// ƒS[ƒŒƒ€
+	for (auto& golem : m_enemyGolems)
+	{
+		if (!golem->IsAlive())continue;
+
+		if (IsHitRect(playerBox, golem->EnemyGolemHitBox()))
+		{
+			float dir = (m_pPlayer->GetPos().x < golem->GetPos().x)
+				? -1.0f
+				: 1.0f;
+
+			m_isHitPlayer = true;
+			m_pPlayer->Damage(dir);
+		}
+	}
+
+}
+
+void SceneMain::CheckPlayerAttackCollision()
+{
+	if (!m_pPlayer->IsAttack())return;
+
+	Rect attackBox = m_pPlayer->AttackHitBox();
+
+	// ƒRƒEƒ‚ƒŠ
+	for (auto& bat : m_enemyBats)
+	{
+		if (!bat->IsAlive())continue;
+		if (IsHitRect(attackBox, bat->EnemyBatHitBox()))
+		{
+			bat->Damage(); // Enemy
+		}
+	}
+
+	// ƒLƒmƒR
+	for (auto& mush : m_enemyMushes)
+	{
+		if (!mush->IsAlive())continue;
+		if (IsHitRect(attackBox, mush->EnemyMushHitBox()))
+		{
+			mush->Damage(); // Enemy
+		}
+	}
+
+	// ƒS[ƒŒƒ€
+	for (auto& golem : m_enemyGolems)
+	{
+		if (!golem->IsAlive())continue;
+		if (IsHitRect(attackBox, golem->EnemyGolemHitBox()))
+		{
+			golem->Damage(); // Enemy
+		}
+	}
 }

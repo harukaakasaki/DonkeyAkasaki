@@ -44,15 +44,18 @@ private:
 	// Enemyクラスのポインタを取得した
 	Enemy* m_pEnemy;
 	// EnemyBatクラスのポインタを取得した
-	EnemyBat* m_pEnemyBat;
+	std::vector<std::unique_ptr<EnemyBat>> m_enemyBats;// unique_ptr = deleteしなくていい安全なポインタ
 	// EnemyMushクラスのポインタを取得した
-	EnemyMush* m_pEnemyMush;
+	std::vector<std::unique_ptr<EnemyMush>> m_enemyMushes;
 	// EnemyGolemクラスのポインタを取得した
-	EnemyGolem* m_pEnemyGolem;
+	std::vector<std::unique_ptr<EnemyGolem>> m_enemyGolems;
 	// Cameraクラスのポインタを取得した
 	Camera* m_pCamera;
 	// Bgクラスのポインタを取得した
 	Bg* m_pBg;
+
+	void CheckPlayerEnemyCollision();
+	void CheckPlayerAttackCollision();
 
 	bool m_isHitPlayer = false; 
 
