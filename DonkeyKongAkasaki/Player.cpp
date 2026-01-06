@@ -64,6 +64,12 @@ void Player::Init()
 // 更新
 void Player::Update()
 {
+	// トラップに当たったら死！
+	if (m_pos.y >= 670.0f)
+	{
+		m_state = PlayerState::Death;
+	}
+
 	if (m_state == PlayerState::Death)
 	{
 		m_spawnTimer++;
