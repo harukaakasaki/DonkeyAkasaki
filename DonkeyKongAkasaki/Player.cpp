@@ -50,22 +50,32 @@ void Player::Init()
 	
 	m_pos.x = Game::kScreenWidth * 0.5f;
 	m_pos.y = 550.0f;
+
+	m_hp = 3;
+	m_damageCoolTime = 0;
 }
 
 // 更新
 void Player::Update()
 {
+	if (m_state == PlayerState::Death)
+	{
+		return;
+	}
+
 	Character::Update();
+
+	if (m_damageCoolTime > 0)
+	{
+		m_damageCoolTime--;
+	}
 
 	// 入力された状態に変わる
 	HandleInput();
-
 	// 今の状態に応じてアニメーションを更新する
 	UpdateState();
-
 	// アニメーション
 	/*Animation();*/
-
 	// ジャンプする
 	Jump();
 	// 移動する
@@ -247,6 +257,26 @@ Rect Player::PlayerHitBox() const
 	r.bottom = m_pos.y;
 
 	return r;
+}
+
+void Player::Damage()
+{
+	m_pos.y -= 20;
+	
+
+	if (m_damageCoolTime > 0)
+	{
+		return;
+	}
+
+	m_hp--;
+
+	m_damageCoolTime = 60;
+
+	if (m_hp <= 0)
+	{
+		m_state = PlayerState::Death;
+	}
 }
 
 // 描画

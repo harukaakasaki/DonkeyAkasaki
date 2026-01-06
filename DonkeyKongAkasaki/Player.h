@@ -47,6 +47,10 @@ public:
 	/// 描画
 	/// </summary>
 	virtual void Draw(Camera&camera)override;
+	/// <summary>
+	/// ダメージ
+	/// </summary>
+	void Damage();
 
 	/// <summary>
 	/// 攻撃判定
@@ -106,7 +110,6 @@ private:
 	/// アニメーションの更新
 	/// </summary>
 	void UpdateState();
-
 	
 
 	// アニメーションのフレーム数
@@ -119,5 +122,7 @@ private:
 	int moveAnim[8];   // 移動コマ数
 	int jumpAnim[4];   // ジャンプコマ数
 
+	int m_hp = 3; //HP
+	int m_damageCoolTime = 0; // 無敵
 };
 

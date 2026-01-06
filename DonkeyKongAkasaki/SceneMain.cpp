@@ -99,6 +99,7 @@ void SceneMain::Update()
 		if (IsHitRect(playerHitBox, batBox))
 		{
 			m_isHitPlayer = true;
+			m_pPlayer->Damage();
 		}
 	}
 	
@@ -107,6 +108,7 @@ void SceneMain::Update()
 		if (IsHitRect(playerHitBox, mushBox))
 		{
 			m_isHitPlayer = true;
+			m_pPlayer->Damage();
 		}
 	}
 	
@@ -115,6 +117,7 @@ void SceneMain::Update()
 		if (IsHitRect(playerHitBox, golemBox))
 		{
 			m_isHitPlayer = true;
+			m_pPlayer->Damage();
 		}
 	}
 	
@@ -173,7 +176,7 @@ void SceneMain::Draw()
 
 	if (m_isHitPlayer)
 	{
-		DrawString(800, 300, "‚ß‚Á‚¿‚á’É‚¢", GetColor(255, 0, 0));
+		DrawString(800, 300, "“–‚½‚Á‚Ä‚é", GetColor(255, 0, 0));
 	}
 
 }
