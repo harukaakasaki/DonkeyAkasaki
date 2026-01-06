@@ -74,6 +74,11 @@ public:
 	/// <returns></returns>
 	Rect PlayerHitBox() const;
 
+	/// <summary>
+	/// HP描画
+	/// </summary>
+	void DrawHP();
+
 	
 
 private:
@@ -86,6 +91,8 @@ private:
 
 	Vec2 m_spawnPos; // リスポーン位置
 	int m_spawnTimer; // リスポーン時間
+
+	int m_hpHandle; // 体力画像
 
 	/// <summary>
 	/// 移動
@@ -117,6 +124,7 @@ private:
 	/// </summary>
 	void UpdateState();
 	
+	
 
 	// アニメーションのフレーム数
 	int m_animFrame = 0;
@@ -129,6 +137,7 @@ private:
 	int jumpAnim[4];   // ジャンプコマ数
 
 	int m_hp = 3; //HP
+	int m_hpMax; //HP限界
 	int m_damageCoolTime = 0; // 無敵
 };
 

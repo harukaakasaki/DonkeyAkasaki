@@ -165,6 +165,9 @@ void SceneMain::Update()
 /// </summary>
 void SceneMain::Draw()
 {
+
+	
+
 	Vec2 cameraPos;
 	cameraPos = m_pCamera->GetPos();
 	// 背景の表示
@@ -176,6 +179,7 @@ void SceneMain::Draw()
 
 	// プレイヤーの描画
 	m_pPlayer->Draw(*m_pCamera);
+	m_pPlayer->DrawHP();
 	// エネミーの描画
 	m_pEnemy->Draw(*m_pCamera);
 	// コウモリの描画

@@ -35,6 +35,8 @@ Player::Player():
 	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
+
+	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
 }
 
 // デストラクタ
@@ -48,6 +50,9 @@ Player::~Player()
 // 初期化
 void Player::Init()
 {
+	m_hpMax = 3;
+	m_hp = m_hpMax;
+
 	m_animFrame = 0;
 	
 	m_pos.x = Game::kScreenWidth * 0.5f;
@@ -55,7 +60,7 @@ void Player::Init()
 	m_spawnPos.x = m_pos.x;
 	m_spawnPos.y = m_pos.y;
 
-	m_hp = 3;
+	
 	m_damageCoolTime = 0;
 	m_state = PlayerState::Normal;
 	m_spawnTimer = 0;
@@ -236,6 +241,25 @@ void Player::UpdateState()
 			m_state = PlayerState::Normal;
 			m_animFrame = 0;
 		}
+	}
+}
+
+void Player::DrawHP()
+{
+	const int startX = 50;
+	const int startY = 50;
+	const int interval = 90; // ハートの間隔
+	const double scale = 0.07;
+
+	for (int i = 0; i < m_hp; i++)
+	{
+		DrawRotaGraph(
+			startX + i * interval,
+			startY,
+			scale,
+			0.0,
+			m_hpHandle,
+			true);
 	}
 }
 
