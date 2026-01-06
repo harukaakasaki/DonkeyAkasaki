@@ -50,9 +50,13 @@ void Player::Init()
 	
 	m_pos.x = Game::kScreenWidth * 0.5f;
 	m_pos.y = 550.0f;
+	m_spawnPos.x = m_pos.x;
+	m_spawnPos.y = m_pos.y;
 
 	m_hp = 3;
 	m_damageCoolTime = 0;
+	m_state = PlayerState::Normal;
+	m_spawnTimer = 0;
 }
 
 // XV
@@ -60,6 +64,12 @@ void Player::Update()
 {
 	if (m_state == PlayerState::Death)
 	{
+		m_spawnTimer++;
+		if (m_spawnTimer >= 60)
+		{
+			Respawn();
+		}
+
 		return;
 	}
 
@@ -263,7 +273,6 @@ void Player::Damage()
 {
 	m_pos.y -= 20;
 	
-
 	if (m_damageCoolTime > 0)
 	{
 		return;
@@ -276,7 +285,23 @@ void Player::Damage()
 	if (m_hp <= 0)
 	{
 		m_state = PlayerState::Death;
+		m_spawnTimer = 0;
 	}
+}
+
+void Player::Respawn()
+{
+	m_pos = m_spawnPos;
+	m_hp = 3;
+	m_state = PlayerState::Normal;
+
+	m_move = Vec2(0, 0);
+	m_isGround = false;
+
+	m_animFrame = 0;
+	m_animCount = 0;
+	m_damageCoolTime = 0;
+	m_spawnTimer = 0;
 }
 
 // •`‰æ

@@ -173,10 +173,12 @@ void SceneMain::Draw()
 	// ƒS[ƒŒƒ€‚Ì•`‰æ
 	m_pEnemyGolem->Draw(*m_pCamera);
 	
+#ifdef _DEBUG
 
 	if (m_isHitPlayer)
 	{
 		DrawString(800, 300, "“–‚½‚Á‚Ä‚é", GetColor(255, 0, 0));
 	}
 
+#endif
 }

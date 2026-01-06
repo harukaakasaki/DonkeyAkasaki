@@ -51,6 +51,10 @@ public:
 	/// ダメージ
 	/// </summary>
 	void Damage();
+	/// <summary>
+	/// リスポーン
+	/// </summary>
+	void Respawn();
 
 	/// <summary>
 	/// 攻撃判定
@@ -80,6 +84,8 @@ private:
 	PlayerState m_state = PlayerState::Normal;// 通常状態
 	LevelState m_level = LevelState::Level0;  // 最初の状態
 
+	Vec2 m_spawnPos; // リスポーン位置
+	int m_spawnTimer; // リスポーン時間
 
 	/// <summary>
 	/// 移動
