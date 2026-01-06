@@ -54,33 +54,49 @@ void SceneMain::Init()
 	m_pPlayer->Init();
 	m_pEnemy->Init();
 	m_pCamera->Init();
-	for (int i = 0; i < 3; i++)
+
+	// コウモリ
+	std::vector<Vec2>batPosition =
+	{
+		{400.0f,400.0f},
+		{800.0f,420.0f},
+		{1200.0f,450.0f}
+	};
+
+	for (auto& pos : batPosition)
 	{
 		auto bat = std::make_unique<EnemyBat>();
 		bat->Init();
-
-		bat->SetPos({ 400.0f + i * 300.0f, 400.0f });
-
+		bat->SetPos(pos);
 		m_enemyBats.push_back(std::move(bat));
 	}
 
-	for (int i = 0; i < 2; i++)
+	// キノコ
+	std::vector<Vec2>mushPosition =
+	{
+		{900.0f,550.0f},
+		{1700.0f,550.0f},
+		{4000.0f,550.0f}
+	};
+
+	for (auto& pos : mushPosition)
 	{
 		auto mush = std::make_unique<EnemyMush>();
 		mush->Init();
-
-		mush->SetPos({ 600.0f + i * 350.0f, 550.0f });
-
+		mush->SetPos(pos);
 		m_enemyMushes.push_back(std::move(mush));
 	}
 
-	for (int i = 0; i < 1; i++)
+	std::vector<Vec2>golemPosition =
+	{
+		{4500.0f,550.0f}
+	};
+
+	for (auto& pos : golemPosition)
 	{
 		auto golem = std::make_unique<EnemyGolem>();
 		golem->Init();
-
-		golem->SetPos({ 1200.0f,550.0f });
-
+		golem->SetPos(pos);
 		m_enemyGolems.push_back(std::move(golem));
 	}
 }
