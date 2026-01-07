@@ -35,7 +35,6 @@ Player::Player():
 	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
-
 	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
 }
 
