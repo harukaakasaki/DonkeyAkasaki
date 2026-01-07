@@ -151,7 +151,7 @@ void Player::Jump()
 	}
 
 	// XキーorPADのBボタンを押す
-	if (Pad::IsPress(PAD_INPUT_2))
+	if (Pad::IsPress(PAD_INPUT_1))
 	{
 		m_move.y = -kJumpPower;
 		m_isGround = false;
@@ -191,7 +191,7 @@ void Player::HandleInput()
 		return;
 	}
 	 
-	if (Pad::IsTrigger(PAD_INPUT_1))
+	if (Pad::IsTrigger(PAD_INPUT_3))
 	{
 		// 攻撃に変更
 		m_state = PlayerState::Attack;
@@ -246,6 +246,7 @@ void Player::UpdateState()
 
 void Player::DrawHP()
 {
+	// ハートの位置
 	const int startX = 50;
 	const int startY = 50;
 	const int interval = 90; // ハートの間隔
