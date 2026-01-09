@@ -84,7 +84,7 @@ void Player::Update()
 	if (m_state == PlayerState::Death)
 	{
 		m_spawnTimer++;
-		if (m_spawnTimer >= 120)
+		if (m_spawnTimer >= 90)
 		{
 			Respawn();
 		}
