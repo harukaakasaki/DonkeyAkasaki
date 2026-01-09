@@ -30,12 +30,15 @@ Player::Player():
 	normalAnim(),
 	attackAnim(),
 	moveAnim(),
+	deathAnim(),
 	jumpAnim()
 {
 	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
+	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
 	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
+	
 }
 
 // デストラクタ
@@ -44,6 +47,7 @@ Player::~Player()
 	DeleteGraph(m_handle);
 	DeleteGraph(m_attackHandle);
 	DeleteGraph(m_moveHandle);
+	DeleteGraph(m_deathHandle);
 }
 
 // 初期化
@@ -68,6 +72,9 @@ void Player::Init()
 // 更新
 void Player::Update()
 {
+	// 今の状態に応じてアニメーションを更新する
+	UpdateState();
+
 	// トラップに当たったら死！
 	if (m_pos.y >= 670.0f)
 	{
@@ -94,8 +101,7 @@ void Player::Update()
 
 	// 入力された状態に変わる
 	HandleInput();
-	// 今の状態に応じてアニメーションを更新する
-	UpdateState();
+	
 	// アニメーション
 	/*Animation();*/
 	// ジャンプする
@@ -353,6 +359,16 @@ void Player::Draw(Camera& camera)
 	// アニメーションの進行に合わせてグラフィックを切り取る
 	int srcX = kGraphWidth * animNo;
 	int srcY = 0;
+
+
+	if (m_state == PlayerState::Death)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_deathHandle, true, !m_isRight);
+	}
 	// 通常アニメーションの描画
 	if (m_state == PlayerState::Normal)
 	{

@@ -31,6 +31,8 @@ protected:
 	int m_moveHandle;
 	// キャラクターの攻撃画像
 	int m_attackHandle;
+	// キャラクターの死画像
+	int m_deathHandle;
 	// 座標
 	Vec2 m_pos;
 	// 移動量
