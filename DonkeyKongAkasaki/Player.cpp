@@ -31,12 +31,14 @@ Player::Player():
 	attackAnim(),
 	moveAnim(),
 	deathAnim(),
+	hitAnim(),
 	jumpAnim()
 {
 	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
 	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
+	m_hitHandle = LoadGraph("data/player_hit.png"); // プレイヤーヒット画像
 	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
 	
 }
@@ -48,6 +50,8 @@ Player::~Player()
 	DeleteGraph(m_attackHandle);
 	DeleteGraph(m_moveHandle);
 	DeleteGraph(m_deathHandle);
+	DeleteGraph(m_hitHandle);
+	DeleteGraph(m_hpHandle);
 }
 
 // 初期化
@@ -225,6 +229,15 @@ void Player::UpdateState()
 
 		}
 	}
+	if (m_state == PlayerState::Damage)
+	{
+		if (m_animFrame >= 3)// ヒット = 3
+		{
+			m_state = PlayerState::Normal;
+			m_animFrame = 0;
+
+		}
+	}
 	//移動モーションの状態
 
 	//else if (m_state == PlayerState::Move)
@@ -312,14 +325,17 @@ void Player::Damage(float hitDir)
 	
 	if (m_damageCoolTime > 0)
 	{
+		
 		return;
 	}
 
 	m_hp--;
 	m_damageCoolTime = 60;
 
-	m_move.x = knockBackX * hitDir;
-	m_move.y = -knockBackY;
+	m_state = PlayerState::Damage;
+
+	/*m_move.x = knockBackX * hitDir;
+	m_move.y = -knockBackY;*/
 
 	m_isGround = false;
 
@@ -360,6 +376,7 @@ void Player::Draw(Camera& camera)
 	int srcX = kGraphWidth * animNo;
 	int srcY = 0;
 
+	
 
 	if (m_state == PlayerState::Death)
 	{
@@ -369,6 +386,8 @@ void Player::Draw(Camera& camera)
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
 	}
+
+	
 	// 通常アニメーションの描画
 	if (m_state == PlayerState::Normal)
 	{
@@ -441,5 +460,13 @@ void Player::Draw(Camera& camera)
 			GetColor(255, 0, 0), false);
 		
 #endif // _DEBUG
+		if (m_state == PlayerState::Damage)
+		{
+			DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+				static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+				srcX, srcY,
+				kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+				m_hitHandle, true, !m_isRight);
+		}
 	}
 }

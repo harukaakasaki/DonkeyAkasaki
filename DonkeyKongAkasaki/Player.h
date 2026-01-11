@@ -10,7 +10,8 @@ enum class PlayerState
 	Move,  // 移動
 	Jump,  // ジャンプ
 	Attack,// 攻撃
-	Death  // 死s
+	Death,  // 死s
+	Damage // ダメージ
 };
 /// <summary>
 /// プレイヤーのLevel状態
@@ -136,6 +137,7 @@ private:
 	int moveAnim[8];   // 移動コマ数
 	int jumpAnim[4];   // ジャンプコマ数
 	int deathAnim[18];   // 死コマ数
+	int hitAnim[3];   // ヒットコマ数
 
 	int m_hp = 3; //HP
 	int m_hpMax; //HP限界
