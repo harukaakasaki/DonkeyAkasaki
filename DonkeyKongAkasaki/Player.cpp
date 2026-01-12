@@ -334,8 +334,11 @@ void Player::Damage(float hitDir)
 
 	m_state = PlayerState::Damage;
 
-	/*m_move.x = knockBackX * hitDir;
-	m_move.y = -knockBackY;*/
+	m_move.x = knockBackX * hitDir;
+	m_move.y = -knockBackY;
+
+	m_animFrame = 0;
+	m_animCount = 0;
 
 	m_isGround = false;
 
@@ -387,6 +390,14 @@ void Player::Draw(Camera& camera)
 			m_deathHandle, true, !m_isRight);
 	}
 
+	if (m_state == PlayerState::Damage)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_hitHandle, true, !m_isRight);
+	}
 	
 	// 通常アニメーションの描画
 	if (m_state == PlayerState::Normal)
@@ -460,13 +471,6 @@ void Player::Draw(Camera& camera)
 			GetColor(255, 0, 0), false);
 		
 #endif // _DEBUG
-		if (m_state == PlayerState::Damage)
-		{
-			DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-				static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
-				srcX, srcY,
-				kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-				m_hitHandle, true, !m_isRight);
-		}
+		
 	}
 }
