@@ -56,7 +56,7 @@ Bg::Bg(Camera* pCamera):
 	// 背景のイラスト
 	m_bg1Handle = LoadGraph("data/bg_1.png");
 	m_bg2Handle = LoadGraph("data/bg_2.png");
-	m_bg3Handle = LoadGraph("data/bg_spring.png");
+	m_bg3Handle = LoadGraph("data/bg_spring_1.png");
 	m_mapHandle = LoadGraph("data/mapChip2.png");
 	// 画像マップチップ数を数える
 	int graphW = 0;
@@ -214,9 +214,10 @@ void Bg::DrawBg()
 	// 横スクローループ
 	for (int i = -1; i <= 1; i++)
 	{
-		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg1Handle, true);
-		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg2Handle, true);
-		DrawGraph(i * bgSize.width - scrollBg, m_pos.y, m_bg3Handle, true);
+		int drawY = static_cast<int>(kScreenHeight - bgSize.height);
+		DrawGraph(i * bgSize.width - scrollBg, drawY, m_bg1Handle, true);
+		DrawGraph(i * bgSize.width - scrollBg, drawY, m_bg2Handle, true);
+		DrawGraph(i * bgSize.width - scrollBg, drawY, m_bg3Handle, true);
 	}
 	 
 	/*DrawGraph(-scrollBg, m_pos.y, m_bg1Handle, true);
