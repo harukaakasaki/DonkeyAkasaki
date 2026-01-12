@@ -11,7 +11,6 @@ namespace
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kSpeed = 3;                        // コウモリのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
-
 }
 
 EnemyGolem::EnemyGolem():

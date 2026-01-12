@@ -78,7 +78,7 @@ void SceneMain::Init()
 	// ÉLÉmÉR
 	std::vector<Vec2>mushPosition =
 	{
-		{1500.0f,550.0f},
+		{1650.0f,550.0f},
 		{2700.0f,550.0f},
 		{4000.0f,550.0f}
 	};
