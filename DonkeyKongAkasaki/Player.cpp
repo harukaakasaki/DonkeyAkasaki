@@ -39,7 +39,7 @@ Player::Player():
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
 	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
 	m_hitHandle = LoadGraph("data/player_hit.png"); // プレイヤーヒット画像
-	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
+	m_hpHandle = LoadGraph("data/hp_2.png"); // プレイヤーHP画像
 	
 }
 
@@ -265,10 +265,10 @@ void Player::UpdateState()
 void Player::DrawHP()
 {
 	// ハートの位置
-	const int startX = 50;
-	const int startY = 50;
-	const int interval = 90; // ハートの間隔
-	const double scale = 0.07;
+	const int startX = 70;
+	const int startY = 70;
+	const int interval = 90; // hpの間隔
+	const double scale = 0.09;// hpの大きさ
 
 	for (int i = 0; i < m_hp; i++)
 	{
