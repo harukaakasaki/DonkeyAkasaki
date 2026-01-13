@@ -2,6 +2,12 @@
 #include "Enemy.h"
 class EnemyGolem :public Enemy
 {
+	enum class GolemState
+	{
+		Normal,
+		Damage,
+		Death
+	};
 public:
 	EnemyGolem();
 	~EnemyGolem();

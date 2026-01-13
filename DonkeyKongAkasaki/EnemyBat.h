@@ -2,6 +2,12 @@
 #include "Enemy.h"
 class EnemyBat :public Enemy
 {
+	enum class BatState
+	{
+		Normal,
+		Death,
+	};
+
 public:
 	EnemyBat();
 	~EnemyBat();
@@ -14,6 +20,7 @@ public:
 	Rect EnemyBatHitBox()const;
 
 private:
+	BatState m_state = BatState::Normal;// コウモリの通常状態
 
 	// アニメーションのフレーム数
 	int m_animFrame = 0;

@@ -7,6 +7,7 @@
 
 class Enemy:public Character
 {
+
 public:
 	/// <summary>
 	/// コンストラクタ

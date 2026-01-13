@@ -2,6 +2,12 @@
 #include "Enemy.h"
 class EnemyMush :public Enemy
 {
+	enum class MushState
+	{
+		Normal,
+		Damage,
+		Death
+	};
 public:
 	EnemyMush();
 	~EnemyMush();

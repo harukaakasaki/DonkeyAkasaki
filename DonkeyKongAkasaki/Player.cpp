@@ -380,7 +380,7 @@ void Player::Draw(Camera& camera)
 	int srcY = 0;
 
 	
-
+	// 死アニメーション
 	if (m_state == PlayerState::Death)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
@@ -389,7 +389,7 @@ void Player::Draw(Camera& camera)
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
 	}
-
+	// ダメージアニメーション
 	if (m_state == PlayerState::Damage)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
@@ -418,7 +418,7 @@ void Player::Draw(Camera& camera)
 #endif // DEBUG
 	}
 
-
+	// 移動アニメーション
 	if (m_state == PlayerState::Move)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
