@@ -9,17 +9,17 @@
 
 namespace
 {
-	constexpr int kIdleAnimNum = 7;                  // プレイヤーのIdleアニメーション
-	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
-	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 1008 / kIdleAnimNum; // プレイヤーのグラフィックサイズ（幅）
-	constexpr int kGraphHeight = 144;                // プレイヤーのグラフィックサイズ（高さ）
-	constexpr float kGraphicsSize = 4.8f;            // グラフィックサイズ
-	constexpr float kSpeed = 7.0f;                   // スピード
-	constexpr float kJumpPower = 20.0f;              // ジャンプ力
-	constexpr float kAnimSpeed = 2.0f;               // アニメーションスピード
-	constexpr float knockBackX = 12.0f;               // ノックバックX
-	constexpr float knockBackY = 15.0f;               // ノックバックY
+	constexpr int	kIdleAnimNum	= 7;				    // プレイヤーのIdleアニメーション
+	constexpr int	kAnimWaitFrame	= 1;					// ↑ 1コマ当たりのフレーム数
+	constexpr int	kGraphicsAngle	= 0;					// グラフィックアングル
+	constexpr int	kGraphWidth		= 1008 / kIdleAnimNum;	// プレイヤーのグラフィックサイズ（幅）
+	constexpr int	kGraphHeight	= 144;					// プレイヤーのグラフィックサイズ（高さ）
+	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
+	constexpr float kSpeed			= 7.0f;					// スピード
+	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
+	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
+	constexpr float knockBackX		= 12.0f;				// ノックバックX
+	constexpr float knockBackY		= 15.0f;				// ノックバックY
 }
 
 // コンストラクタ
