@@ -15,16 +15,6 @@ class Player : public Character
 		Death,  // 死s
 		Damage // ダメージ
 	};
-	/// <summary>
-	/// プレイヤーのLevel状態
-	/// </summary>
-	enum class LevelState
-	{
-		Level0,// 敵を0体倒した（Levelリセット）
-		Level1,// 敵を1体倒した
-		Level2,// 敵を2体倒した
-		Level3 // 敵を3体倒した
-	};
 public:
 	/// <summary>
 	/// コンストラクタ
@@ -87,7 +77,6 @@ private:
 	float m_vecY;
 
 	PlayerState m_state = PlayerState::Normal;// 通常状態
-	LevelState m_level = LevelState::Level0;  // 最初の状態
 
 	Vec2 m_spawnPos; // リスポーン位置
 	int m_spawnTimer; // リスポーン時間
