@@ -20,6 +20,10 @@ public:
 	Rect EnemyGolemHitBox()const;
 
 private:
+
+	// アニメーション更新
+	void UpdateState();
+
 	GolemState m_state = GolemState::Normal;// ゴーレムの通常状態
 
 	// アニメーションのフレーム数

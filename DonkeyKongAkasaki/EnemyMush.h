@@ -21,6 +21,8 @@ public:
 
 private:
 
+	void UpdateState();// アニメーション更新
+
 	MushState m_state = MushState::Normal;// キノコの通常状態
 
 	// アニメーションのフレーム数

@@ -4,7 +4,7 @@
 
 namespace
 {
-	constexpr int kIdleAnimNum = 9;                  // プレイヤーのIdleアニメーション
+	constexpr int kIdleAnimNum = 8;                  // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
 	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
@@ -18,6 +18,7 @@ EnemyGolem::EnemyGolem():
 	m_animCount(0),
 	m_normalAnim(0)
 {
+	m_handle = LoadGraph("data/Golem.png");
 	m_hp = 3;
 }
 
@@ -28,13 +29,15 @@ EnemyGolem::~EnemyGolem()
 
 void EnemyGolem::Init()
 {
-	m_handle = LoadGraph("data/Golem.png");
+	m_state = GolemState::Normal;
 	m_pos = { 300.0f,545.0f };
 	m_isAlive = true;
 }
 
 void EnemyGolem::Update()
 {
+	UpdateState();
+
 	Character::Update();
 
 	if (m_stopTimer > 0)
@@ -66,8 +69,50 @@ void EnemyGolem::Update()
 
 }
 
+void EnemyGolem::UpdateState()
+{
+	m_animCount++;
+
+	if (m_animCount > 2)// アニメーションスピード
+	{
+		m_animCount = 0;// はじめに戻す
+		m_animFrame++;  // 次のコマへ
+	}
+
+	if (m_state == GolemState::Normal)
+	{
+		if (m_animFrame >= 8)// 通常 = 7
+		{
+			m_animFrame = 0;
+
+		}
+	}
+
+	if (m_state == GolemState::Damage)
+	{
+		if (m_animFrame >= 3)// ヒット = 3
+		{
+			m_state = GolemState::Normal;
+			m_animFrame = 0;
+
+		}
+	}
+
+	if (m_state == GolemState::Death)
+	{
+		if (m_animFrame >= 3)// ヒット = 3
+		{
+			m_state = GolemState::Normal;
+			m_animFrame = 0;
+
+		}
+	}
+}
+
+
 void EnemyGolem::Damage()
 {
+	m_state = GolemState::Damage;
 
 	if (m_damageCoolTime > 0)
 	{
@@ -85,6 +130,7 @@ void EnemyGolem::Damage()
 
 	if (m_hp <= 0)
 	{
+		m_state = GolemState::Death;
 		Kill();
 	}
 }
@@ -104,7 +150,6 @@ void EnemyGolem::Draw(const Camera& camera)
 
 	int w = kGraphWidth * kGraphicsSize;
 	int h = kGraphHeight * kGraphicsSize;
-
 
 	DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 		static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整

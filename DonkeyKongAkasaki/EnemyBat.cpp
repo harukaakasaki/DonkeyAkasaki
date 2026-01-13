@@ -52,11 +52,11 @@ void EnemyBat::Update()
 	}
 	if(m_moveLeft)
 	{
-		m_pos.x -= 3;
+		m_pos.x -= kSpeed;
 	}
 	else
 	{
-		m_pos.x += 3;
+		m_pos.x += kSpeed;
 	}
 	
 }

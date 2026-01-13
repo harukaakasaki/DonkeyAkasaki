@@ -5,7 +5,7 @@
 
 namespace
 {
-	constexpr int kIdleAnimNum = 9;                  // プレイヤーのIdleアニメーション
+	constexpr int kIdleAnimNum = 7;                  // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
 	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
@@ -20,6 +20,7 @@ EnemyMush::EnemyMush():
 	m_animCount(0),
 	m_normalAnim(0)
 {
+	m_handle = LoadGraph("data/Mush.png");
 	m_hp = 2;
 }
 
@@ -30,13 +31,16 @@ EnemyMush::~EnemyMush()
 
 void EnemyMush::Init()
 {
-	m_handle = LoadGraph("data/Mush.png");
+	m_state = MushState::Normal;
 	m_pos = { 500.0f,545.0f };
 	m_isAlive = true;
 }
 
 void EnemyMush::Update()
 {
+	// 状態の更新
+	UpdateState();
+
 	Character::Update();
 
 	if (m_stopTimer > 0)
@@ -67,27 +71,47 @@ void EnemyMush::Update()
 
 }
 
-void EnemyMush::Damage()
+void EnemyMush::UpdateState()
 {
-	if (m_damageCoolTime > 0)
+	m_animCount++;
+
+	if (m_animCount > 2)// アニメーションスピード
 	{
-		return;
+		m_animCount = 0;// はじめに戻す
+		m_animFrame++;  // 次のコマへ
 	}
 
-	m_hp--;
-
-	// 止まる
-	m_stopTimer = 30;
-
-	// 無敵時間
-	m_damageCoolTime = 30;
-
-
-	if (m_hp <= 0)
+	if (m_state == MushState::Normal)
 	{
-		Kill();
+		if (m_animFrame >= 7)// 通常 = 7
+		{
+			m_animFrame = 0;
+
+		}
+	}
+
+	if (m_state == MushState::Damage)
+	{
+		if (m_animFrame >= 3)// ヒット = 3
+		{
+			m_state = MushState::Normal;
+			m_animFrame = 0;
+
+		}
+	}
+
+	if (m_state == MushState::Death)
+	{
+		if (m_animFrame >= 3)// ヒット = 3
+		{
+			m_state = MushState::Normal;
+			m_animFrame = 0;
+
+		}
 	}
 }
+
+
 
 void EnemyMush::Draw(const Camera& camera)
 {
@@ -121,7 +145,30 @@ void EnemyMush::Draw(const Camera& camera)
 #endif // DEBUG
 }
 
+void EnemyMush::Damage()
+{
+	m_state = MushState::Damage;
 
+	if (m_damageCoolTime > 0)
+	{
+		return;
+	}
+
+	m_hp--;
+
+	// 止まる
+	m_stopTimer = 30;
+
+	// 無敵時間
+	m_damageCoolTime = 30;
+
+
+	if (m_hp <= 0)
+	{
+		m_state = MushState::Death;
+		Kill();
+	}
+}
 
 Rect EnemyMush::EnemyMushHitBox() const
 {
