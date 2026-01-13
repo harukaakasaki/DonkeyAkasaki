@@ -130,6 +130,7 @@ void EnemyMush::Draw(const Camera& camera)
 	int h = kGraphHeight * kGraphicsSize;
 
 
+
 	DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 		static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 		srcX, srcY,
@@ -137,22 +138,24 @@ void EnemyMush::Draw(const Camera& camera)
 		m_handle, true);
 #ifdef _DEBUG
 	// 当たり判定（キノコ）の描画
-	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 3),
-		static_cast<int>(m_pos.y - cam.y - 35 - h / 10),
-		static_cast<int>(m_pos.x - cam.x + w / 3),
-		static_cast<int>(m_pos.y - cam.y - 35 + h / 3),
+	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 5),
+		static_cast<int>(m_pos.y - cam.y - 5 - h / 10),
+		static_cast<int>(m_pos.x - cam.x + w / 5),
+		static_cast<int>(m_pos.y - cam.y - 5 + h / 3),
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }
 
 void EnemyMush::Damage()
 {
-	m_state = MushState::Damage;
+	
 
 	if (m_damageCoolTime > 0)
 	{
 		return;
 	}
+
+	m_state = MushState::Damage;
 
 	m_hp--;
 
@@ -176,10 +179,10 @@ Rect EnemyMush::EnemyMushHitBox() const
 	float h = kGraphHeight * kGraphicsSize;
 
 	Rect r;
-	r.left = m_pos.x - w / 3;
-	r.top = m_pos.y - 35 - h / 10;
-	r.right = m_pos.x + w / 3;
-	r.bottom = m_pos.y - 35 + h / 3;
+	r.left = m_pos.x - w / 5;
+	r.top = m_pos.y - 5 - h / 10;
+	r.right = m_pos.x + w / 5;
+	r.bottom = m_pos.y - 5 + h / 3;
 
 	return r;
 }

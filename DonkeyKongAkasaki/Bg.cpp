@@ -119,11 +119,11 @@ void Bg::DrawMapChip()
 				m_mapHandle, true);
 
 
-#ifdef _DEBUG
-
-			DrawBoxAA(posX, posY, posX + kChipSize * kChipScale, posY + kChipSize * kChipScale, 0x00ff00, false);
-
-#endif // _DEBUG
+//#ifdef _DEBUG
+//
+//			DrawBoxAA(posX, posY, posX + kChipSize * kChipScale, posY + kChipSize * kChipScale, 0x00ff00, false);
+//
+//#endif // _DEBUG
 
 		}
 	}

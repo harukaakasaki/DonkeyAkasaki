@@ -324,7 +324,6 @@ void Player::Damage(float hitDir)
 	
 	if (m_damageCoolTime > 0)
 	{
-		
 		return;
 	}
 
@@ -333,8 +332,9 @@ void Player::Damage(float hitDir)
 
 	m_state = PlayerState::Damage;
 
-	m_move.x = knockBackX * hitDir;
-	m_move.y = -knockBackY;
+	// ヒット時のノックバック
+	/*m_move.x = knockBackX * hitDir;
+	m_move.y = -knockBackY;*/
 
 	m_animFrame = 0;
 	m_animCount = 0;
