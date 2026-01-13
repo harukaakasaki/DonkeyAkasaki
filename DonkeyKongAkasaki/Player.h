@@ -1,31 +1,30 @@
 #pragma once
 #include "Character.h"
 
-/// <summary>
-/// プレイヤーの状態
-/// </summary>
-enum class PlayerState
-{
-	Normal,// 通常
-	Move,  // 移動
-	Jump,  // ジャンプ
-	Attack,// 攻撃
-	Death,  // 死s
-	Damage // ダメージ
-};
-/// <summary>
-/// プレイヤーのLevel状態
-/// </summary>
-enum class LevelState
-{
-	Level0,// 敵を0体倒した（Levelリセット）
-	Level1,// 敵を1体倒した
-	Level2,// 敵を2体倒した
-	Level3 // 敵を3体倒した
-};
-
 class Player : public Character
 {
+	/// <summary>
+	/// プレイヤーの状態
+	/// </summary>
+	enum class PlayerState
+	{
+		Normal,// 通常
+		Move,  // 移動
+		Jump,  // ジャンプ
+		Attack,// 攻撃
+		Death,  // 死s
+		Damage // ダメージ
+	};
+	/// <summary>
+	/// プレイヤーのLevel状態
+	/// </summary>
+	enum class LevelState
+	{
+		Level0,// 敵を0体倒した（Levelリセット）
+		Level1,// 敵を1体倒した
+		Level2,// 敵を2体倒した
+		Level3 // 敵を3体倒した
+	};
 public:
 	/// <summary>
 	/// コンストラクタ
