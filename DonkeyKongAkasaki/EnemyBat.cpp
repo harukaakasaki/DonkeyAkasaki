@@ -20,6 +20,7 @@ EnemyBat::EnemyBat():
 	m_animCount(0),
 	m_normalAnim(0)
 {
+	m_handle = LoadGraph("data/bat.png");
 }
 
 EnemyBat::~EnemyBat()
@@ -29,7 +30,7 @@ EnemyBat::~EnemyBat()
 
 void EnemyBat::Init()
 {
-	m_handle = LoadGraph("data/bat.png");
+	m_state = BatState::Normal;
 	m_pos = { 100.0f,400.0f };
 	m_hp = 2;
 	m_isAlive = true;
@@ -37,6 +38,9 @@ void EnemyBat::Init()
 
 void EnemyBat::Update()
 {
+	// 状態の更新
+	UpdateState();
+
 	if (!m_isAlive)return;
 
 	Character::Update();
@@ -55,6 +59,35 @@ void EnemyBat::Update()
 		m_pos.x += 3;
 	}
 	
+}
+
+void EnemyBat::UpdateState()
+{
+	m_animCount++;
+
+	if (m_animCount > 2)// アニメーションスピード
+	{
+		m_animCount = 0;// はじめに戻す
+		m_animFrame++;  // 次のコマへ
+	}
+
+	if (m_state == BatState::Normal)
+	{
+		if (m_animFrame >= 9)// 通常 = 7
+		{
+			m_animFrame = 0;
+
+		}
+	}
+	if (m_state == BatState::Death)
+	{
+		if (m_animFrame >= 3)// ヒット = 3
+		{
+			m_state = BatState::Normal;
+			m_animFrame = 0;
+
+		}
+	}
 }
 
 void EnemyBat::Draw(const Camera& camera)

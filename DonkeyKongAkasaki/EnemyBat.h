@@ -17,9 +17,14 @@ public:
 	
 	void Damage(); // ダメージ
 
+	
+
 	Rect EnemyBatHitBox()const;
 
 private:
+
+	void UpdateState();// アニメーション更新
+
 	BatState m_state = BatState::Normal;// コウモリの通常状態
 
 	// アニメーションのフレーム数

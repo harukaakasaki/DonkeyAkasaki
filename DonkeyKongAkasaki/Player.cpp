@@ -57,6 +57,7 @@ Player::~Player()
 // èâä˙âª
 void Player::Init()
 {
+	m_state = PlayerState::Normal;
 	m_hpMax = 3;
 	m_hp = m_hpMax;
 
@@ -66,10 +67,8 @@ void Player::Init()
 	m_pos.y = 550.0f;
 	m_spawnPos.x = m_pos.x;
 	m_spawnPos.y = m_pos.y;
-
-	
 	m_damageCoolTime = 0;
-	m_state = PlayerState::Normal;
+	
 	m_spawnTimer = 0;
 }
 

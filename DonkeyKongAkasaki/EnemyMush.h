@@ -21,6 +21,8 @@ public:
 
 private:
 
+	MushState m_state = MushState::Normal;// キノコの通常状態
+
 	// アニメーションのフレーム数
 	int m_animFrame = 0;
 	// コマ送りのカウンタ
@@ -36,7 +38,7 @@ private:
 	// 攻撃されたら止まる
 	int m_stopTimer = 0;
 
-	int m_normalAnim[9]; // 通常コマ数
+	int m_normalAnim[7]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数
 	//int moveAnim[8];   // 移動コマ数
 
