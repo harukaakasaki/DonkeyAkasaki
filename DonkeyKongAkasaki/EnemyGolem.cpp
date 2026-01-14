@@ -174,6 +174,11 @@ void EnemyGolem::Draw(const Camera& camera)
 
 Rect EnemyGolem::EnemyGolemHitBox() const
 {
+	if (m_state == GolemState::Death)
+	{
+		return Rect{ 0,0,0,0 };
+	}
+
 	float w = kGraphWidth * kGraphicsSize;
 	float h = kGraphHeight * kGraphicsSize;
 

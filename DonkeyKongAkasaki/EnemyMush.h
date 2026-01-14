@@ -40,7 +40,7 @@ private:
 	// 攻撃されたら止まる
 	int m_stopTimer = 0;
 
-	int m_normalAnim[7]; // 通常コマ数
+	int m_normalAnim[8]; // 通常コマ数
 	//int attackAnim[10];// 攻撃コマ数
 	//int moveAnim[8];   // 移動コマ数
 

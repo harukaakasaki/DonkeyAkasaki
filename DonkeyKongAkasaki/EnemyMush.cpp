@@ -22,7 +22,7 @@ EnemyMush::EnemyMush():
 {
 	m_handle = LoadGraph("data/mush_run.png");
 	m_hitHandle = LoadGraph("data/mush_hit.png");
-	m_deathHandle = LoadGraph("data/mush_hit.png");
+	m_deathHandle = LoadGraph("data/mush_death.png");
 	m_hp = 2;
 }
 
@@ -44,6 +44,10 @@ void EnemyMush::Update()
 {
 	// 状態の更新
 	UpdateState();
+
+	if (!m_isAlive)return;
+
+	if (m_state == MushState::Death)return;
 
 	Character::Update();
 
@@ -87,30 +91,27 @@ void EnemyMush::UpdateState()
 
 	if (m_state == MushState::Normal)
 	{
-		if (m_animFrame >= 7)// 通常 = 7
+		if (m_animFrame >= 8)// 通常 = 8
 		{
 			m_animFrame = 0;
-
 		}
 	}
 
 	if (m_state == MushState::Damage)
 	{
-		if (m_animFrame >= 3)// ヒット = 3
+		if (m_animFrame >= 5)// ヒット = 5
 		{
 			m_state = MushState::Normal;
 			m_animFrame = 0;
-
 		}
 	}
 
 	if (m_state == MushState::Death)
 	{
-		if (m_animFrame >= 3)// ヒット = 3
+		if (m_animFrame >= 15)// 死 = 15
 		{
-			m_state = MushState::Normal;
+			Kill();
 			m_animFrame = 0;
-
 		}
 	}
 }
@@ -143,6 +144,24 @@ void EnemyMush::Draw(const Camera& camera)
 			m_handle, true);
 	}
 	
+	if (m_state == MushState::Damage)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_hitHandle, true);
+	}
+
+	if (m_state == MushState::Death)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_deathHandle, true);
+	}
+
 #ifdef _DEBUG
 	// 当たり判定（キノコ）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 5),
@@ -155,14 +174,14 @@ void EnemyMush::Draw(const Camera& camera)
 
 void EnemyMush::Damage()
 {
-	
-
 	if (m_damageCoolTime > 0)
 	{
 		return;
 	}
 
 	m_state = MushState::Damage;
+	m_animFrame = 0;
+	m_animCount = 0;
 
 	m_hp--;
 
@@ -176,12 +195,18 @@ void EnemyMush::Damage()
 	if (m_hp <= 0)
 	{
 		m_state = MushState::Death;
-		Kill();
+		m_animFrame = 0;
+		m_animCount = 0;
 	}
 }
 
 Rect EnemyMush::EnemyMushHitBox() const
 {
+
+	if (m_state == MushState::Death)
+	{
+		return Rect{ 0,0,0,0 };
+	}
 	float w = kGraphWidth * kGraphicsSize;
 	float h = kGraphHeight * kGraphicsSize;
 

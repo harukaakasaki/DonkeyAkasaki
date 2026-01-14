@@ -88,7 +88,6 @@ void EnemyBat::UpdateState()
 		if (m_animFrame >= 12)// ƒqƒbƒg = 3
 		{
 			Kill();
-			m_state = BatState::Normal;
 			m_animFrame = 0;
 
 		}
