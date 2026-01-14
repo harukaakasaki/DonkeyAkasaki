@@ -7,9 +7,9 @@ namespace
 	constexpr int kIdleAnimNum = 8;                  // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
+	constexpr int kGraphWidth = 80; // プレイヤーのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
-	constexpr int kSpeed = 3;                        // コウモリのスピード
+	constexpr int kSpeed = 3;                        // ゴーレムのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
 }
 
@@ -81,7 +81,7 @@ void EnemyGolem::UpdateState()
 
 	if (m_state == GolemState::Normal)
 	{
-		if (m_animFrame >= 8)// 通常 = 7
+		if (m_animFrame >= 9)// 通常 = 7
 		{
 			m_animFrame = 0;
 
@@ -151,11 +151,15 @@ void EnemyGolem::Draw(const Camera& camera)
 	int w = kGraphWidth * kGraphicsSize;
 	int h = kGraphHeight * kGraphicsSize;
 
-	DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
-		static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
-		srcX, srcY,
-		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-		m_handle, true);
+	if (m_state == GolemState::Normal)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_handle, true);
+	}
+	
 #ifdef _DEBUG
 	// 当たり判定（ゴーレム）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 3),
