@@ -130,12 +130,15 @@ void EnemyMush::Draw(const Camera& camera)
 	int h = kGraphHeight * kGraphicsSize;
 
 
-
-	DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
-		static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
-		srcX, srcY,
-		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-		m_handle, true);
+	if (m_state == MushState::Normal)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_handle, true);
+	}
+	
 #ifdef _DEBUG
 	// 当たり判定（キノコ）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 5),

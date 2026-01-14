@@ -8,7 +8,7 @@ namespace
 	constexpr int kIdleAnimNum = 9;                  // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 64; // プレイヤーのグラフィックサイズ（幅）
+	constexpr int kGraphWidth = 64; // コウモリのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kSpeed = 3;                        // コウモリのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
@@ -21,11 +21,13 @@ EnemyBat::EnemyBat():
 	m_normalAnim(0)
 {
 	m_handle = LoadGraph("data/bat.png");
+	m_deathHandle = LoadGraph("data/bat_death.png");
 }
 
 EnemyBat::~EnemyBat()
 {
 	DeleteGraph(m_handle);
+	DeleteGraph(m_deathHandle);
 }
 
 void EnemyBat::Init()
@@ -42,6 +44,8 @@ void EnemyBat::Update()
 	UpdateState();
 
 	if (!m_isAlive)return;
+
+	if (m_state == BatState::Death)return;
 
 	Character::Update();
 	m_moveTimer++;
@@ -81,8 +85,9 @@ void EnemyBat::UpdateState()
 	}
 	if (m_state == BatState::Death)
 	{
-		if (m_animFrame >= 3)// ヒット = 3
+		if (m_animFrame >= 12)// ヒット = 3
 		{
+			Kill();
 			m_state = BatState::Normal;
 			m_animFrame = 0;
 
@@ -106,12 +111,24 @@ void EnemyBat::Draw(const Camera& camera)
 	int w = kGraphWidth * kGraphicsSize;
 	int h = kGraphHeight * kGraphicsSize;
 
+	if (m_state == BatState::Normal)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_handle, true);
+	}
 
-	DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
-		static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
-		srcX, srcY,
-		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-		m_handle, true);
+	if (m_state == BatState::Death)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_deathHandle, true);
+	}
+	
 #ifdef _DEBUG
 	// 当たり判定（コウモリ）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w/3),
@@ -128,12 +145,20 @@ void EnemyBat::Damage()
 
 	if (m_hp <= 0)
 	{
-		Kill();
+		m_state = BatState::Death;
+		m_animFrame = 0;
+		m_animCount = 0;
+		
 	}
 }
 
 Rect EnemyBat::EnemyBatHitBox() const
 {
+	if (m_state == BatState::Death)
+	{
+		return Rect{ 0,0,0,0 };
+	}
+
 	float w = kGraphWidth * kGraphicsSize;
 	float h = kGraphHeight * kGraphicsSize;
 

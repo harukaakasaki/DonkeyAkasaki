@@ -27,12 +27,12 @@ Player::Player():
 	m_vecX(0),
 	m_vecY(0),
 	m_animFrame(0),
-	normalAnim(),
-	attackAnim(),
-	moveAnim(),
-	deathAnim(),
-	hitAnim(),
-	jumpAnim()
+	m_normalAnim(),
+	m_attackAnim(),
+	m_moveAnim(),
+	m_deathAnim(),
+	m_hitAnim(),
+	m_jumpAnim()
 {
 	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像

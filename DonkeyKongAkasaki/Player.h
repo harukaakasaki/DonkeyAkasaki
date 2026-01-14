@@ -120,12 +120,12 @@ private:
 	// コマ送りのカウンタ
 	int m_animCount = 0;
 
-	int normalAnim[7]; // 通常コマ数
-	int attackAnim[10];// 攻撃コマ数
-	int moveAnim[8];   // 移動コマ数
-	int jumpAnim[4];   // ジャンプコマ数
-	int deathAnim[18];   // 死コマ数
-	int hitAnim[3];   // ヒットコマ数
+	int m_normalAnim[7]; // 通常コマ数
+	int m_attackAnim[10];// 攻撃コマ数
+	int m_moveAnim[8];   // 移動コマ数
+	int m_jumpAnim[4];   // ジャンプコマ数
+	int m_deathAnim[18];   // 死コマ数
+	int m_hitAnim[3];   // ヒットコマ数
 
 	int m_hp = 3; //HP
 	int m_hpMax; //HP限界
