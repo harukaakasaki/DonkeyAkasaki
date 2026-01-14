@@ -171,9 +171,7 @@ void SceneMain::Draw()
 	// 地面の線
 	DrawLine(0 - cameraPos.x, -10 - cameraPos.y, 5000 - cameraPos.x, -10 - cameraPos.y, GetColor(255, 255, 255));
 
-	// プレイヤーの描画
-	m_pPlayer->Draw(*m_pCamera);
-	m_pPlayer->DrawHP();
+	
 	// エネミーの描画
 	m_pEnemy->Draw(*m_pCamera);
 	// コウモリの描画
@@ -192,10 +190,16 @@ void SceneMain::Draw()
 		golem->Draw(*m_pCamera);
 	}
 
+	// プレイヤーの描画
+	m_pPlayer->Draw(*m_pCamera);
+	m_pPlayer->DrawHP();
+
 	int drawX = static_cast<int>(kGoalX - cameraPos.x);
 
 	DrawBox(drawX, 0, drawX + kGoalWidth, 1080, GetColor(255, 255, 0),false);
 
+
+	// クリアシーンができたら#ifdefに移動
 	if (m_isGoal)
 	{
 		DrawString(drawX - 10, 200, "クリア！！！", GetColor(255, 255, 0));
