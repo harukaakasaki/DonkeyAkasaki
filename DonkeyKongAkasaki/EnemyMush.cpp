@@ -20,13 +20,17 @@ EnemyMush::EnemyMush():
 	m_animCount(0),
 	m_normalAnim(0)
 {
-	m_handle = LoadGraph("data/Mush.png");
+	m_handle = LoadGraph("data/mush_run.png");
+	m_hitHandle = LoadGraph("data/mush_hit.png");
+	m_deathHandle = LoadGraph("data/mush_hit.png");
 	m_hp = 2;
 }
 
 EnemyMush::~EnemyMush()
 {
 	DeleteGraph(m_handle);
+	DeleteGraph(m_hitHandle);
+	DeleteGraph(m_deathHandle);
 }
 
 void EnemyMush::Init()
@@ -75,7 +79,7 @@ void EnemyMush::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 2)// アニメーションスピード
+	if (m_animCount > 4)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ
