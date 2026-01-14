@@ -7,7 +7,7 @@ namespace
 	constexpr int kIdleAnimNum = 8;                  // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 80; // プレイヤーのグラフィックサイズ（幅）
+	constexpr int kGraphWidth = 90; // プレイヤーのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kSpeed = 3;                        // ゴーレムのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
@@ -15,10 +15,11 @@ namespace
 
 EnemyGolem::EnemyGolem():
 	m_animFrame(0),
-	m_animCount(0),
-	m_normalAnim(0)
+	m_animCount(0)
 {
-	m_handle = LoadGraph("data/Golem.png");
+	m_handle = LoadGraph("data/golem_run.png");
+	m_hitHandle = LoadGraph("data/golem_hit.png");
+	m_deathHandle = LoadGraph("data/golem_death.png");
 	m_hp = 3;
 }
 
@@ -36,7 +37,12 @@ void EnemyGolem::Init()
 
 void EnemyGolem::Update()
 {
+	// 状態の更新
 	UpdateState();
+
+	if (!m_isAlive)return;
+
+	if (m_state == GolemState::Death)return;
 
 	Character::Update();
 
@@ -56,10 +62,12 @@ void EnemyGolem::Update()
 	if (m_moveLeft)
 	{
 		m_pos.x -= 4;
+		m_isRight = false;
 	}
 	else
 	{
 		m_pos.x += 4;
+		m_isRight = true;
 	}
 
 	if (m_damageCoolTime > 0)
@@ -73,7 +81,7 @@ void EnemyGolem::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 2)// アニメーションスピード
+	if (m_animCount > 4)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ
@@ -81,7 +89,7 @@ void EnemyGolem::UpdateState()
 
 	if (m_state == GolemState::Normal)
 	{
-		if (m_animFrame >= 9)// 通常 = 7
+		if (m_animFrame >= 10)// 通常 = 7
 		{
 			m_animFrame = 0;
 
@@ -90,8 +98,9 @@ void EnemyGolem::UpdateState()
 
 	if (m_state == GolemState::Damage)
 	{
-		if (m_animFrame >= 3)// ヒット = 3
+		if (m_animFrame >= 4)// ヒット = 4
 		{
+			
 			m_state = GolemState::Normal;
 			m_animFrame = 0;
 
@@ -100,8 +109,9 @@ void EnemyGolem::UpdateState()
 
 	if (m_state == GolemState::Death)
 	{
-		if (m_animFrame >= 3)// ヒット = 3
+		if (m_animFrame >= 11)// 死 = 11
 		{
+			Kill();
 			m_state = GolemState::Normal;
 			m_animFrame = 0;
 
@@ -131,7 +141,7 @@ void EnemyGolem::Damage()
 	if (m_hp <= 0)
 	{
 		m_state = GolemState::Death;
-		Kill();
+
 	}
 }
 
@@ -157,15 +167,34 @@ void EnemyGolem::Draw(const Camera& camera)
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-			m_handle, true);
+			m_handle, true, !m_isRight);
+	}
+
+	if (m_state == GolemState::Damage)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_hitHandle, true, !m_isRight);
+	}
+
+
+	if (m_state == GolemState::Death)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_deathHandle, true, !m_isRight);
 	}
 	
 #ifdef _DEBUG
 	// 当たり判定（ゴーレム）の描画
-	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 3),
-		static_cast<int>(m_pos.y - cam.y - 35 - h / 10),
-		static_cast<int>(m_pos.x - cam.x + w / 3),
-		static_cast<int>(m_pos.y - cam.y - 35 + h / 3),
+	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 5),
+		static_cast<int>(m_pos.y - cam.y - 5 - h / 10),
+		static_cast<int>(m_pos.x - cam.x + w / 5),
+		static_cast<int>(m_pos.y - cam.y - 5 + h / 3),
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }

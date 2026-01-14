@@ -17,8 +17,7 @@ namespace
 
 EnemyBat::EnemyBat():
 	m_animFrame(0),
-	m_animCount(0),
-	m_normalAnim(0)
+	m_animCount(0)
 {
 	m_handle = LoadGraph("data/bat.png");
 	m_deathHandle = LoadGraph("data/bat_death.png");
@@ -57,10 +56,12 @@ void EnemyBat::Update()
 	if(m_moveLeft)
 	{
 		m_pos.x -= kSpeed;
+		m_isRight = true;
 	}
 	else
 	{
 		m_pos.x += kSpeed;
+		m_isRight = false;
 	}
 	
 }
@@ -116,7 +117,7 @@ void EnemyBat::Draw(const Camera& camera)
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-			m_handle, true);
+			m_handle, true, !m_isRight);
 	}
 
 	if (m_state == BatState::Death)
@@ -125,7 +126,7 @@ void EnemyBat::Draw(const Camera& camera)
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-			m_deathHandle, true);
+			m_deathHandle, true, !m_isRight);
 	}
 	
 #ifdef _DEBUG

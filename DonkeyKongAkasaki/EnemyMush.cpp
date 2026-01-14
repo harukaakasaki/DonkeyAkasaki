@@ -17,8 +17,7 @@ namespace
 
 EnemyMush::EnemyMush():
 	m_animFrame(0),
-	m_animCount(0),
-	m_normalAnim(0)
+	m_animCount(0)
 {
 	m_handle = LoadGraph("data/mush_run.png");
 	m_hitHandle = LoadGraph("data/mush_hit.png");
@@ -66,10 +65,12 @@ void EnemyMush::Update()
 	if (m_moveLeft)
 	{
 		m_pos.x -= 1;
+		m_isRight = true;
 	}
 	else
 	{
 		m_pos.x += 1;
+		m_isRight = false;
 	}
 
 	if (m_damageCoolTime > 0)
@@ -141,7 +142,7 @@ void EnemyMush::Draw(const Camera& camera)
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-			m_handle, true);
+			m_handle, true, !m_isRight);
 	}
 	
 	if (m_state == MushState::Damage)
@@ -150,7 +151,7 @@ void EnemyMush::Draw(const Camera& camera)
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-			m_hitHandle, true);
+			m_hitHandle, true, !m_isRight);
 	}
 
 	if (m_state == MushState::Death)
@@ -159,7 +160,7 @@ void EnemyMush::Draw(const Camera& camera)
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-			m_deathHandle, true);
+			m_deathHandle, true, !m_isRight);
 	}
 
 #ifdef _DEBUG
