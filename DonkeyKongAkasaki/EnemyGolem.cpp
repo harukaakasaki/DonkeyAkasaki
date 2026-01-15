@@ -212,10 +212,10 @@ Rect EnemyGolem::EnemyGolemHitBox() const
 	float h = kGraphHeight * kGraphicsSize;
 
 	Rect r;
-	r.left = m_pos.x - w / 3;
-	r.top = m_pos.y - 35 - h / 10;
-	r.right = m_pos.x + w / 3;
-	r.bottom = m_pos.y - 35 + h / 3;
+	r.left = m_pos.x - w / 5;
+	r.top = m_pos.y - 5 - h / 10;
+	r.right = m_pos.x + w / 5;
+	r.bottom = m_pos.y - 5 + h / 3;
 
 	return r;
 }
