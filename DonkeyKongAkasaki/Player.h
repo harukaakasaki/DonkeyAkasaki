@@ -13,7 +13,8 @@ class Player : public Character
 		Jump,  // ジャンプ
 		Attack,// 攻撃
 		Death,  // 死s
-		Damage // ダメージ
+		Damage, // ダメージ
+		Respawn // 復活
 	};
 public:
 	/// <summary>
