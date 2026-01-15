@@ -105,16 +105,11 @@ void Player::Update()
 	// 入力された状態に変わる
 	HandleInput();
 	
-	// アニメーション
-	/*Animation();*/
 	// ジャンプする
 	Jump();
 	// 移動する
 	Move();
 	m_pos += m_move;
-
-	// 攻撃
-	/*Attack();*/
 
 
 }
@@ -139,16 +134,6 @@ void Player::Move()
 		m_move.x = 0.0f;
 	}
 }
-// アニメーション
-
-//void Player::Animation()
-//{
-//	m_animFrame++;
-//	if (m_animFrame >= kIdleAnimNum * kAnimWaitFrame)
-//	{
-//		m_animFrame = 0;
-//	}
-//}
 // ジャンプ
 void Player::Jump()
 {
@@ -170,29 +155,7 @@ void Player::Jump()
 
 void Player::HandleInput()
 {
-	// MoveStateに変更
-	/*if (m_state == PlayerState::Move)
-	{
-		return;
-	}*/
-
-	//if (Pad::IsPress(PAD_INPUT_LEFT))// 左入力で左方向に移動
-	//{
-	//	m_move.x = -kSpeed;
-	//	//		m_pos.y -= 20;// スキップしてるみたいな動きになる
-	//	m_isRight = false;
-	//}
-	//else if (Pad::IsPress(PAD_INPUT_RIGHT))// 右入力で右方向に移動
-	//{
-	//	m_move.x = kSpeed;
-	//	//		m_pos.y -= 20;// スキップしてるみたいな動きになる
-	//	m_isRight = true;
-	//}
-	//else// 何も入力がなかったら動かない
-	//{
-	//	m_move.x = 0.0f;
-	//}
-
+	
 	// AttackStateに変更
 	if (m_state == PlayerState::Attack)
 	{
@@ -239,16 +202,16 @@ void Player::UpdateState()
 	}
 	//移動モーションの状態
 
-	//else if (m_state == PlayerState::Move)
-	//{
-	//	if (m_animFrame >= 8)// 移動 = 8
-	//	{
-	//	// 攻撃アニメーションが最後まで行ったら、
-	//	// 自動でNormal状態に戻す
-	//		m_state = PlayerState::Normal;
-	//		m_animFrame = 0;
-	//	}
-	//}
+	else if (m_state == PlayerState::Move)
+	{
+		if (m_animFrame >= 8)// 移動 = 8
+		{
+		// 移動アニメーションが最後まで行ったら、
+		// 自動でNormal状態に戻す
+			m_state = PlayerState::Normal;
+			m_animFrame = 0;
+		}
+	}
 	else if (m_state == PlayerState::Attack)
 	{
 		// 攻撃アニメーションが最後まで行ったら、
