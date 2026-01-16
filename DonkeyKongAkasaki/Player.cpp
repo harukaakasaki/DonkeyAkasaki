@@ -86,9 +86,11 @@ void Player::Update()
 
 	if (m_state == PlayerState::Death)
 	{
+		
 		m_spawnTimer++;
 		if (m_spawnTimer >= 90)
 		{
+			m_state = PlayerState::Respawn;
 			Respawn();
 		}
 
@@ -180,8 +182,17 @@ void Player::UpdateState()
 	if (m_animCount > 2)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
-		m_animFrame++;  // 次のコマへ
+		
+		if (m_state == PlayerState::Respawn)
+		{
+			 m_animFrame--;
+		}
+		else
+		{
+			m_animFrame++;// 次のコマへ
+		}
 	}
+
 
 	if (m_state == PlayerState::Normal)
 	{
@@ -200,6 +211,7 @@ void Player::UpdateState()
 
 		}
 	}
+	
 	//移動モーションの状態
 
 	else if (m_state == PlayerState::Move)
@@ -220,6 +232,15 @@ void Player::UpdateState()
 		{
 			m_state = PlayerState::Normal;
 			m_animFrame = 0;
+		}
+	}
+	if (m_state == PlayerState::Respawn)
+	{
+		if (m_animFrame <= 0)// ヒット = 3
+		{
+			m_state = PlayerState::Normal;
+			m_animFrame = 0;
+
 		}
 	}
 }
@@ -307,6 +328,8 @@ void Player::Damage(float hitDir)
 	if (m_hp <= 0)
 	{
 		m_state = PlayerState::Death;
+		m_animFrame = 18;
+		m_animCount = 0;
 		m_spawnTimer = 0;
 	}
 }
@@ -315,12 +338,12 @@ void Player::Respawn()
 {
 	m_pos = m_spawnPos;
 	m_hp = 3;
-	m_state = PlayerState::Normal;
+	m_state = PlayerState::Respawn;
 
 	m_move = Vec2(0, 0);
 	m_isGround = false;
 
-	m_animFrame = 0;
+	m_animFrame = 18;
 	m_animCount = 0;
 	m_damageCoolTime = 0;
 	m_spawnTimer = 0;
@@ -340,7 +363,14 @@ void Player::Draw(Camera& camera)
 	// アニメーションの進行に合わせてグラフィックを切り取る
 	int srcX = kGraphWidth * animNo;
 	int srcY = 0;
-
+	if (m_state == PlayerState::Respawn)
+	{
+		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_deathHandle, true, !m_isRight);
+	}
 	
 	// 死アニメーション
 	if (m_state == PlayerState::Death)
