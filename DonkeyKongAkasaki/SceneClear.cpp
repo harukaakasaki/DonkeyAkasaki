@@ -13,7 +13,7 @@ void SceneClear::Update()
 
 void SceneClear::Draw()
 {
-	DrawString(400, 300, "CLEAR!!", GetColor(255, 255, 0));
+	DrawString(400, 300, "CLEAR!!", GetColor(0, 255, 255));
 }
 
 Scene* SceneClear::GetNextScene()

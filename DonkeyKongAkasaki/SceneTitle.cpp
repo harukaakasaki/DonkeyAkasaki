@@ -14,6 +14,7 @@ void SceneTitle::Update()
 
 void SceneTitle::Draw()
 {
+	DrawString(400, 300, "TitleScene", GetColor(255, 255, 255));
 }
 
 Scene* SceneTitle::GetNextScene()
