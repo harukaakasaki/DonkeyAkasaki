@@ -1,3 +1,4 @@
+#include "SceneClear.h"
 #include "SceneMain.h"
 #include "Game.h"
 #include "Enemy.h"
@@ -214,6 +215,16 @@ void SceneMain::Draw()
 	}
 
 #endif
+}
+
+bool SceneMain::IsEnd() const
+{
+	return m_isGoal;
+}
+
+Scene* SceneMain::GetNextScene()
+{
+	return new SceneClear();
 }
 
 void SceneMain::CheckPlayerEnemyCollision()

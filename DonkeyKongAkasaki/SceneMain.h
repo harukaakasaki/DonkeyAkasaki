@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "Scene.h"
 
 // プロトタイプ宣言
 class Player;
@@ -11,7 +12,7 @@ class EnemyGolem;
 class Camera;
 class Bg;
 
-class SceneMain
+class SceneMain : public Scene
 {
 public:
 	/// <summary>
@@ -35,6 +36,10 @@ public:
 	/// 描画
 	/// </summary>
 	void Draw();
+
+	bool IsEnd() const override;
+	Scene* GetNextScene() override;
+
 
 	
 

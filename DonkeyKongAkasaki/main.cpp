@@ -1,4 +1,5 @@
 #include <DxLib.h>
+#include "SceneController.h"
 #include "Game.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -24,8 +25,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	SceneMain* m_pScene = new SceneMain;
-	m_pScene->Init();
+	SceneController controller;
+	controller.Init();
+
+	/*SceneMain* m_pScene = new SceneMain;
+	m_pScene->Init();*/
 	
 	while (ProcessMessage() != -1)
 	{
@@ -36,8 +40,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//（ゲーム内容）
 		
 		Pad::Update();
-		m_pScene->Update();
-		m_pScene->Draw();
+
+		controller.Update();
+		controller.Draw();
+		/*m_pScene->Update();
+		m_pScene->Draw();*/
 		
 
 		if (CheckHitKey(KEY_INPUT_ESCAPE))
