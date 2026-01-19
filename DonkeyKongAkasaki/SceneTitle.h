@@ -13,6 +13,7 @@ public:
 
 private:
 	bool m_isEnd = false;
+	// ƒ^ƒCƒgƒ‹‚Ì‰æ‘œ
 	int m_titleHandle;
 };
 

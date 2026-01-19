@@ -64,7 +64,7 @@ void Player::Init()
 	m_animFrame = 0;
 	
 	m_pos.x = Game::kScreenWidth * 0.5f;
-	m_pos.y = 550.0f;
+	m_pos.y = 630.0f;
 	m_spawnPos.x = m_pos.x;
 	m_spawnPos.y = m_pos.y;
 	m_damageCoolTime = 0;
