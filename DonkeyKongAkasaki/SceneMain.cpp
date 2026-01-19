@@ -284,7 +284,7 @@ void SceneMain::CheckPlayerEnemyCollision()
 
 void SceneMain::CheckPlayerAttackCollision()
 {
-	if (!m_pPlayer->IsAttack())return;
+	if (!m_pPlayer->IsAttackHitActive())return;
 
 	Rect attackBox = m_pPlayer->AttackHitBox();
 

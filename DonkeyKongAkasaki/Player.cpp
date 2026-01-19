@@ -15,7 +15,7 @@ namespace
 	constexpr int	kGraphWidth		= 1008 / kIdleAnimNum;	// プレイヤーのグラフィックサイズ（幅）
 	constexpr int	kGraphHeight	= 144;					// プレイヤーのグラフィックサイズ（高さ）
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
-	constexpr float kSpeed			= 7.0f;					// スピード
+	constexpr float kSpeed			= 8.0f;					// スピード
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
 	constexpr float knockBackX		= 12.0f;				// ノックバックX
@@ -266,6 +266,11 @@ void Player::DrawHP()
 			m_hpHandle,
 			true);
 	}
+}
+
+bool Player::IsAttackHitActive() const
+{
+	return (m_state == PlayerState::Attack && m_animFrame >= 3 && m_animFrame <= 5);
 }
 
 // 攻撃当たり判定

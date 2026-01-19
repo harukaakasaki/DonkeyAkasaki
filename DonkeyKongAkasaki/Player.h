@@ -70,7 +70,7 @@ public:
 	/// </summary>
 	void DrawHP();
 
-	
+	bool IsAttackHitActive() const;
 
 private:
 	// 力X,Y
@@ -93,17 +93,10 @@ private:
 	/// </summary>
 	void Gravity();
 	/// <summary>
-	/// アニメーション
-	/// </summary>
-	//void Animation();
-	/// <summary>
 	/// ジャンプ
 	/// </summary>
 	void Jump();
-	/// <summary>
-	/// 攻撃
-	/// </summary>
-	/*void Attack();*/
+
 
 	/// <summary>
 	/// キー入力処理
