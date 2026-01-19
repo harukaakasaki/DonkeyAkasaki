@@ -246,6 +246,10 @@ void Player::UpdateState()
 
 void Player::DrawHP()
 {
+	if (m_state == PlayerState::Death)
+	{
+		m_hp = 0;
+	}
 	// ハートの位置
 	const int startX = 70;
 	const int startY = 70;
