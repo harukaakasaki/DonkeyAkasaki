@@ -62,10 +62,10 @@ void SceneMain::Init()
 	// コウモリ
 	std::vector<Vec2>batPosition =
 	{
-		{900.0f,400.0f},
 		{1700.0f,420.0f},
 		{3000.0f,450.0f},
-		{2500.0f,300.0f}
+		{2500.0f,300.0f},
+		{4000.0f,400.0f}
 	};
 	// コウモリのスポーン地点
 	for (auto& pos : batPosition)

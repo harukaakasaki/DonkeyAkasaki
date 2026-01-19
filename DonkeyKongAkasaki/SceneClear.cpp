@@ -6,7 +6,7 @@
 
 void SceneClear::Update()
 {
-	if (Pad::IsTrigger(PAD_INPUT_1))
+	if (Pad::IsTrigger(PAD_INPUT_8))
 	{
 		m_isEnd = true;
 	}
