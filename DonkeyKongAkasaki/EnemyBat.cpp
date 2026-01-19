@@ -70,7 +70,7 @@ void EnemyBat::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 2)// アニメーションスピード
+	if (m_animCount > 3)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ

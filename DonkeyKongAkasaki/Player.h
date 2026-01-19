@@ -69,7 +69,10 @@ public:
 	/// HP•`‰æ
 	/// </summary>
 	void DrawHP();
-
+	/// <summary>
+	/// UŒ‚ŠÔ
+	/// </summary>
+	/// <returns></returns>
 	bool IsAttackHitActive() const;
 
 private:

@@ -270,6 +270,7 @@ void Player::DrawHP()
 
 bool Player::IsAttackHitActive() const
 {
+	// 攻撃アニメーション(10アニメーション中3～5の間だけ攻撃判定)
 	return (m_state == PlayerState::Attack && m_animFrame >= 3 && m_animFrame <= 5);
 }
 

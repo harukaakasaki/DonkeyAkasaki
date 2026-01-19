@@ -81,7 +81,7 @@ void EnemyGolem::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 5)// アニメーションスピード
+	if (m_animCount > 4)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ
@@ -121,12 +121,14 @@ void EnemyGolem::UpdateState()
 
 void EnemyGolem::Damage()
 {
-	m_state = GolemState::Damage;
-
 	if (m_damageCoolTime > 0)
 	{
 		return;
 	}
+
+	m_state = GolemState::Damage;
+	m_animFrame = 0;
+	m_animCount = 0;
 
 	m_hp--;
 
@@ -140,7 +142,8 @@ void EnemyGolem::Damage()
 	if (m_hp <= 0)
 	{
 		m_state = GolemState::Death;
-
+		m_animFrame = 0;
+		m_animCount = 0;
 	}
 }
 
