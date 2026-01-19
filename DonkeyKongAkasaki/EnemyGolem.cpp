@@ -81,7 +81,7 @@ void EnemyGolem::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 4)// アニメーションスピード
+	if (m_animCount > 5)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ
@@ -112,7 +112,6 @@ void EnemyGolem::UpdateState()
 		if (m_animFrame >= 11)// 死 = 11
 		{
 			Kill();
-			m_state = GolemState::Normal;
 			m_animFrame = 0;
 
 		}
