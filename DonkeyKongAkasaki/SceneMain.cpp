@@ -67,7 +67,7 @@ void SceneMain::Init()
 		{3000.0f,450.0f},
 		{2500.0f,300.0f}
 	};
-
+	// コウモリのスポーン地点
 	for (auto& pos : batPosition)
 	{
 		auto bat = std::make_unique<EnemyBat>();
@@ -84,6 +84,7 @@ void SceneMain::Init()
 		{4000.0f,550.0f}
 	};
 
+	// キノコのスポーン地点
 	for (auto& pos : mushPosition)
 	{
 		auto mush = std::make_unique<EnemyMush>();
@@ -91,12 +92,12 @@ void SceneMain::Init()
 		mush->SetPos(pos);
 		m_enemyMushes.push_back(std::move(mush));
 	}
-
+	// ゴーレムのスポーン地点
 	std::vector<Vec2>golemPosition =
 	{
 		{4500.0f,550.0f}
 	};
-
+	// ゴーレムのスポーン地点
 	for (auto& pos : golemPosition)
 	{
 		auto golem = std::make_unique<EnemyGolem>();
@@ -221,7 +222,7 @@ bool SceneMain::IsEnd() const
 {
 	return m_isGoal;
 }
-
+// 次のシーンに遷移する
 Scene* SceneMain::GetNextScene()
 {
 	return new SceneClear();

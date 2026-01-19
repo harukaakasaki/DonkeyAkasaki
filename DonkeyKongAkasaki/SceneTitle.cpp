@@ -18,6 +18,7 @@ void SceneTitle::Draw()
 	DrawString(400, 300, "TitleScene", GetColor(255, 255, 255));
 }
 
+// Ÿ‚ÌƒV[ƒ“‚É‘JˆÚ‚·‚é
 Scene* SceneTitle::GetNextScene()
 {
 	return new SceneMain();

@@ -86,7 +86,6 @@ void Player::Update()
 
 	if (m_state == PlayerState::Death)
 	{
-		
 		m_spawnTimer++;
 		if (m_spawnTimer >= 90)
 		{
@@ -327,10 +326,14 @@ void Player::Damage(float hitDir)
 
 	if (m_hp <= 0)
 	{
-		m_state = PlayerState::Death;
-		m_animFrame = 18;
-		m_animCount = 0;
-		m_spawnTimer = 0;
+		if (m_state != PlayerState::Death)
+		{
+			m_state = PlayerState::Death;
+			m_animFrame = 0;
+			m_animCount = 0;
+			m_spawnTimer = 0;
+		}
+		return;
 	}
 }
 
