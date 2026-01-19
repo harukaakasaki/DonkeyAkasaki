@@ -5,8 +5,8 @@
 
 namespace
 {
-	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
-	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
+	constexpr float kScreenWidth = 1600.0f;// スクリーンの幅
+	constexpr float kScreenHeight = 900.0f;// スクリーンの高さ
 
 }
 
@@ -27,6 +27,7 @@ void SceneTitle::Update()
 void SceneTitle::Draw()
 {
 	DrawString(400, 300, "TitleScene", GetColor(255, 255, 255));
+	DrawGraph(0, 0,m_titleHandle, true);
 
 }
 
