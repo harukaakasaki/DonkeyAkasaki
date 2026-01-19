@@ -3,7 +3,18 @@
 #include "SceneMain.h"
 #include <DxLib.h>
 
+namespace
+{
+	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
+	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
 
+}
+
+
+SceneTitle::SceneTitle()
+{
+	m_titleHandle = LoadGraph("data/TitleImage.png");
+}
 
 void SceneTitle::Update()
 {
@@ -16,6 +27,7 @@ void SceneTitle::Update()
 void SceneTitle::Draw()
 {
 	DrawString(400, 300, "TitleScene", GetColor(255, 255, 255));
+
 }
 
 // 次のシーンに遷移する
