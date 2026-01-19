@@ -1,4 +1,5 @@
 #include "SceneTitle.h"
+#include "Pad.h"
 #include "SceneMain.h"
 #include <DxLib.h>
 
@@ -6,7 +7,7 @@
 
 void SceneTitle::Update()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE))
+	if (Pad::IsTrigger(PAD_INPUT_1))
 	{
 		m_isEnd = true;
 	}

@@ -1,11 +1,12 @@
 #include "SceneClear.h"
-#include "SceneMain.h"
+#include "SceneTitle.h"
+#include "Pad.h"
 #include <DxLib.h>
 
 
 void SceneClear::Update()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE))
+	if (Pad::IsTrigger(PAD_INPUT_1))
 	{
 		m_isEnd = true;
 	}
@@ -18,5 +19,5 @@ void SceneClear::Draw()
 
 Scene* SceneClear::GetNextScene()
 {
-	return new SceneMain();
+	return new SceneTitle();
 }
