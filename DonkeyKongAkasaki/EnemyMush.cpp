@@ -14,6 +14,7 @@ namespace
 	constexpr int kEffectHeight = 64;                // キノコのエフェクトサイズ（高さ）
 	constexpr int kSpeed = 3;                        // コウモリのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
+	constexpr float kEffectSize = 4.0f;            // グラフィックサイズ
 
 }
 
@@ -178,10 +179,12 @@ void EnemyMush::Draw(const Camera& camera)
 
 	if (m_state == MushState::DeathEffect)
 	{
+		int effectSrcX = kEffectWidth * m_animFrame;
+		int effectSrcY = 0;
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 			static_cast<int>(m_pos.y - cam.y),
-			srcX, srcY,
-			kEffectWidth, kEffectHeight, kGraphicsSize, kGraphicsAngle,
+			effectSrcX, effectSrcY,
+			kEffectWidth, kEffectHeight, kEffectSize, kGraphicsAngle,
 			m_effectHandle, true, !m_isRight);
 
 	}
@@ -213,7 +216,7 @@ void EnemyMush::Damage()
 	m_stopTimer = 30;
 
 	// 無敵時間
-	m_damageCoolTime = 30;
+	m_damageCoolTime = 10;
 
 
 	if (m_hp <= 0)

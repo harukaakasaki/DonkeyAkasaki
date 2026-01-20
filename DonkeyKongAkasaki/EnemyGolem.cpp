@@ -13,7 +13,7 @@ namespace
 	constexpr int kEffectHeight = 64;                // ゴーレムのエフェクトサイズ（高さ）
 	constexpr int kSpeed = 3;                        // ゴーレムのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
-	constexpr float kEffectSize = 2.0f;              // グラフィックサイズ
+	constexpr float kEffectSize = 4.0f;              // グラフィックサイズ
 }
 
 EnemyGolem::EnemyGolem():
@@ -153,7 +153,7 @@ void EnemyGolem::Damage()
 	m_stopTimer = 30;
 
 	// 無敵時間
-	m_damageCoolTime = 30;
+	m_damageCoolTime = 10;
 
 
 	if (m_hp <= 0)
@@ -210,10 +210,12 @@ void EnemyGolem::Draw(const Camera& camera)
 
 	if (m_state == GolemState::DeathEffect)
 	{
+		int effectSrcX = kEffectWidth * m_animFrame;
+		int effectSrcY = 0;
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
-			srcX, srcY,
-			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			effectSrcX, effectSrcY,
+			kEffectWidth, kEffectHeight, kEffectSize, kGraphicsAngle,
 			m_effectHandle, true, !m_isRight);
 	}
 	
