@@ -7,13 +7,13 @@ namespace
 	constexpr int kIdleAnimNum = 8;                  // プレイヤーのIdleアニメーション
 	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 90; // プレイヤーのグラフィックサイズ（幅）
-	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
+	constexpr int kGraphWidth = 90;					 // プレイヤーのグラフィックサイズ（幅）
+	constexpr int kGraphHeight = 64;                 // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kEffectWidth = 64;                 // ゴーレムのエフェクトサイズ（幅）
 	constexpr int kEffectHeight = 64;                // ゴーレムのエフェクトサイズ（高さ）
 	constexpr int kSpeed = 3;                        // ゴーレムのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
-	constexpr float kEffectSize = 2.0f;            // グラフィックサイズ
+	constexpr float kEffectSize = 2.0f;              // グラフィックサイズ
 }
 
 EnemyGolem::EnemyGolem():
@@ -50,6 +50,7 @@ void EnemyGolem::Update()
 	if (!m_isAlive)return;
 
 	if (m_state == GolemState::Death)return;
+	if (m_state == GolemState::DeathEffect)return;
 
 	Character::Update();
 
@@ -117,6 +118,15 @@ void EnemyGolem::UpdateState()
 	if (m_state == GolemState::Death)
 	{
 		if (m_animFrame >= 11)// 死 = 11
+		{
+			m_state = GolemState::DeathEffect;
+			m_animFrame = 0;
+
+		}
+	}
+	if (m_state == GolemState::DeathEffect)
+	{
+		if (m_animFrame >= 12)// 死エフェクト = 12
 		{
 			Kill();
 			m_animFrame = 0;
@@ -196,11 +206,14 @@ void EnemyGolem::Draw(const Camera& camera)
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
+	}
 
+	if (m_state == GolemState::DeathEffect)
+	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
-			kEffectWidth, kEffectHeight, kEffectSize, kGraphicsAngle,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_effectHandle, true, !m_isRight);
 	}
 	
@@ -218,7 +231,7 @@ void EnemyGolem::Draw(const Camera& camera)
 
 Rect EnemyGolem::EnemyGolemHitBox() const
 {
-	if (m_state == GolemState::Death)
+	if (m_state == GolemState::Death||m_state == GolemState::DeathEffect)
 	{
 		return Rect{ 0,0,0,0 };
 	}

@@ -6,7 +6,8 @@ class EnemyGolem :public Enemy
 	{
 		Normal,
 		Damage,
-		Death
+		Death,
+		DeathEffect
 	};
 public:
 	EnemyGolem();

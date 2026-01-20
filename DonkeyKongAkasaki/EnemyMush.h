@@ -6,7 +6,8 @@ class EnemyMush :public Enemy
 	{
 		Normal,
 		Damage,
-		Death
+		Death,
+		DeathEffect,
 	};
 public:
 	EnemyMush();

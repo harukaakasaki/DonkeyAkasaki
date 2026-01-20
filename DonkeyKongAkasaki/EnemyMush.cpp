@@ -51,6 +51,7 @@ void EnemyMush::Update()
 	if (!m_isAlive)return;
 
 	if (m_state == MushState::Death)return;
+	if (m_state == MushState::DeathEffect)return;
 
 	Character::Update();
 
@@ -115,6 +116,14 @@ void EnemyMush::UpdateState()
 	{
 		if (m_animFrame >= 15)// 死 = 15
 		{
+			m_state = MushState::DeathEffect;
+			m_animFrame = 0;
+		}
+	}
+	if (m_state == MushState::DeathEffect)
+	{
+		if (m_animFrame >= 11)// 死エフェクト = 12
+		{
 			Kill();
 			m_animFrame = 0;
 		}
@@ -165,14 +174,18 @@ void EnemyMush::Draw(const Camera& camera)
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
+	}
 
+	if (m_state == MushState::DeathEffect)
+	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 			static_cast<int>(m_pos.y - cam.y),
 			srcX, srcY,
 			kEffectWidth, kEffectHeight, kGraphicsSize, kGraphicsAngle,
 			m_effectHandle, true, !m_isRight);
-	}
 
+	}
+	
 #ifdef _DEBUG
 	// 当たり判定（キノコ）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 5),
@@ -214,7 +227,7 @@ void EnemyMush::Damage()
 Rect EnemyMush::EnemyMushHitBox() const
 {
 
-	if (m_state == MushState::Death)
+	if (m_state == MushState::Death||m_state == MushState::DeathEffect)
 	{
 		return Rect{ 0,0,0,0 };
 	}

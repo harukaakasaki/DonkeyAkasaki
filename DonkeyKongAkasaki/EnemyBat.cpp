@@ -92,7 +92,6 @@ void EnemyBat::UpdateState()
 		if (m_animFrame >= 12)// Ž€ = 12
 		{
 			m_state = BatState::DeathEffect;
-			m_isDeathEffect = true;
 			m_animFrame = 0;
 
 		}	
@@ -176,7 +175,7 @@ void EnemyBat::Damage()
 
 Rect EnemyBat::EnemyBatHitBox() const
 {
-	if (m_state == BatState::Death)
+	if (m_state == BatState::Death || m_state == BatState::DeathEffect)
 	{
 		return Rect{ 0,0,0,0 };
 	}
