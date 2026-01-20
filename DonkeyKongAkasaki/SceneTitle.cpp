@@ -12,7 +12,6 @@ namespace
 
 }
 
-
 SceneTitle::SceneTitle()
 {
 	m_titleHandle = LoadGraph("data/Titlesakura.png");
