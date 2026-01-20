@@ -4,6 +4,7 @@ class SceneTitle : public Scene
 {
 public:
 	SceneTitle();
+	~SceneTitle();
 	void Init() override {};
 	void Update() override;
 	void Draw() override;
@@ -15,5 +16,7 @@ private:
 	bool m_isEnd = false;
 	// タイトルの画像
 	int m_titleHandle;
+	// 桜のエフェクト
+	int m_sakuraEffectsHandle;
 };
 

@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "SceneMain.h"
 #include "Pad.h"
+#include "EffekseerForDXLib.h"
 
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -21,9 +22,32 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return -1;			// エラーが起きたら直ちに終了
 	}
 
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	{
+		// Effekseerを使用する際に必ず使う。
+		SetUseDirect3DVersion(DX_DIRECT3D_11);
+
+		// Effekseerを初期化する。
+		if (Effekseer_Init(8000) == -1)
+		{
+			DxLib_End();
+			return -1;
+		}
+		// フルスクリーンウインドウの切り替えでリソースが消えるのを防ぐ。
+		SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
+		// DXライブラリのデバイスロストした時のコールバックを設定する。
+		Effekseer_SetGraphicsDeviceLostCallbackFunctions();
+		// Effekseerに2D描画の設定をする。
+		Effekseer_Set2DSetting(Game::kScreenWidth, Game::kScreenHeight);
+		// Zバッファを有効にする。
+		SetUseZBuffer3D(TRUE);
+		// Zバッファへの書き込みを有効にする。
+		SetWriteZBuffer3D(TRUE);
+	}
 	
 
-	SetDrawScreen(DX_SCREEN_BACK);
+	
 
 	SceneController controller;
 	controller.Init();
@@ -66,6 +90,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//WaitKey();				// キー入力待ち
 
+	Effkseer_End();				// Effekseerを終了する。
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
 	return 0;				// ソフトの終了 
