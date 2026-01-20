@@ -13,6 +13,7 @@ namespace
 	constexpr int kEffectHeight = 64;                // ゴーレムのエフェクトサイズ（高さ）
 	constexpr int kSpeed = 3;                        // ゴーレムのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
+	constexpr float kEffectSize = 2.0f;            // グラフィックサイズ
 }
 
 EnemyGolem::EnemyGolem():
@@ -199,7 +200,7 @@ void EnemyGolem::Draw(const Camera& camera)
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
 			srcX, srcY,
-			kEffectWidth, kEffectHeight, kGraphicsSize, kGraphicsAngle,
+			kEffectWidth, kEffectHeight, kEffectSize, kGraphicsAngle,
 			m_effectHandle, true, !m_isRight);
 	}
 	

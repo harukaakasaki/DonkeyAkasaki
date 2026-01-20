@@ -45,6 +45,8 @@ protected:
 	bool m_isRight;
 	// 地面についているのか
 	bool m_isGround;
+	// 死のエフェクトがあるか
+	bool m_isDeathEffect;
 	// 重力
 	void Gravity();
 	// マップチップとの当たり判定

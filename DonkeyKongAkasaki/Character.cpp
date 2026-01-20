@@ -24,7 +24,8 @@ Character::Character() :
 	m_pos(),
 	m_move(),
 	m_isGround(false),
-	m_isRight(true)
+	m_isRight(true),
+	m_isDeathEffect(false)
 {
 }
 

@@ -6,6 +6,7 @@ class EnemyBat :public Enemy
 	{
 		Normal,
 		Death,
+		DeathEffect,
 	};
 
 public:

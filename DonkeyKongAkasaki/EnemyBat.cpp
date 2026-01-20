@@ -47,6 +47,7 @@ void EnemyBat::Update()
 	if (!m_isAlive)return;
 
 	if (m_state == BatState::Death)return;
+	if (m_state == BatState::DeathEffect)return;
 
 	Character::Update();
 	m_moveTimer++;
@@ -88,12 +89,22 @@ void EnemyBat::UpdateState()
 	}
 	if (m_state == BatState::Death)
 	{
-		if (m_animFrame >= 12)// ヒット = 3
+		if (m_animFrame >= 12)// 死 = 12
+		{
+			m_state = BatState::DeathEffect;
+			m_isDeathEffect = true;
+			m_animFrame = 0;
+
+		}	
+	}
+	if (m_state == BatState::DeathEffect)
+	{
+		if (m_animFrame >= 12)// 死エフェクト = 12
 		{
 			Kill();
 			m_animFrame = 0;
-
 		}
+		
 	}
 }
 
@@ -129,14 +140,17 @@ void EnemyBat::Draw(const Camera& camera)
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
+	}
 
+	if (m_state == BatState::DeathEffect)
+	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
 			static_cast<int>(m_pos.y - cam.y),
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_effectHandle, true, !m_isRight);
 	}
-	
+
 #ifdef _DEBUG
 	// 当たり判定（コウモリ）の描画
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w/3),
