@@ -21,12 +21,14 @@ EnemyBat::EnemyBat():
 {
 	m_handle = LoadGraph("data/bat.png");
 	m_deathHandle = LoadGraph("data/bat_death.png");
+	m_effectHandle = LoadGraph("data/explosion1.png");
 }
 
 EnemyBat::~EnemyBat()
 {
 	DeleteGraph(m_handle);
 	DeleteGraph(m_deathHandle);
+	DeleteGraph(m_effectHandle);
 }
 
 void EnemyBat::Init()
@@ -123,10 +125,16 @@ void EnemyBat::Draw(const Camera& camera)
 	if (m_state == BatState::Death)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
-			static_cast<int>(m_pos.y - cam.y),//-35ÇÕínñ Ç÷ÇÃà íuí≤êÆ
+			static_cast<int>(m_pos.y - cam.y),
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
+
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),
+			srcX, srcY,
+			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+			m_effectHandle, true, !m_isRight);
 	}
 	
 #ifdef _DEBUG

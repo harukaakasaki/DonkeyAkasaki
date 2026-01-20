@@ -9,6 +9,8 @@ namespace
 	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
 	constexpr int kGraphWidth = 90; // プレイヤーのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
+	constexpr int kEffectWidth = 64;                 // ゴーレムのエフェクトサイズ（幅）
+	constexpr int kEffectHeight = 64;                // ゴーレムのエフェクトサイズ（高さ）
 	constexpr int kSpeed = 3;                        // ゴーレムのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
 }
@@ -20,12 +22,16 @@ EnemyGolem::EnemyGolem():
 	m_handle = LoadGraph("data/golem_run.png");
 	m_hitHandle = LoadGraph("data/golem_hit.png");
 	m_deathHandle = LoadGraph("data/golem_death.png");
+	m_effectHandle = LoadGraph("data/explosion2.png");
 	m_hp = 3;
 }
 
 EnemyGolem::~EnemyGolem()
 {
 	DeleteGraph(m_handle);
+	DeleteGraph(m_hitHandle);
+	DeleteGraph(m_deathHandle);
+	DeleteGraph(m_effectHandle);
 }
 
 void EnemyGolem::Init()
@@ -189,6 +195,12 @@ void EnemyGolem::Draw(const Camera& camera)
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
+
+		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
+			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			srcX, srcY,
+			kEffectWidth, kEffectHeight, kGraphicsSize, kGraphicsAngle,
+			m_effectHandle, true, !m_isRight);
 	}
 	
 #ifdef _DEBUG

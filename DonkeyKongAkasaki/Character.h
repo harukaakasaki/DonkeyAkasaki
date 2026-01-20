@@ -35,6 +35,8 @@ protected:
 	int m_deathHandle;
 	// キャラクターのヒット画像
 	int m_hitHandle;
+	// キャラクターのエフェクト画像
+	int m_effectHandle;
 	// 座標
 	Vec2 m_pos;
 	// 移動量

@@ -19,6 +19,7 @@ Character::Character() :
 	m_attackHandle(-1),
 	m_moveHandle(-1),
 	m_deathHandle(-1),
+	m_effectHandle(-1),
 	m_hitHandle(-1),
 	m_pos(),
 	m_move(),
