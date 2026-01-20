@@ -11,7 +11,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	// ウィンドウモード設定
-	ChangeWindowMode(false);
+	ChangeWindowMode(true);
 	// ウィンドウのタイトル変更
 	SetMainWindowText("ゲーム名");
 	// 画面のサイズ変更
