@@ -16,11 +16,11 @@ namespace
 SceneTitle::SceneTitle()
 {
 	m_titleHandle = LoadGraph("data/Titlesakura.png");
-	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura3.efk");
+	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura.efkefc");
 	// エフェクトを再生する。
 	m_sakuraEffectsHandle = PlayEffekseer2DEffect(m_sakuraEffectsHandle);
 	// Effekseerで作成したエフェクトは2D表示の場合、小さすぎることが殆どなので必ず拡大する。
-	SetScalePlayingEffekseer2DEffect(m_sakuraEffectsHandle, 1.0f, 1.0f, 1.0f);
+	SetScalePlayingEffekseer2DEffect(m_sakuraEffectsHandle, 50.0f, 50.0f, 50.0f);
 	// 再生中のエフェクトを移動
 	SetPosPlayingEffekseer2DEffect(m_sakuraEffectsHandle, kScreenWidth/2, kScreenHeight/2, 0);
 }
