@@ -79,6 +79,11 @@ void Player::Update()
 	// 今の状態に応じてアニメーションを更新する
 	UpdateState();
 
+	if (m_state == PlayerState::Respawn)
+	{
+		return;
+	}
+
 	// トラップに当たったら死！
 	if (m_pos.y >= 670.0f)
 	{
@@ -164,6 +169,7 @@ void Player::Jump()
 
 void Player::HandleInput()
 {
+	
 	
 	// AttackStateに変更
 	if (m_state == PlayerState::Attack)
