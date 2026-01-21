@@ -15,6 +15,7 @@ namespace
 	constexpr int	kGraphWidth		= 1008 / kIdleAnimNum;	// プレイヤーのグラフィックサイズ（幅）
 	constexpr int	kGraphHeight	= 144;					// プレイヤーのグラフィックサイズ（高さ）
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
+	constexpr float kHpSize			= 0.2f;					// HPグラフィックサイズ
 	constexpr float kSpeed			= 8.0f;					// スピード
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
@@ -39,7 +40,7 @@ Player::Player():
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
 	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
 	m_hitHandle = LoadGraph("data/player_hit.png"); // プレイヤーヒット画像
-	m_hpHandle = LoadGraph("data/hp_2.png"); // プレイヤーHP画像
+	m_hpHandle = LoadGraph("data/sakura_hanabira.png"); // プレイヤーHP画像
 	
 }
 
@@ -118,6 +119,13 @@ void Player::Update()
 // 移動
 void Player::Move()
 {
+	if (m_state == PlayerState::Damage ||
+		m_state == PlayerState::Death ||
+		m_state == PlayerState::Respawn)
+	{
+		return;
+	}
+
 	if (Pad::IsPress(PAD_INPUT_LEFT))// 左入力で左方向に移動
 	{
 		m_move.x = -kSpeed;
@@ -174,6 +182,7 @@ void Player::HandleInput()
 	}
 }
 
+// Playerの状態を更新
 void Player::UpdateState()
 {
 	m_animCount++;
@@ -244,6 +253,7 @@ void Player::UpdateState()
 	}
 }
 
+// HP描画
 void Player::DrawHP()
 {
 	if (m_state == PlayerState::Death)
@@ -254,7 +264,7 @@ void Player::DrawHP()
 	const int startX = 70;
 	const int startY = 70;
 	const int interval = 90; // hpの間隔
-	const double scale = 0.09;// hpの大きさ
+	const double scale = kHpSize;// hpの大きさ
 
 	for (int i = 0; i < m_hp; i++)
 	{
@@ -314,7 +324,9 @@ Rect Player::PlayerHitBox() const
 
 void Player::Damage(float hitDir)
 {
-	
+#ifdef _DEBUG
+	printfDx("Player::Damege called\n");
+#endif
 	if (m_damageCoolTime > 0)
 	{
 		return;
@@ -326,8 +338,9 @@ void Player::Damage(float hitDir)
 	m_state = PlayerState::Damage;
 
 	// ヒット時のノックバック
-	/*m_move.x = knockBackX * hitDir;
-	m_move.y = -knockBackY;*/
+	m_move.x = knockBackX * hitDir;
+	//m_move.y = -knockBackY;
+
 
 	m_animFrame = 0;
 	m_animCount = 0;
@@ -346,6 +359,7 @@ void Player::Damage(float hitDir)
 		return;
 	}
 }
+
 
 void Player::Respawn()
 {

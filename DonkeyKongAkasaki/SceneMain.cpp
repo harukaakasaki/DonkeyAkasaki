@@ -242,8 +242,6 @@ void SceneMain::CheckPlayerEnemyCollision()
 			float dir = (m_pPlayer->GetPos().x < bat->GetPos().x)
 				? -1.0f
 				: 1.0f;
-
-			m_isHitPlayer = true;
 			m_pPlayer->Damage(dir);
 		}
 	}
@@ -251,10 +249,11 @@ void SceneMain::CheckPlayerEnemyCollision()
 	// ƒLƒmƒR
 	for (auto& mush : m_enemyMushes)
 	{
-		if (!mush->IsAlive())continue;
+		
 
 		if (IsHitRect(playerBox, mush->EnemyMushHitBox()))
 		{
+			if (!mush->IsAlive())continue;
 			float dir = (m_pPlayer->GetPos().x < mush->GetPos().x)
 				? -1.0f
 				: 1.0f;
@@ -262,6 +261,7 @@ void SceneMain::CheckPlayerEnemyCollision()
 			m_isHitPlayer = true;
 			m_pPlayer->Damage(dir);
 		}
+		
 	}
 
 	// ƒS[ƒŒƒ€

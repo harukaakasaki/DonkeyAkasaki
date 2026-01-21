@@ -1,5 +1,6 @@
 #include "SceneTitle.h"
 #include "Pad.h"
+#include "Game.h"
 #include "SceneMain.h"
 #include <DxLib.h>
 #include "EffekseerForDXLib.h"
@@ -7,8 +8,8 @@
 
 namespace
 {
-	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
-	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
+	//constexpr float kScreenWidth = 1600.0f;// スクリーンの幅
+	//constexpr float kScreenHeight = 900.0f;// スクリーンの高さ
 
 }
 
@@ -21,7 +22,7 @@ SceneTitle::SceneTitle()
 	// Effekseerで作成したエフェクトは2D表示の場合、小さすぎることが殆どなので必ず拡大する。
 	SetScalePlayingEffekseer2DEffect(m_sakuraEffectsHandle, 50.0f, 50.0f, 50.0f);
 	// 再生中のエフェクトを移動
-	SetPosPlayingEffekseer2DEffect(m_sakuraEffectsHandle, kScreenWidth/2, kScreenHeight/2, 0);
+	SetPosPlayingEffekseer2DEffect(m_sakuraEffectsHandle, Game::kScreenWidth/2, Game::kScreenHeight / 2, 0);
 }
 
 SceneTitle::~SceneTitle()
@@ -32,7 +33,6 @@ SceneTitle::~SceneTitle()
 
 void SceneTitle::Update()
 {
-	
 	// Effekseerにより再生中のエフェクトを更新する。
 	UpdateEffekseer2D();
 	if (Pad::IsTrigger(PAD_INPUT_8))
