@@ -115,6 +115,13 @@ void SceneMain::Init()
 void SceneMain::Update()
 {
 	m_pPlayer->Update();
+	// Player‚ªƒqƒbƒg‚µ‚½‚ç‰æ–Ê‚ª—h‚ê‚é
+	if (m_pPlayer->IsDamage())
+	{
+		m_pCamera->Shake(20, 10.0f);
+		m_pPlayer->ClearDamage();
+	}
+
 	m_pEnemy->Update();
 	for (auto& bat : m_enemyBats)
 	{

@@ -92,6 +92,7 @@ void Player::Update()
 
 	if (m_state == PlayerState::Death)
 	{
+		m_isDamage = true;
 		m_spawnTimer++;
 		if (m_spawnTimer >= 90)
 		{
@@ -338,6 +339,8 @@ void Player::Damage(float hitDir)
 		return;
 	}
 
+	m_isDamage = true;
+
 	m_hp--;
 	m_damageCoolTime = 60;
 
@@ -352,6 +355,7 @@ void Player::Damage(float hitDir)
 	m_animCount = 0;
 
 	m_isGround = false;
+
 
 	if (m_hp <= 0)
 	{

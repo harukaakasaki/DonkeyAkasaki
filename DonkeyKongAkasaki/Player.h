@@ -74,8 +74,12 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	bool IsAttackHitActive() const;
+	bool IsDamage()const { return m_isDamage; }
+	void ClearDamage() { m_isDamage = false; }
 
 private:
+	bool m_isDamage = false;
+
 	// 力X,Y
 	float m_vecX;
 	float m_vecY;
@@ -109,8 +113,6 @@ private:
 	/// アニメーションの更新
 	/// </summary>
 	void UpdateState();
-	
-	
 
 	// アニメーションのフレーム数
 	int m_animFrame = 0;
