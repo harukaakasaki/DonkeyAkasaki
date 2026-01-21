@@ -21,8 +21,8 @@ EnemyGolem::EnemyGolem():
 	m_animCount(0)
 {
 	m_handle = LoadGraph("data/golem_run.png");
-	m_hitHandle = LoadGraph("data/golem_hit.png");
-	m_deathHandle = LoadGraph("data/golem_death.png");
+	m_hitHandle = LoadGraph("data/golem_hit2.png");
+	m_deathHandle = LoadGraph("data/golem_death2.png");
 	m_effectHandle = LoadGraph("data/explosion2.png");
 	m_hp = 3;
 }

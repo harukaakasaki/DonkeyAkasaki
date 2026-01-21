@@ -20,7 +20,7 @@ EnemyBat::EnemyBat():
 	m_animCount(0)
 {
 	m_handle = LoadGraph("data/bat.png");
-	m_deathHandle = LoadGraph("data/bat_death.png");
+	m_deathHandle = LoadGraph("data/bat_death2.png");
 	m_effectHandle = LoadGraph("data/explosion1.png");
 }
 

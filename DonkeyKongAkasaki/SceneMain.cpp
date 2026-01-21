@@ -257,8 +257,6 @@ void SceneMain::CheckPlayerEnemyCollision()
 			float dir = (m_pPlayer->GetPos().x < mush->GetPos().x)
 				? -1.0f
 				: 1.0f;
-
-			m_isHitPlayer = true;
 			m_pPlayer->Damage(dir);
 		}
 		
@@ -274,8 +272,6 @@ void SceneMain::CheckPlayerEnemyCollision()
 			float dir = (m_pPlayer->GetPos().x < golem->GetPos().x)
 				? -1.0f
 				: 1.0f;
-
-			m_isHitPlayer = true;
 			m_pPlayer->Damage(dir);
 		}
 	}

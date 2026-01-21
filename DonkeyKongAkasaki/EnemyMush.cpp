@@ -23,8 +23,8 @@ EnemyMush::EnemyMush():
 	m_animCount(0)
 {
 	m_handle = LoadGraph("data/mush_run.png");
-	m_hitHandle = LoadGraph("data/mush_hit.png");
-	m_deathHandle = LoadGraph("data/mush_death.png");
+	m_hitHandle = LoadGraph("data/mush_hit2.png");
+	m_deathHandle = LoadGraph("data/mush_death2.png");
 	m_effectHandle = LoadGraph("data/explosion3.png");
 	m_hp = 2;
 }

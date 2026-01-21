@@ -15,7 +15,7 @@ namespace
 	constexpr int	kGraphWidth		= 1008 / kIdleAnimNum;	// プレイヤーのグラフィックサイズ（幅）
 	constexpr int	kGraphHeight	= 144;					// プレイヤーのグラフィックサイズ（高さ）
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
-	constexpr float kHpSize			= 0.2f;					// HPグラフィックサイズ
+	constexpr float kHpSize			= 0.15f;					// HPグラフィックサイズ
 	constexpr float kSpeed			= 8.0f;					// スピード
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
