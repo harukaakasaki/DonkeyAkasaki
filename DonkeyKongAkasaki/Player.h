@@ -114,6 +114,8 @@ private:
 	/// </summary>
 	void UpdateState();
 
+	int m_frame = 0;
+
 	// アニメーションのフレーム数
 	int m_animFrame = 0;
 	// コマ送りのカウンタ

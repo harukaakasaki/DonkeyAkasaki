@@ -115,12 +115,19 @@ void SceneMain::Init()
 void SceneMain::Update()
 {
 	m_pPlayer->Update();
-	// Player‚ªƒqƒbƒg‚µ‚½‚ç‰æ–Ê‚ª—h‚ê‚é
-	if (m_pPlayer->IsDamage())
+	/*if (m_hitStopFrame > 0)
 	{
-		m_pCamera->Shake(20, 10.0f);
-		m_pPlayer->ClearDamage();
-	}
+		m_hitStopFrame--;
+		return;
+	}*/
+	//// Player‚ªƒqƒbƒg‚µ‚½‚ç‰æ–Ê‚ª—h‚ê‚é
+	//if (m_pPlayer->IsDamage())
+	//{
+	//	m_pCamera->Shake(20, 10.0f);
+	//	m_pPlayer->ClearDamage();
+	//}
+
+	
 
 	m_pEnemy->Update();
 	for (auto& bat : m_enemyBats)
@@ -225,6 +232,17 @@ void SceneMain::Draw()
 #endif
 }
 
+// ‰æ–Ê‚ðŽ~‚ß‚éiƒqƒbƒgƒXƒgƒbƒvj
+void SceneMain::HitStop(int frame)
+{
+	m_hitStopFrame = frame;
+}
+
+bool SceneMain::IshitStop() const
+{
+	return m_hitStopFrame > 0;
+}
+
 bool SceneMain::IsEnd() const
 {
 	return m_isGoal;
@@ -250,6 +268,8 @@ void SceneMain::CheckPlayerEnemyCollision()
 				? -1.0f
 				: 1.0f;
 			m_pPlayer->Damage(dir);
+
+			HitStop(3);
 		}
 	}
 
@@ -265,6 +285,8 @@ void SceneMain::CheckPlayerEnemyCollision()
 				? -1.0f
 				: 1.0f;
 			m_pPlayer->Damage(dir);
+
+			HitStop(3);
 		}
 		
 	}
@@ -280,6 +302,8 @@ void SceneMain::CheckPlayerEnemyCollision()
 				? -1.0f
 				: 1.0f;
 			m_pPlayer->Damage(dir);
+
+			HitStop(3);
 		}
 	}
 
@@ -298,6 +322,7 @@ void SceneMain::CheckPlayerAttackCollision()
 		if (IsHitRect(attackBox, bat->EnemyBatHitBox()))
 		{
 			bat->Damage(); // Enemy
+			HitStop(3);
 		}
 	}
 
@@ -308,6 +333,7 @@ void SceneMain::CheckPlayerAttackCollision()
 		if (IsHitRect(attackBox, mush->EnemyMushHitBox()))
 		{
 			mush->Damage(); // Enemy
+			HitStop(3);
 		}
 	}
 
@@ -318,6 +344,7 @@ void SceneMain::CheckPlayerAttackCollision()
 		if (IsHitRect(attackBox, golem->EnemyGolemHitBox()))
 		{
 			golem->Damage(); // Enemy
+			HitStop(3);
 		}
 	}
 }

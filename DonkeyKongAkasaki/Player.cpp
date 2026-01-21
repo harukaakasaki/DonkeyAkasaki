@@ -79,6 +79,8 @@ void Player::Update()
 	// 今の状態に応じてアニメーションを更新する
 	UpdateState();
 
+	m_frame++;
+
 	if (m_state == PlayerState::Respawn)
 	{
 		return;
@@ -344,11 +346,13 @@ void Player::Damage(float hitDir)
 	m_hp--;
 	m_damageCoolTime = 60;
 
+
+
 	m_state = PlayerState::Damage;
 
 	// ヒット時のノックバック
 	m_move.x = knockBackX * hitDir;
-	//m_move.y = -knockBackY;
+	m_move.y = -knockBackY;
 
 
 	m_animFrame = 0;
@@ -426,6 +430,26 @@ void Player::Draw(Camera& camera)
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_hitHandle, true, !m_isRight);
+		//if (m_frame / 30 % 2 == 0)
+		//{
+		//	DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+		//		static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+		//		srcX, srcY,
+		//		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+		//		m_hitHandle, true, !m_isRight);
+		//}
+
+		//else
+		//{
+		//	SetDrawBright(255, 255, 255);
+		//	DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
+		//		static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+		//		srcX, srcY,
+		//		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
+		//		m_hitHandle, true, !m_isRight);
+		//	SetDrawBright(0, 0, 0);
+		//}
+		
 	}
 	
 	// 通常アニメーションの描画

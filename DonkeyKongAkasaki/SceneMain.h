@@ -36,6 +36,12 @@ public:
 	/// 描画
 	/// </summary>
 	void Draw();
+	/// <summary>
+	/// ヒットストップ
+	/// </summary>
+	/// <param name="frame"></param>
+	void HitStop(int frame);
+	bool IshitStop()const;
 
 	bool IsEnd() const override;
 	Scene* GetNextScene() override;
@@ -44,6 +50,7 @@ public:
 	
 
 private:
+	int m_hitStopFrame = 0;
 	// Playerクラスのポインタを取得した
 	Player* m_pPlayer;
 	// Enemyクラスのポインタを取得した
