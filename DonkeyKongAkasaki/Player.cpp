@@ -39,7 +39,7 @@ Player::Player():
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
 	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
-	m_hitHandle = LoadGraph("data/player_hit.png"); // プレイヤーヒット画像
+	m_hitHandle = LoadGraph("data/player_hit3.png"); // プレイヤーヒット画像
 	m_hpHandle = LoadGraph("data/sakura_hanabira.png"); // プレイヤーHP画像
 	
 }
