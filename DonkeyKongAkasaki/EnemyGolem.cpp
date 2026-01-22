@@ -11,8 +11,8 @@ namespace
 	constexpr int kGraphHeight = 64;                 // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kEffectWidth = 64;                 // ゴーレムのエフェクトサイズ（幅）
 	constexpr int kEffectHeight = 64;                // ゴーレムのエフェクトサイズ（高さ）
-	constexpr int kSpeed = 3;                        // ゴーレムのスピード
-	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
+	constexpr int kSpeed = 5;                        // ゴーレムのスピード
+	constexpr float kGraphicsSize = 5.0f;            // グラフィックサイズ
 	constexpr float kEffectSize = 4.0f;              // グラフィックサイズ
 }
 
@@ -150,10 +150,10 @@ void EnemyGolem::Damage()
 	m_hp--;
 
 	// 止まる
-	m_stopTimer = 30;
+	m_stopTimer = 10;
 
 	// 無敵時間
-	m_damageCoolTime = 10;
+	m_damageCoolTime = 30;
 
 
 	if (m_hp <= 0)

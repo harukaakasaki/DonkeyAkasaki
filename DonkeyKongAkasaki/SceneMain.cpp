@@ -63,8 +63,9 @@ void SceneMain::Init()
 	std::vector<Vec2>batPosition =
 	{
 		{1700.0f,420.0f},
+		{3500.0f,480.0f},
 		{3000.0f,450.0f},
-		{2500.0f,300.0f},
+		{2500.0f,180.0f},
 		{4000.0f,400.0f}
 	};
 	// コウモリのスポーン地点
@@ -81,6 +82,8 @@ void SceneMain::Init()
 	{
 		{1650.0f,550.0f},
 		{2700.0f,550.0f},
+		{3600.0f,550.0f},
+		{3800.0f,550.0f},
 		{4000.0f,550.0f}
 	};
 
@@ -95,7 +98,7 @@ void SceneMain::Init()
 	// ゴーレムのスポーン地点
 	std::vector<Vec2>golemPosition =
 	{
-		{4500.0f,550.0f}
+		{4500.0f,490.0f}
 	};
 	// ゴーレムのスポーン地点
 	for (auto& pos : golemPosition)
@@ -115,17 +118,18 @@ void SceneMain::Init()
 void SceneMain::Update()
 {
 	m_pPlayer->Update();
+	
 	/*if (m_hitStopFrame > 0)
 	{
 		m_hitStopFrame--;
 		return;
 	}*/
-	//// Playerがヒットしたら画面が揺れる
-	//if (m_pPlayer->IsDamage())
-	//{
-	//	m_pCamera->Shake(20, 10.0f);
-	//	m_pPlayer->ClearDamage();
-	//}
+	// Playerがヒットしたら画面が揺れる
+	if (m_pPlayer->IsDamage())
+	{
+		m_pCamera->Shake(30, 10.0f);// 揺れる強さ（X軸,Y軸）
+		m_pPlayer->ClearDamage();
+	}
 
 	
 
