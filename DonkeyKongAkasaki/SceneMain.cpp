@@ -15,7 +15,7 @@
 
 namespace
 {
-	constexpr float kGoalX = 6200.0f;// ゴールの場所
+	constexpr float kGoalX = 9000.0f;// ゴールの場所
 	constexpr float kGoalWidth = 128.0f;// ゴール幅
 
 	bool IsHitRect(const Rect& a, const Rect& b)
@@ -62,11 +62,11 @@ void SceneMain::Init()
 	// コウモリ
 	std::vector<Vec2>batPosition =
 	{
-		{1700.0f,420.0f},
+		/*{1700.0f,420.0f},
 		{3500.0f,480.0f},
 		{3000.0f,450.0f},
 		{2500.0f,180.0f},
-		{4000.0f,400.0f}
+		{4000.0f,400.0f}*/
 	};
 	// コウモリのスポーン地点
 	for (auto& pos : batPosition)
@@ -80,11 +80,11 @@ void SceneMain::Init()
 	// キノコ
 	std::vector<Vec2>mushPosition =
 	{
-		{1650.0f,550.0f},
-		{2700.0f,550.0f},
-		{3600.0f,550.0f},
-		{3800.0f,550.0f},
-		{4000.0f,550.0f}
+		{1650.0f,805.0f},
+		{2700.0f,805.0f},
+		{3600.0f,805.0f},
+		{3800.0f,805.0f},
+		{4000.0f,805.0f}
 	};
 
 	// キノコのスポーン地点
@@ -98,7 +98,7 @@ void SceneMain::Init()
 	// ゴーレムのスポーン地点
 	std::vector<Vec2>golemPosition =
 	{
-		{4500.0f,490.0f}
+		/*{4500.0f,490.0f}*/
 	};
 	// ゴーレムのスポーン地点
 	for (auto& pos : golemPosition)
@@ -127,7 +127,7 @@ void SceneMain::Update()
 	// Playerがヒットしたら画面が揺れる
 	if (m_pPlayer->IsDamage())
 	{
-		m_pCamera->Shake(30, 10.0f);// 揺れる強さ（X軸,Y軸）
+		m_pCamera->Shake(30, 10.0f);// 揺れる強さ（時間,揺れ）
 		m_pPlayer->ClearDamage();// 元に戻す
 	}
 

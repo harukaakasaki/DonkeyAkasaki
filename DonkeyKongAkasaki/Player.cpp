@@ -14,8 +14,9 @@ namespace
 	constexpr int	kGraphicsAngle	= 0;					// グラフィックアングル
 	constexpr int	kGraphWidth		= 1008 / kIdleAnimNum;	// プレイヤーのグラフィックサイズ（幅）
 	constexpr int	kGraphHeight	= 144;					// プレイヤーのグラフィックサイズ（高さ）
+	constexpr float	kTrapGround		= 930.0f;				// トラップ
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
-	constexpr float kHpSize			= 0.2f;				// HPグラフィックサイズ
+	constexpr float kHpSize			= 0.2f;				    // HPグラフィックサイズ
 	constexpr float kSpeed			= 8.0f;					// スピード
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
@@ -65,7 +66,7 @@ void Player::Init()
 	m_animFrame = 0;
 	
 	m_pos.x = Game::kScreenWidth * 0.5f;
-	m_pos.y = 630.0f;
+	m_pos.y = 890.0f;
 	m_spawnPos.x = m_pos.x;
 	m_spawnPos.y = m_pos.y;
 	m_damageCoolTime = 0;
@@ -87,7 +88,7 @@ void Player::Update()
 	}
 
 	// トラップに当たったら死！
-	if (m_pos.y >= 670.0f)
+	if (m_pos.y >= kTrapGround)
 	{
 		m_state = PlayerState::Death;
 	}
@@ -271,8 +272,8 @@ void Player::DrawHP()
 		m_hp = 0;
 	}
 	// ハートの位置
-	const int startX = 70;
-	const int startY = 70;
+	const int startX = 100;
+	const int startY = 100;
 	const int interval = 90; // hpの間隔
 	const double scale = kHpSize;// hpの大きさ
 

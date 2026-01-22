@@ -16,7 +16,7 @@ namespace
 SceneTitle::SceneTitle()
 {
 	m_titleHandle = LoadGraph("data/Titlesakura.png");
-	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura.efkefc");
+	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura2.efkefc");
 	// エフェクトを再生する。
 	m_sakuraEffectsHandle = PlayEffekseer2DEffect(m_sakuraEffectsHandle);
 	// Effekseerで作成したエフェクトは2D表示の場合、小さすぎることが殆どなので必ず拡大する。
