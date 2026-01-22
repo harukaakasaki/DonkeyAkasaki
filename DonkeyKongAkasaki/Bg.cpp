@@ -61,7 +61,7 @@ Bg::Bg(Camera* pCamera):
 	m_bg2Handle = LoadGraph("data/bg_2.png");
 	m_bg3Handle = LoadGraph("data/bg_spring_1.png");
 	//m_bg3Handle = LoadGraph("data/bg_winter_1.png");
-	m_mapHandle = LoadGraph("data/mapChip_3.png");
+	m_mapHandle = LoadGraph("data/mapChip_4.png");
 	// 画像マップチップ数を数える
 	int graphW = 0;
 	int graphH = 0;

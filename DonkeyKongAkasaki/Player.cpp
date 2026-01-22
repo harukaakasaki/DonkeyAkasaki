@@ -163,7 +163,7 @@ void Player::Jump()
 	}
 
 	// XキーorPADのBボタンを押す
-	if (Pad::IsPress(PAD_INPUT_1))
+	if (Pad::IsTrigger(PAD_INPUT_1))
 	{
 		m_move.y = -kJumpPower;
 		m_isGround = false;

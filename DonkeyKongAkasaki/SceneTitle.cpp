@@ -15,8 +15,9 @@ namespace
 
 SceneTitle::SceneTitle()
 {
-	m_titleHandle = LoadGraph("data/Titlesakura.png");
-	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura2.efkefc");
+	m_titleHandle = LoadGraph("data/title.png");
+	m_titleLogoHandle = LoadGraph("data/title_logo.png");
+	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura3.efkefc");
 	// エフェクトを再生する。
 	m_sakuraEffectsHandle = PlayEffekseer2DEffect(m_sakuraEffectsHandle);
 	// Effekseerで作成したエフェクトは2D表示の場合、小さすぎることが殆どなので必ず拡大する。
@@ -47,6 +48,8 @@ void SceneTitle::Draw()
 	DrawGraph(0, 0,m_titleHandle, true);
 	// Effekseerにより再生中のエフェクトを描画する。
 	DrawEffekseer2D();
+	DrawGraph(0, 0,m_titleLogoHandle, true);
+	
 }
 
 // 次のシーンに遷移する

@@ -16,6 +16,8 @@ private:
 	bool m_isEnd = false;
 	// タイトルの画像
 	int m_titleHandle;
+	// タイトルロゴの画像
+	int m_titleLogoHandle;
 	// 桜のエフェクト
 	int m_sakuraEffectsHandle;
 };
