@@ -24,7 +24,7 @@ EnemyGolem::EnemyGolem():
 	m_hitHandle = LoadGraph("data/golem_hit2.png");
 	m_deathHandle = LoadGraph("data/golem_death2.png");
 	m_effectHandle = LoadGraph("data/explosion2.png");
-	m_hp = 3;
+	m_hp = 5;
 }
 
 EnemyGolem::~EnemyGolem()
@@ -69,12 +69,12 @@ void EnemyGolem::Update()
 	}
 	if (m_moveLeft)
 	{
-		m_pos.x -= 4;
+		m_pos.x -= kSpeed;
 		m_isRight = false;
 	}
 	else
 	{
-		m_pos.x += 4;
+		m_pos.x += kSpeed;
 		m_isRight = true;
 	}
 

@@ -12,7 +12,7 @@ namespace
 	constexpr int kGraphHeight = 64;                 // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kEffectWidth = 64;                 // キノコのエフェクトサイズ（幅）
 	constexpr int kEffectHeight = 64;                // キノコのエフェクトサイズ（高さ）
-	constexpr int kSpeed = 3;                        // コウモリのスピード
+	constexpr int kSpeed = 3;                        // キノコのスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
 	constexpr float kEffectSize = 4.0f;            // グラフィックサイズ
 
@@ -63,19 +63,19 @@ void EnemyMush::Update()
 	}
 
 	m_moveTimer++;
-	if (m_moveTimer >= 180)
+	if (m_moveTimer >= 60)
 	{
 		m_moveLeft = !m_moveLeft;
 		m_moveTimer = 0;
 	}
 	if (m_moveLeft)
 	{
-		m_pos.x -= 1;
+		m_pos.x -= kSpeed;
 		m_isRight = true;
 	}
 	else
 	{
-		m_pos.x += 1;
+		m_pos.x += kSpeed;
 		m_isRight = false;
 	}
 

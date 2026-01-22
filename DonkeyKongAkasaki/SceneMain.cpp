@@ -128,7 +128,7 @@ void SceneMain::Update()
 	if (m_pPlayer->IsDamage())
 	{
 		m_pCamera->Shake(30, 10.0f);// 揺れる強さ（X軸,Y軸）
-		m_pPlayer->ClearDamage();
+		m_pPlayer->ClearDamage();// 元に戻す
 	}
 
 	
@@ -150,7 +150,7 @@ void SceneMain::Update()
 	}
 	m_pCamera->Update(*m_pPlayer);
 	m_pBg->Update();
-
+	// ゴールの矩形
 	Rect goalRect;
 	goalRect.left = kGoalX;
 	goalRect.right = kGoalX + kGoalWidth;
@@ -182,6 +182,7 @@ void SceneMain::Update()
 /// </summary>
 void SceneMain::Draw()
 {
+	// カメラのポジション
 	Vec2 cameraPos;
 	cameraPos = m_pCamera->GetPos();
 	// 背景の表示
@@ -213,9 +214,7 @@ void SceneMain::Draw()
 	// プレイヤーの描画
 	m_pPlayer->Draw(*m_pCamera);
 	m_pPlayer->DrawHP();
-
 	int drawX = static_cast<int>(kGoalX - cameraPos.x);
-
 	DrawBox(drawX, 0, drawX + kGoalWidth, 1080, GetColor(255, 255, 0),false);
 
 
@@ -241,22 +240,22 @@ void SceneMain::HitStop(int frame)
 {
 	m_hitStopFrame = frame;
 }
-
 bool SceneMain::IshitStop() const
 {
 	return m_hitStopFrame > 0;
 }
 
+// 次のシーンに遷移する
 bool SceneMain::IsEnd() const
 {
 	return m_isGoal;
 }
-// 次のシーンに遷移する
 Scene* SceneMain::GetNextScene()
 {
 	return new SceneClear();
 }
 
+// プレイヤーとエネミーの当たり判定
 void SceneMain::CheckPlayerEnemyCollision()
 {
 	Rect playerBox = m_pPlayer->PlayerHitBox();
@@ -313,6 +312,7 @@ void SceneMain::CheckPlayerEnemyCollision()
 
 }
 
+// プレイヤーの攻撃とエネミーの当たり判定
 void SceneMain::CheckPlayerAttackCollision()
 {
 	if (!m_pPlayer->IsAttackHitActive())return;
