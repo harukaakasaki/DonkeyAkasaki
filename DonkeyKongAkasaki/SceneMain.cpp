@@ -120,11 +120,11 @@ void SceneMain::Update()
 	m_pPlayer->Update();
 	
 	// ヒットストップ
-	/*if (m_hitStopFrame > 0)
+	if (m_hitStopFrame > 0)
 	{
 		m_hitStopFrame--;
 		return;
-	}*/
+	}
 	// Playerがヒットしたら画面が揺れる
 	if (m_pPlayer->IsDamage())
 	{
@@ -161,6 +161,7 @@ void SceneMain::Update()
 	Rect playerRect = m_pPlayer->GetRect();
 	Rect chipRect;
 
+	// Playerとゴールの当たり判定
 	if (IsHitRect(playerRect, goalRect))
 	{
 		m_isGoal = true;
