@@ -16,7 +16,7 @@ namespace
 	constexpr int	kGraphHeight	= 144;					// プレイヤーのグラフィックサイズ（高さ）
 	constexpr float	kTrapGround		= 930.0f;				// トラップ
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
-	constexpr float kHpSize			= 0.2f;				    // HPグラフィックサイズ
+	constexpr float kHpSize			= 0.09f;				    // HPグラフィックサイズ
 	constexpr float kSpeed			= 8.0f;					// スピード
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
@@ -41,7 +41,7 @@ Player::Player():
 	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
 	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
 	m_hitHandle = LoadGraph("data/player_hit3.png"); // プレイヤーヒット画像
-	m_hpHandle = LoadGraph("data/sakura_hanabira.png"); // プレイヤーHP画像
+	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
 	
 }
 
@@ -274,7 +274,7 @@ void Player::DrawHP()
 	// ハートの位置
 	const int startX = 100;
 	const int startY = 100;
-	const int interval = 90; // hpの間隔
+	const int interval = 120; // hpの間隔
 	const double scale = kHpSize;// hpの大きさ
 
 	for (int i = 0; i < m_hp; i++)
