@@ -62,11 +62,11 @@ void SceneMain::Init()
 	// コウモリ
 	std::vector<Vec2>batPosition =
 	{
-		{1700.0f,700.0f},
+		/*{1700.0f,700.0f},
 		{3500.0f,750.0f},
 		{3000.0f,650.0f},
 		{2500.0f,780.0f},
-		{4000.0f,760.0f}
+		{4000.0f,760.0f}*/
 	};
 	// コウモリのスポーン地点
 	for (auto& pos : batPosition)
@@ -80,11 +80,11 @@ void SceneMain::Init()
 	// キノコ
 	std::vector<Vec2>mushPosition =
 	{
-		{1650.0f,805.0f},
+		/*{1650.0f,805.0f},
 		{2700.0f,805.0f},
 		{3600.0f,805.0f},
 		{3800.0f,805.0f},
-		{4000.0f,805.0f}
+		{4000.0f,805.0f}*/
 	};
 
 	// キノコのスポーン地点
@@ -98,7 +98,7 @@ void SceneMain::Init()
 	// ゴーレムのスポーン地点
 	std::vector<Vec2>golemPosition =
 	{
-		{4500.0f,750.0f}
+		/*{4500.0f,750.0f}*/
 	};
 	// ゴーレムのスポーン地点
 	for (auto& pos : golemPosition)
