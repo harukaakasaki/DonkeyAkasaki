@@ -15,8 +15,8 @@
 
 namespace
 {
-	constexpr float kGoalX = 9000.0f;// ゴールの場所
-	constexpr float kGoalWidth = 128.0f;// ゴール幅
+	constexpr float kGoalX = 9000.0f;// リスポーン地点更新位置
+	constexpr float kGoalWidth = 128.0f;// リスポーン位置幅
 
 	bool IsHitRect(const Rect& a, const Rect& b)
 	{
@@ -62,11 +62,11 @@ void SceneMain::Init()
 	// コウモリ
 	std::vector<Vec2>batPosition =
 	{
-		/*{1700.0f,700.0f},
+		{1700.0f,700.0f},
 		{3500.0f,750.0f},
 		{3000.0f,650.0f},
 		{2500.0f,780.0f},
-		{4000.0f,760.0f}*/
+		{4000.0f,760.0f}
 	};
 	// コウモリのスポーン地点
 	for (auto& pos : batPosition)
@@ -119,6 +119,7 @@ void SceneMain::Update()
 {
 	m_pPlayer->Update();
 	
+	// ヒットストップ
 	/*if (m_hitStopFrame > 0)
 	{
 		m_hitStopFrame--;

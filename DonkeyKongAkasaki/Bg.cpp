@@ -190,12 +190,6 @@ bool Bg::IsCollision(const Rect& rect, Rect& chipRect)
 			if (top > rect.bottom)continue;
 			if (bottom < rect.top)continue;
 
-			// ぶつかったマップチップの矩形を設定
-			/*chipRect.left = static_cast<float>(chipLeft);
-			chipRect.right = static_cast<float>(chipRight);
-			chipRect.top = static_cast<float>(chipTop);
-			chipRect.bottom = static_cast<float>(chipBottom);*/
-
 			chipRect = { left,top,right,bottom };
 
 			// どれかのチップに当たっていたら、終了

@@ -3,14 +3,13 @@
 #include "Game.h"
 #include "SceneMain.h"
 #include <DxLib.h>
-#include "EffekseerForDXLib.h"
+#include <EffekseerForDXLib.h>
 
 
 namespace
 {
 	//constexpr float kScreenWidth = 1600.0f;// スクリーンの幅
 	//constexpr float kScreenHeight = 900.0f;// スクリーンの高さ
-
 }
 
 SceneTitle::SceneTitle()
