@@ -120,11 +120,11 @@ void SceneMain::Update()
 	m_pPlayer->Update();
 	
 	// ヒットストップ
-	if (m_hitStopFrame > 0)
+	/*if (m_hitStopFrame > 0)
 	{
 		m_hitStopFrame--;
 		return;
-	}
+	}*/
 	// Playerがヒットしたら画面が揺れる
 	if (m_pPlayer->IsDamage())
 	{
