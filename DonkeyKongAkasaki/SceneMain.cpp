@@ -15,7 +15,7 @@
 
 namespace
 {
-	constexpr float kGoalX = 9000.0f;// リスポーン地点更新位置
+	constexpr float kGoalX = 23000.0f;// リスポーン地点更新位置
 	constexpr float kGoalWidth = 128.0f;// リスポーン位置幅
 
 	bool IsHitRect(const Rect& a, const Rect& b)
@@ -62,11 +62,11 @@ void SceneMain::Init()
 	// コウモリ
 	std::vector<Vec2>batPosition =
 	{
-		{1700.0f,700.0f},
-		{3500.0f,750.0f},
-		{3000.0f,650.0f},
-		{2500.0f,780.0f},
-		{4000.0f,760.0f}
+		{7000.0f,800.0f},
+		{7700.0f,700.0f},
+		{8700.0f,820.0f},
+		{9600.0f,650.0f},
+		{12500.0f,780.0f}
 	};
 	// コウモリのスポーン地点
 	for (auto& pos : batPosition)
@@ -80,11 +80,11 @@ void SceneMain::Init()
 	// キノコ
 	std::vector<Vec2>mushPosition =
 	{
-		/*{1650.0f,805.0f},
-		{2700.0f,805.0f},
-		{3600.0f,805.0f},
-		{3800.0f,805.0f},
-		{4000.0f,805.0f}*/
+		{13000.0f,805.0f},
+		{14000.0f,805.0f},
+		{15000.0f,805.0f},
+		{15500.0f,805.0f},
+		{16000.0f,805.0f}
 	};
 
 	// キノコのスポーン地点
@@ -216,19 +216,16 @@ void SceneMain::Draw()
 	// プレイヤーの描画
 	m_pPlayer->Draw(*m_pCamera);
 	m_pPlayer->DrawHP();
+	
+#ifdef _DEBUG
+
 	int drawX = static_cast<int>(kGoalX - cameraPos.x);
-	DrawBox(drawX, 0, drawX + kGoalWidth, 1080, GetColor(255, 255, 0),false);
-
-
+	DrawBox(drawX, 0, drawX + kGoalWidth, 1080, GetColor(255, 255, 0), false);
 	// クリアシーンができたら#ifdefに移動
 	if (m_isGoal)
 	{
 		DrawString(drawX - 10, 200, "クリア！！！", GetColor(255, 255, 0));
 	}
-	
-	
-#ifdef _DEBUG
-
 	if (m_isHitPlayer)
 	{
 		DrawString(800, 300, "当たってる", GetColor(255, 0, 0));
