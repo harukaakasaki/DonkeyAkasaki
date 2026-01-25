@@ -23,6 +23,8 @@ private:
 	int m_sakuraEffectsHandle;
 	// ƒ^ƒCƒgƒ‹BGM
 	int m_bgmHandle;
+	// SEŒn
+	int m_selectSe;
 
 };
 

@@ -19,9 +19,11 @@ SceneTitle::SceneTitle()
 
 	// BGM
 	m_bgmHandle = LoadSoundMem("bgm/title_bgm.mp3");
+	m_selectSe = LoadSoundMem("bgm/select_se.mp3");
 
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
+	
 
 	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura3.efkefc");
 	// エフェクトを再生する。
@@ -46,6 +48,7 @@ void SceneTitle::Update()
 	UpdateEffekseer2D();
 	if (Pad::IsTrigger(PAD_INPUT_8))
 	{
+		PlaySoundMem(m_selectSe, DX_PLAYTYPE_BACK);
 		m_isEnd = true;
 	}
 
