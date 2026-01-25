@@ -22,10 +22,15 @@ EnemyMush::EnemyMush():
 	m_animFrame(0),
 	m_animCount(0)
 {
+	// ‰æ‘œ
 	m_handle = LoadGraph("data/mush_run.png");
 	m_hitHandle = LoadGraph("data/mush_hit2.png");
 	m_deathHandle = LoadGraph("data/mush_death2.png");
 	m_effectHandle = LoadGraph("data/explosion3.png");
+	// SE
+	m_hitSe = LoadSoundMem("bgm/enemy_hit_se.mp3");
+	m_deathSe = LoadSoundMem("bgm/enemy_death_se.mp3");
+	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");
 	m_hp = 2;
 }
 
@@ -35,6 +40,9 @@ EnemyMush::~EnemyMush()
 	DeleteGraph(m_hitHandle);
 	DeleteGraph(m_deathHandle);
 	DeleteGraph(m_effectHandle);
+	DeleteSoundMem(m_hitSe);
+	DeleteSoundMem(m_deathSe);
+	DeleteSoundMem(m_effectSe);
 }
 
 void EnemyMush::Init()
@@ -117,6 +125,7 @@ void EnemyMush::UpdateState()
 	{
 		if (m_animFrame >= 15)// Ž€ = 15
 		{
+			PlaySoundMem(m_effectSe, DX_PLAYTYPE_BACK);
 			m_state = MushState::DeathEffect;
 			m_animFrame = 0;
 		}
@@ -201,11 +210,12 @@ void EnemyMush::Draw(const Camera& camera)
 
 void EnemyMush::Damage()
 {
+	
 	if (m_damageCoolTime > 0)
 	{
 		return;
 	}
-
+	PlaySoundMem(m_hitSe, DX_PLAYTYPE_BACK);
 	m_state = MushState::Damage;
 	m_animFrame = 0;
 	m_animCount = 0;
@@ -221,6 +231,7 @@ void EnemyMush::Damage()
 
 	if (m_hp <= 0)
 	{
+		PlaySoundMem(m_deathSe, DX_PLAYTYPE_BACK);
 		m_state = MushState::Death;
 		m_animFrame = 0;
 		m_animCount = 0;

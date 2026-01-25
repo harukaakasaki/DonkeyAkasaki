@@ -38,6 +38,9 @@ private:
 	bool m_moveLeft = false;
 	// ƒRƒEƒ‚ƒŠ‚ÌHP
 	int m_hp = 1;
+	// SEŒn
+	int m_hitSe;
+	int m_effectSe;
 
 };
 

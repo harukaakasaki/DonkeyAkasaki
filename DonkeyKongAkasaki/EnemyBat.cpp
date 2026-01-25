@@ -19,9 +19,13 @@ EnemyBat::EnemyBat():
 	m_animFrame(0),
 	m_animCount(0)
 {
+	// 画像
 	m_handle = LoadGraph("data/bat.png");
 	m_deathHandle = LoadGraph("data/bat_death2.png");
 	m_effectHandle = LoadGraph("data/explosion1.png");
+	// SE
+	m_hitSe = LoadSoundMem("bgm/enemy_death_se.mp3");
+	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");
 }
 
 EnemyBat::~EnemyBat()
@@ -29,6 +33,8 @@ EnemyBat::~EnemyBat()
 	DeleteGraph(m_handle);
 	DeleteGraph(m_deathHandle);
 	DeleteGraph(m_effectHandle);
+	DeleteSoundMem(m_hitSe);
+	DeleteSoundMem(m_effectSe);
 }
 
 void EnemyBat::Init()
@@ -91,6 +97,7 @@ void EnemyBat::UpdateState()
 	{
 		if (m_animFrame >= 12)// 死 = 12
 		{
+			PlaySoundMem(m_effectSe, DX_PLAYTYPE_BACK);
 			m_state = BatState::DeathEffect;
 			m_animFrame = 0;
 
@@ -98,8 +105,10 @@ void EnemyBat::UpdateState()
 	}
 	if (m_state == BatState::DeathEffect)
 	{
+		
 		if (m_animFrame >= 12)// 死エフェクト = 12
 		{
+			
 			Kill();
 			m_animFrame = 0;
 		}
@@ -166,6 +175,7 @@ void EnemyBat::Damage()
 
 	if (m_hp <= 0)
 	{
+		PlaySoundMem(m_hitSe, DX_PLAYTYPE_BACK);
 		m_state = BatState::Death;
 		m_animFrame = 0;
 		m_animCount = 0;
