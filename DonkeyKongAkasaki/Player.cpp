@@ -116,7 +116,7 @@ void Player::Update()
 	{
 		m_isDamage = true;
 		m_spawnTimer++;
-		if (m_spawnTimer >= 180)
+		if (m_spawnTimer >= 120)
 		{
 			m_state = PlayerState::Respawn;
 			Respawn();
@@ -416,6 +416,8 @@ void Player::Respawn()
 	m_animCount = 0;
 	m_damageCoolTime = 0;
 	m_spawnTimer = 0;
+
+	m_isRespawn = true;
 }
 
 // •`‰æ

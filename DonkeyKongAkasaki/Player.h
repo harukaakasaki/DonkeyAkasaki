@@ -77,8 +77,12 @@ public:
 	bool IsDamage()const { return m_isDamage; }
 	void ClearDamage() { m_isDamage = false; }
 
+	bool IsJustRespawn()const { return m_isRespawn; }
+	void ClearJustRespawn() { m_isRespawn = false; }
+
 private:
 	bool m_isDamage = false;
+	bool m_isRespawn = false;
 
 	// —ÍX,Y
 	float m_vecX;

@@ -68,9 +68,11 @@ private:
 
 	void CheckPlayerEnemyCollision();
 	void CheckPlayerAttackCollision();
+	void ResetEnemies();
 
 	bool m_isHitPlayer = false; 
 	bool m_isGoal = false;
+	bool m_isReset = false;
 
 	int m_bgmHandle;
 

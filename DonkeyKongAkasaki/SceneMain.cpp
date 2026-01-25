@@ -128,6 +128,12 @@ void SceneMain::Init()
 void SceneMain::Update()
 {
 	m_pPlayer->Update();
+
+	if (m_pPlayer->IsJustRespawn())
+	{
+		m_isReset = true;
+		m_pPlayer->ClearJustRespawn();
+	}
 	
 	// ヒットストップ
 	/*if (m_hitStopFrame > 0)
@@ -187,6 +193,11 @@ void SceneMain::Update()
 	// プレイヤーの攻撃判定
 	CheckPlayerAttackCollision();
 
+	if (m_isReset)
+	{
+		ResetEnemies();
+		m_isReset = false;
+	}
 }
 
 /// <summary>
@@ -359,5 +370,61 @@ void SceneMain::CheckPlayerAttackCollision()
 			golem->Damage(); // Enemy
 			HitStop(3);
 		}
+	}
+}
+
+void SceneMain::ResetEnemies()
+{
+	m_enemyBats.clear();
+	m_enemyMushes.clear();
+	m_enemyGolems.clear();
+
+	std::vector<Vec2>batPosition =
+	{
+		{7000.0f,800.0f},
+		{7700.0f,700.0f},
+		{8700.0f,820.0f},
+		{9600.0f,650.0f},
+		{18000.0f,200.0f},
+		{16000.0f,700.0f},
+		{17300.0f,400.0f},
+		{12500.0f,780.0f}
+	};
+	for (auto& pos : batPosition)
+	{
+		auto bat = std::make_unique<EnemyBat>();
+		bat->Init();
+		bat->SetPos(pos);
+		m_enemyBats.push_back(std::move(bat));
+	}
+
+	std::vector<Vec2>mushPosition =
+	{
+		{13000.0f,805.0f},
+		{14000.0f,805.0f},
+		{15000.0f,805.0f},
+		{15500.0f,805.0f},
+		{17000.0f,615.0f},
+		{17800.0f,230.0f},
+		{16000.0f,805.0f}
+	};
+	for (auto& pos : mushPosition)
+	{
+		auto mush = std::make_unique<EnemyMush>();
+		mush->Init();
+		mush->SetPos(pos);
+		m_enemyMushes.push_back(std::move(mush));
+	}
+
+	std::vector<Vec2>golemPosition =
+	{
+		/*{4500.0f,750.0f}*/
+	};
+	for (auto& pos : golemPosition)
+	{
+		auto golem = std::make_unique<EnemyGolem>();
+		golem->Init();
+		golem->SetPos(pos);
+		m_enemyGolems.push_back(std::move(golem));
 	}
 }
