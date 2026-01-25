@@ -72,6 +72,8 @@ private:
 	bool m_isHitPlayer = false; 
 	bool m_isGoal = false;
 
+	int m_bgmHandle;
+
 //	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
 };
 

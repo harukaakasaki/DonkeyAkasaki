@@ -37,7 +37,9 @@ SceneMain::SceneMain()
 	m_pEnemy = new Enemy;
 	m_pCamera = new Camera;
 	m_pBg = new Bg(m_pCamera);
-
+	m_bgmHandle = LoadSoundMem("bgm/game_bgm2.mp3");
+	ChangeVolumeSoundMem(180, m_bgmHandle);
+	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
 }
 
 /// <summary>
@@ -48,6 +50,9 @@ SceneMain::~SceneMain()
 	delete m_pPlayer;
 	delete m_pEnemy;
 	delete m_pCamera;
+
+	StopSoundMem(m_bgmHandle);
+	DeleteSoundMem(m_bgmHandle);
 }
 
 /// <summary>

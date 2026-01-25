@@ -13,6 +13,7 @@ public:
 	Scene* GetNextScene() override;
 
 private:
+	// シーンが終わったか
 	bool m_isEnd = false;
 	// タイトルの画像
 	int m_titleHandle;
@@ -20,5 +21,8 @@ private:
 	int m_titleLogoHandle;
 	// 桜のエフェクト
 	int m_sakuraEffectsHandle;
+	// タイトルBGM
+	int m_bgmHandle;
+
 };
 
