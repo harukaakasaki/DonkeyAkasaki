@@ -131,5 +131,11 @@ private:
 	int m_hp = 3; //HP
 	int m_hpMax; //HPŒÀŠE
 	int m_damageCoolTime = 0; // –³“G
+
+	// SEŒn
+	int m_jumpSe;
+	int m_attackSe;
+	int m_deathSe;
+	int m_hitSe;
 };
 

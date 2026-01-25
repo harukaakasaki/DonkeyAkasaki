@@ -3,6 +3,8 @@
 class SceneClear : public Scene
 {
 public:
+	SceneClear();
+	~SceneClear();
 	void Init() override {};
 	void Update() override;
 	void Draw() override;
@@ -12,5 +14,6 @@ public:
 
 private:
 	bool m_isEnd = false;
+	int m_bgmHandle;
 };
 

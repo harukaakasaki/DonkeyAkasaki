@@ -17,7 +17,7 @@ namespace
 	constexpr float	kTrapGround		= 930.0f;				// トラップ
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
 	constexpr float kHpSize			= 0.09f;				// HPグラフィックサイズ
-	constexpr float kSpeed			= 8.0f;					// スピード
+	constexpr float kSpeed			= 10.0f;					// スピード
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
 	constexpr float knockBackX		= 12.0f;				// ノックバックX
@@ -54,11 +54,20 @@ Player::~Player()
 	DeleteGraph(m_deathHandle);
 	DeleteGraph(m_hitHandle);
 	DeleteGraph(m_hpHandle);
+	DeleteSoundMem(m_jumpSe);
+	DeleteSoundMem(m_attackSe);
+	DeleteSoundMem(m_hitSe);
+	DeleteSoundMem(m_deathSe);
 }
 
 // 初期化
 void Player::Init()
 {
+	m_jumpSe = LoadSoundMem("bgm/player_jump_se2.mp3");
+	m_attackSe = LoadSoundMem("bgm/player_attack_se2.mp3");
+	m_hitSe = LoadSoundMem("bgm/player_hit_se.mp3");
+	m_deathSe = LoadSoundMem("bgm/player_death_se2.mp3");
+
 	m_state = PlayerState::Normal;
 	m_hpMax = 3;
 	m_hp = m_hpMax;
@@ -90,14 +99,24 @@ void Player::Update()
 	// トラップに当たったら死！
 	if (m_pos.y >= kTrapGround)
 	{
-		m_state = PlayerState::Death;
-	}
+		// 既にDeathなら何もしない
+		if (m_state != PlayerState::Death)
+		{
+			ChangeVolumeSoundMem(200, m_deathSe);
+			PlaySoundMem(m_deathSe, DX_PLAYTYPE_BACK);
 
+			m_state = PlayerState::Death;
+			m_animFrame = 0;
+			m_animCount = 0;
+			m_spawnTimer = 0;
+		}
+
+	}
 	if (m_state == PlayerState::Death)
 	{
 		m_isDamage = true;
 		m_spawnTimer++;
-		if (m_spawnTimer >= 90)
+		if (m_spawnTimer >= 180)
 		{
 			m_state = PlayerState::Respawn;
 			Respawn();
@@ -106,25 +125,23 @@ void Player::Update()
 		return;
 	}
 
-	Character::Update();
+		Character::Update();
 
-	if (m_damageCoolTime > 0)
-	{
-		m_damageCoolTime--;
+		if (m_damageCoolTime > 0)
+		{
+			m_damageCoolTime--;
+		}
+
+		// 入力された状態に変わる
+		HandleInput();
+
+		// ジャンプする
+		Jump();
+		// 移動する
+		Move();
+		m_pos += m_move;
+
 	}
-
-	// 入力された状態に変わる
-	HandleInput();
-	
-	// ジャンプする
-	Jump();
-	// 移動する
-	Move();
-	m_pos += m_move;
-
-
-}
-
 // 移動
 void Player::Move()
 {
@@ -167,6 +184,9 @@ void Player::Jump()
 	{
 		m_move.y = -kJumpPower;
 		m_isGround = false;
+
+		ChangeVolumeSoundMem(150, m_jumpSe);
+		PlaySoundMem(m_jumpSe, DX_PLAYTYPE_BACK);
 	}
 }
 
@@ -190,6 +210,8 @@ void Player::HandleInput()
 		m_animFrame = 0;
 		// アニメーションカウンターをリセット
 		m_animCount = 0;
+		ChangeVolumeSoundMem(200, m_attackSe);
+		PlaySoundMem(m_attackSe, DX_PLAYTYPE_BACK);
 	}
 }
 
@@ -367,6 +389,8 @@ void Player::Damage(float hitDir)
 	{
 		if (m_state != PlayerState::Death)
 		{
+			ChangeVolumeSoundMem(200, m_deathSe);
+			PlaySoundMem(m_deathSe, DX_PLAYTYPE_BACK);
 			m_state = PlayerState::Death;
 			m_animFrame = 0;
 			m_animCount = 0;
@@ -374,6 +398,8 @@ void Player::Damage(float hitDir)
 		}
 		return;
 	}
+	ChangeVolumeSoundMem(200, m_hitSe);
+	PlaySoundMem(m_hitSe, DX_PLAYTYPE_BACK);
 }
 
 
