@@ -135,12 +135,15 @@ void Player::Update()
 		// 入力された状態に変わる
 		HandleInput();
 
-		// ジャンプする
-		Jump();
+		if (m_state != PlayerState::Attack)
+		{
+			// ジャンプする
+			Jump();
+		}
 		// 移動する
 		Move();
 		m_pos += m_move;
-
+		
 	}
 // 移動
 void Player::Move()
@@ -153,14 +156,26 @@ void Player::Move()
 		return;
 	}
 
+	
+
 	if (Pad::IsPress(PAD_INPUT_LEFT))// 左入力で左方向に移動
 	{
+		if (m_state != PlayerState::Attack)
+		{
+			m_state = PlayerState::Move;
+		}
+
 		m_move.x = -kSpeed;
 //		m_pos.y -= 20;// スキップしてるみたいな動きになる
 		m_isRight = false;
 	}
 	else if (Pad::IsPress(PAD_INPUT_RIGHT))// 右入力で右方向に移動
 	{
+		if (m_state != PlayerState::Attack)
+		{
+			m_state = PlayerState::Move;
+		}
+
 		m_move.x = kSpeed;
 //		m_pos.y -= 20;// スキップしてるみたいな動きになる
 		m_isRight = true;
@@ -194,8 +209,6 @@ void Player::Jump()
 
 void Player::HandleInput()
 {
-	
-	
 	// AttackStateに変更
 	if (m_state == PlayerState::Attack)
 	{
@@ -206,6 +219,7 @@ void Player::HandleInput()
 	{
 		// 攻撃に変更
 		m_state = PlayerState::Attack;
+
 		// 攻撃モーションをはじめからにする
 		m_animFrame = 0;
 		// アニメーションカウンターをリセット
