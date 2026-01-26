@@ -4,11 +4,19 @@
 #include <DxLib.h>
 
 
+namespace
+{
+	int kPlayerScale = 6;
+}
+
 SceneClear::SceneClear() :
-	m_scrollX(0.0f)
+	m_scrollX(0.0f),
+	m_animCount(0),
+	m_animFrame(0)
 {
 	m_bgmHandle = LoadSoundMem("bgm/clear_bgm.mp3");
 	m_bgHandle = LoadGraph("data/clear3.png");
+	m_playerRunHandle = LoadGraph("data/player_move.png");
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
 }
@@ -21,7 +29,7 @@ SceneClear::~SceneClear()
 
 void SceneClear::Update()
 {
-	m_scrollX += 1.0f;
+	m_scrollX += 3.0f;
 
 	int bgW, bgH;
 	GetGraphSize(m_bgHandle, &bgW, &bgH);
@@ -29,6 +37,17 @@ void SceneClear::Update()
 	if(m_scrollX >= bgW)
 	{
 		m_scrollX -= bgW;
+	}
+
+	m_animCount++;
+	if (m_animCount > 4)
+	{
+		m_animCount = 0;
+		m_animFrame++;
+		if (m_animFrame >= 8)
+		{
+			m_animFrame = 0;
+		}
 	}
 
 
@@ -47,6 +66,22 @@ void SceneClear::Draw()
 	DrawGraph(-m_scrollX +bgW,0, m_bgHandle, true);
 
 	DrawString(400, 300, "CLEAR!!", GetColor(0, 255, 255));
+
+	const int kFrameW = 1008/7;
+	const int kFrameH = 144;
+
+	int srcX = m_animFrame * kFrameW;
+	int srcY = 0;
+
+	DrawRectRotaGraph(
+		550, 900,
+		srcX, srcY,
+		kFrameW, kFrameH,
+		kPlayerScale,
+		0.0f,
+		m_playerRunHandle,
+		true
+	);
 }
 
 Scene* SceneClear::GetNextScene()
