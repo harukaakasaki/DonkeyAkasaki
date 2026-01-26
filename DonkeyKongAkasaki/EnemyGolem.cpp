@@ -20,10 +20,15 @@ EnemyGolem::EnemyGolem():
 	m_animFrame(0),
 	m_animCount(0)
 {
+	// ‰æ‘œ
 	m_handle = LoadGraph("data/golem_run.png");
 	m_hitHandle = LoadGraph("data/golem_hit2.png");
 	m_deathHandle = LoadGraph("data/golem_death2.png");
 	m_effectHandle = LoadGraph("data/explosion2.png");
+	// SE
+	m_hitSe = LoadSoundMem("bgm/golem_hit_se.mp3");
+	m_deathSe = LoadSoundMem("bgm/golem_death_se.mp3");
+	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");
 	m_hp = 5;
 }
 
@@ -33,6 +38,9 @@ EnemyGolem::~EnemyGolem()
 	DeleteGraph(m_hitHandle);
 	DeleteGraph(m_deathHandle);
 	DeleteGraph(m_effectHandle);
+	DeleteSoundMem(m_hitSe);
+	DeleteSoundMem(m_deathSe);
+	DeleteSoundMem(m_effectSe);
 }
 
 void EnemyGolem::Init()
@@ -119,6 +127,7 @@ void EnemyGolem::UpdateState()
 	{
 		if (m_animFrame >= 11)// Ž€ = 11
 		{
+			PlaySoundMem(m_effectSe, DX_PLAYTYPE_BACK);
 			m_state = GolemState::DeathEffect;
 			m_animFrame = 0;
 
@@ -142,7 +151,7 @@ void EnemyGolem::Damage()
 	{
 		return;
 	}
-
+	PlaySoundMem(m_hitSe, DX_PLAYTYPE_BACK);
 	m_state = GolemState::Damage;
 	m_animFrame = 0;
 	m_animCount = 0;
@@ -158,6 +167,7 @@ void EnemyGolem::Damage()
 
 	if (m_hp <= 0)
 	{
+		PlaySoundMem(m_deathSe, DX_PLAYTYPE_BACK);
 		m_state = GolemState::Death;
 		m_animFrame = 0;
 		m_animCount = 0;

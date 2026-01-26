@@ -15,7 +15,7 @@
 
 namespace
 {
-	constexpr float kGoalX = 23000.0f;// リスポーン地点更新位置
+	constexpr float kGoalX = 25000.0f;// リスポーン地点更新位置
 	constexpr float kGoalWidth = 128.0f;// リスポーン位置幅
 
 	bool IsHitRect(const Rect& a, const Rect& b)
@@ -90,11 +90,12 @@ void SceneMain::Init()
 	{
 		{13000.0f,805.0f},
 		{14000.0f,805.0f},
-		{15000.0f,805.0f},
+		{14500.0f,805.0f},
 		{15500.0f,805.0f},
+		{16500.0f,805.0f},
 		{17000.0f,615.0f},
-		{17800.0f,230.0f},
-		{16000.0f,805.0f}
+		{17800.0f,230.0f}
+	
 	};
 
 	// キノコのスポーン地点
@@ -108,7 +109,7 @@ void SceneMain::Init()
 	// ゴーレムのスポーン地点
 	std::vector<Vec2>golemPosition =
 	{
-		/*{4500.0f,750.0f}*/
+		{22000.0f,750.0f}
 	};
 	// ゴーレムのスポーン地点
 	for (auto& pos : golemPosition)
@@ -402,11 +403,11 @@ void SceneMain::ResetEnemies()
 	{
 		{13000.0f,805.0f},
 		{14000.0f,805.0f},
-		{15000.0f,805.0f},
+		{14500.0f,805.0f},
 		{15500.0f,805.0f},
+		{16500.0f,805.0f},
 		{17000.0f,615.0f},
-		{17800.0f,230.0f},
-		{16000.0f,805.0f}
+		{17800.0f,230.0f}
 	};
 	for (auto& pos : mushPosition)
 	{
@@ -418,7 +419,7 @@ void SceneMain::ResetEnemies()
 
 	std::vector<Vec2>golemPosition =
 	{
-		/*{4500.0f,750.0f}*/
+		{22000.0f,750.0f}
 	};
 	for (auto& pos : golemPosition)
 	{

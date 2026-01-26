@@ -57,6 +57,7 @@ void EnemyBat::Update()
 
 	Character::Update();
 	m_moveTimer++;
+	
 	if (m_moveTimer >= 100)
 	{
 		m_moveLeft = !m_moveLeft;
@@ -72,6 +73,7 @@ void EnemyBat::Update()
 		m_pos.x += kSpeed;
 		m_isRight = false;
 	}
+
 	
 }
 

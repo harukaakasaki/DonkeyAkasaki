@@ -41,6 +41,10 @@ private:
 	int m_damageCoolTime = 0;
 	// UŒ‚‚³‚ê‚½‚ç~‚Ü‚é
 	int m_stopTimer = 0;
+	// SEŒn
+	int m_hitSe;
+	int m_deathSe;
+	int m_effectSe;
 
 };
 
