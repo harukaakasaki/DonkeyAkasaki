@@ -141,5 +141,6 @@ private:
 	int m_attackSe;
 	int m_deathSe;
 	int m_hitSe;
+	int m_runSe;
 };
 

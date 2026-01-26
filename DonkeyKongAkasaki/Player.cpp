@@ -58,6 +58,7 @@ Player::~Player()
 	DeleteSoundMem(m_attackSe);
 	DeleteSoundMem(m_hitSe);
 	DeleteSoundMem(m_deathSe);
+	DeleteSoundMem(m_runSe);
 }
 
 // 初期化
@@ -67,6 +68,7 @@ void Player::Init()
 	m_attackSe = LoadSoundMem("bgm/player_attack_se2.mp3");
 	m_hitSe = LoadSoundMem("bgm/player_hit_se.mp3");
 	m_deathSe = LoadSoundMem("bgm/player_death_se2.mp3");
+	m_runSe = LoadSoundMem("bgm/player_run_se.mp3");
 
 	m_state = PlayerState::Normal;
 	m_hpMax = 3;
@@ -134,12 +136,8 @@ void Player::Update()
 
 		// 入力された状態に変わる
 		HandleInput();
-
-		if (m_state != PlayerState::Attack)
-		{
-			// ジャンプする
-			Jump();
-		}
+		// ジャンプする
+		Jump();
 		// 移動する
 		Move();
 		m_pos += m_move;
@@ -160,6 +158,8 @@ void Player::Move()
 
 	if (Pad::IsPress(PAD_INPUT_LEFT))// 左入力で左方向に移動
 	{
+		/*ChangeVolumeSoundMem(200, m_runSe);
+		PlaySoundMem(m_runSe, DX_PLAYTYPE_BACK);*/
 		if (m_state != PlayerState::Attack)
 		{
 			m_state = PlayerState::Move;
@@ -171,6 +171,8 @@ void Player::Move()
 	}
 	else if (Pad::IsPress(PAD_INPUT_RIGHT))// 右入力で右方向に移動
 	{
+		/*ChangeVolumeSoundMem(200, m_runSe);
+		PlaySoundMem(m_runSe, DX_PLAYTYPE_BACK);*/
 		if (m_state != PlayerState::Attack)
 		{
 			m_state = PlayerState::Move;
