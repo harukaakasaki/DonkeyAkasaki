@@ -7,6 +7,7 @@
 #include "EnemyGolem.h"
 #include <DxLib.h>
 #include "Player.h"
+#include "Pad.h"
 #include "Vec2.h"
 #include "Camera.h"
 #include <memory>
@@ -241,6 +242,11 @@ void SceneMain::Draw()
 	
 #ifdef _DEBUG
 
+	if (Pad::IsTrigger(PAD_INPUT_8))
+	{
+		m_isGoal = true;
+	}
+
 	int drawX = static_cast<int>(kGoalX - cameraPos.x);
 	DrawBox(drawX, 0, drawX + kGoalWidth, 1080, GetColor(255, 255, 0), false);
 	// クリアシーンができたら#ifdefに移動
@@ -374,6 +380,7 @@ void SceneMain::CheckPlayerAttackCollision()
 	}
 }
 
+// ポジションのリセット
 void SceneMain::ResetEnemies()
 {
 	m_enemyBats.clear();

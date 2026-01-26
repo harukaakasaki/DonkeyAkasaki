@@ -17,7 +17,7 @@ namespace
 	constexpr float	kTrapGround		= 930.0f;				// トラップ
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
 	constexpr float kHpSize			= 0.09f;				// HPグラフィックサイズ
-	constexpr float kSpeed			= 10.0f;					// スピード
+	constexpr float kSpeed			= 10.0f;				// スピード
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
 	constexpr float knockBackX		= 12.0f;				// ノックバックX

@@ -15,5 +15,7 @@ public:
 private:
 	bool m_isEnd = false;
 	int m_bgmHandle;
+	int m_bgHandle;
+	float m_scrollX;
 };
 
