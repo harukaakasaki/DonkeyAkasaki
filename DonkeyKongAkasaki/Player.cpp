@@ -42,7 +42,6 @@ Player::Player():
 	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
 	m_hitHandle = LoadGraph("data/player_hit3.png"); // プレイヤーヒット画像
 	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
-	
 }
 
 // デストラクタ
