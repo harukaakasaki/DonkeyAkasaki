@@ -17,6 +17,7 @@ SceneClear::SceneClear() :
 	m_bgmHandle = LoadSoundMem("bgm/clear_bgm.mp3");
 	m_bgHandle = LoadGraph("data/clear3.png");
 	m_clearHandle = LoadGraph("data/spring_has_come.png");
+	m_endHandle = LoadGraph("data/endButton.png");
 	m_playerRunHandle = LoadGraph("data/player_move.png");
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
@@ -56,6 +57,10 @@ void SceneClear::Update()
 	{
 		m_isEnd = true;
 	}
+	if (Pad::IsTrigger(PAD_INPUT_2))
+	{
+		m_isEnd = true;
+	}
 }
 
 void SceneClear::Draw()
@@ -82,6 +87,7 @@ void SceneClear::Draw()
 		true
 	);
 	DrawGraph(0, 0, m_clearHandle, true);
+	DrawGraph(0, 0, m_endHandle, true);
 }
 
 Scene* SceneClear::GetNextScene()

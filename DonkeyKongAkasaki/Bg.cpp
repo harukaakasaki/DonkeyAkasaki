@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "Game.h"
 
-
 namespace
 {
 	constexpr int kChipSize = 32;// マップチップの大きさ

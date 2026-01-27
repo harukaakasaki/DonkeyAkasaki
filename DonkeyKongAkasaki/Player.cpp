@@ -235,7 +235,7 @@ void Player::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 3)// アニメーションスピード
+	if (m_animCount > kAnimSpeed)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		

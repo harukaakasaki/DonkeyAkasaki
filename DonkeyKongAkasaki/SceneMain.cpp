@@ -1,4 +1,5 @@
 #include "SceneClear.h"
+#include "SceneTitle.h"
 #include "SceneMain.h"
 #include "Game.h"
 #include "Enemy.h"
@@ -13,12 +14,11 @@
 #include <memory>
 #include "Bg.h"
 
-
 namespace
 {
-	constexpr float kGoalX = 25000.0f;// ゴール位置
+	constexpr float kGoalX = 23000.0f;// ゴール位置
 	constexpr float kGoalWidth = 128.0f;// ゴール位置幅
-	constexpr int kTreeX = 24700; // 桜位置X
+	constexpr int kTreeX = 22700; // 桜位置X
 	constexpr int kTreeY = 220;  // 桜位置Y
 	constexpr int kMoveX = 1500; // 移動位置X
 	constexpr int kMoveY = 700;  // 移動位置Y
@@ -26,6 +26,8 @@ namespace
 	constexpr int kJumpY = 700;  // ジャンプ位置Y
 	constexpr int kAttackX = 7000; // 攻撃位置X
 	constexpr int kAttackY = 700;  // 攻撃位置Y
+	constexpr int kTitleX = 1300;  // Back画像位置Y
+	constexpr int kTitleY = 300;  // Back画像位置Y
 	constexpr float kScale = 0.5f;  // 画像拡大率
 
 	bool IsHitRect(const Rect& a, const Rect& b)
@@ -123,7 +125,7 @@ void SceneMain::Init()
 	// ゴーレムのスポーン地点
 	std::vector<Vec2>golemPosition =
 	{
-		{22000.0f,750.0f}
+		{20000.0f,520.0f}
 	};
 	// ゴーレムのスポーン地点
 	for (auto& pos : golemPosition)
@@ -223,6 +225,7 @@ void SceneMain::Draw()
 	// カメラのポジション
 	Vec2 cameraPos;
 	cameraPos = m_pCamera->GetPos();
+	
 	// 背景の表示
 	m_pBg->Draw();
 	// 天井の線
@@ -230,7 +233,6 @@ void SceneMain::Draw()
 	// 地面の線
 	DrawLine(0 - cameraPos.x, -10 - cameraPos.y, 5000 - cameraPos.x, -10 - cameraPos.y, GetColor(255, 255, 255));
 
-	
 	// エネミーの描画
 	m_pEnemy->Draw(*m_pCamera);
 	// コウモリの描画
@@ -470,7 +472,7 @@ void SceneMain::ResetEnemies()
 
 	std::vector<Vec2>golemPosition =
 	{
-		{22000.0f,750.0f}
+		{20000.0f,520.0f}
 	};
 	for (auto& pos : golemPosition)
 	{

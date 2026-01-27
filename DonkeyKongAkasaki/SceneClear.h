@@ -18,6 +18,7 @@ private:
 	int m_bgmHandle;
 	int m_bgHandle;
 	int m_clearHandle;
+	int m_endHandle;
 	int m_animFrame;
 	int m_animCount;
 	float m_scrollX;

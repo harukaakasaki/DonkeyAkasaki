@@ -11,7 +11,11 @@ namespace
 	constexpr int kGraphWidth = 64; // コウモリのグラフィックサイズ（幅）
 	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kSpeed = 3;                        // コウモリのスピード
+	constexpr int kAnimSpeed = 3;                        // コウモリのアニメーションスピード
 	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
+	constexpr float kNormalFrame = 9.0f;            // 通常アニメーションフレーム
+	constexpr float kDeathFrame = 12.0f;            // 通常アニメーションフレーム
+	constexpr float kEffectFrame = 12.0f;            // 通常アニメーションフレーム
 	
 }
 
@@ -81,7 +85,7 @@ void EnemyBat::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 3)// アニメーションスピード
+	if (m_animCount > kAnimSpeed)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ
@@ -89,7 +93,7 @@ void EnemyBat::UpdateState()
 
 	if (m_state == BatState::Normal)
 	{
-		if (m_animFrame >= 9)// 通常 = 7
+		if (m_animFrame >= kNormalFrame)// 通常 = 7
 		{
 			m_animFrame = 0;
 
@@ -97,7 +101,7 @@ void EnemyBat::UpdateState()
 	}
 	if (m_state == BatState::Death)
 	{
-		if (m_animFrame >= 12)// 死 = 12
+		if (m_animFrame >= kDeathFrame)// 死 = 12
 		{
 			PlaySoundMem(m_effectSe, DX_PLAYTYPE_BACK);
 			m_state = BatState::DeathEffect;
@@ -108,7 +112,7 @@ void EnemyBat::UpdateState()
 	if (m_state == BatState::DeathEffect)
 	{
 		
-		if (m_animFrame >= 12)// 死エフェクト = 12
+		if (m_animFrame >= kEffectFrame)// 死エフェクト = 12
 		{
 			
 			Kill();

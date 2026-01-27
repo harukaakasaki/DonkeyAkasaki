@@ -52,7 +52,11 @@ void SceneTitle::Update()
 		PlaySoundMem(m_selectSe, DX_PLAYTYPE_BACK);
 		m_isEnd = true;
 	}
-
+	if (Pad::IsTrigger(PAD_INPUT_1))
+	{
+		PlaySoundMem(m_selectSe, DX_PLAYTYPE_BACK);
+		m_isEnd = true;
+	}
 }
 
 void SceneTitle::Draw()

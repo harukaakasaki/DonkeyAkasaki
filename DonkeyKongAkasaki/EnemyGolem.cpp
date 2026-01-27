@@ -11,9 +11,9 @@ namespace
 	constexpr int kGraphHeight = 64;                 // プレイヤーのグラフィックサイズ（高さ）
 	constexpr int kEffectWidth = 64;                 // ゴーレムのエフェクトサイズ（幅）
 	constexpr int kEffectHeight = 64;                // ゴーレムのエフェクトサイズ（高さ）
-	constexpr int kSpeed = 5;                        // ゴーレムのスピード
-	constexpr float kGraphicsSize = 5.0f;            // グラフィックサイズ
-	constexpr float kEffectSize = 4.0f;              // グラフィックサイズ
+	constexpr int kSpeed = 3;                        // ゴーレムのスピード
+	constexpr float kGraphicsSize = 12.0f;            // グラフィックサイズ
+	constexpr float kEffectSize = 14.0f;              // エフェクトサイズ
 }
 
 EnemyGolem::EnemyGolem():
@@ -29,7 +29,7 @@ EnemyGolem::EnemyGolem():
 	m_hitSe = LoadSoundMem("bgm/golem_hit_se.mp3");
 	m_deathSe = LoadSoundMem("bgm/golem_death_se.mp3");
 	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");
-	m_hp = 5;
+	m_hp = 10;
 }
 
 EnemyGolem::~EnemyGolem()
@@ -70,7 +70,7 @@ void EnemyGolem::Update()
 
 
 	m_moveTimer++;
-	if (m_moveTimer >= 300)
+	if (m_moveTimer >= 420)
 	{
 		m_moveLeft = !m_moveLeft;
 		m_moveTimer = 0;
@@ -234,7 +234,7 @@ void EnemyGolem::Draw(const Camera& camera)
 	DrawBox(static_cast<int>(m_pos.x - cam.x - w / 5),
 		static_cast<int>(m_pos.y - cam.y - 5 - h / 10),
 		static_cast<int>(m_pos.x - cam.x + w / 5),
-		static_cast<int>(m_pos.y - cam.y - 5 + h / 3),
+		static_cast<int>(m_pos.y - cam.y - 5 + h / 2),
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }
@@ -255,7 +255,7 @@ Rect EnemyGolem::EnemyGolemHitBox() const
 	r.left = m_pos.x - w / 5;
 	r.top = m_pos.y - 5 - h / 10;
 	r.right = m_pos.x + w / 5;
-	r.bottom = m_pos.y - 5 + h / 3;
+	r.bottom = m_pos.y - 5 + h / 2;
 
 	return r;
 }
