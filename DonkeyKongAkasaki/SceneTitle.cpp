@@ -16,6 +16,7 @@ SceneTitle::SceneTitle()
 {
 	m_titleHandle = LoadGraph("data/title.png");
 	m_titleLogoHandle = LoadGraph("data/title_logo.png");
+	m_startHandle = LoadGraph("data/press_start.png");
 
 	// BGM
 	m_bgmHandle = LoadSoundMem("bgm/title_bgm.mp3");
@@ -56,12 +57,11 @@ void SceneTitle::Update()
 
 void SceneTitle::Draw()
 {
-	DrawString(400, 300, "TitleScene", GetColor(255, 255, 255));
 	DrawGraph(0, 0,m_titleHandle, true);
 	// Effekseerにより再生中のエフェクトを描画する。
 	DrawEffekseer2D();
 	DrawGraph(0, 0,m_titleLogoHandle, true);
-	
+	DrawGraph(0, 0,m_startHandle, true);
 }
 
 // 次のシーンに遷移する

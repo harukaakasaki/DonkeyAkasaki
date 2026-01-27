@@ -38,6 +38,7 @@ private:
 	int m_bg2Handle;// ”wŒi2‚Ì‰æ‘œ
 	int m_bg3Handle;// ”wŒi3‚Ì‰æ‘œ
 	int m_mapHandle;// ƒ}ƒbƒvƒ`ƒbƒv‰æ‘œ
+	
 	Vec2 m_pos;// ”wŒi‚ÌˆÊ’u
 
 	Camera* m_pCamera;

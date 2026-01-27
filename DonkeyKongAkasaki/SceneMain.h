@@ -75,6 +75,7 @@ private:
 	bool m_isReset = false;
 
 	int m_bgmHandle;
+	int m_treeHandle;// ÷‚Ì–Ø‰æ‘œ
 
 //	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
 };

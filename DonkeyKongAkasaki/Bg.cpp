@@ -11,6 +11,7 @@ namespace
 	// マップチップを置く数
 	constexpr int kChipNumX = 400;
 	constexpr int kChipNumY = 19;
+	
 
 	
 	
@@ -62,6 +63,7 @@ Bg::Bg(Camera* pCamera):
 	m_bg3Handle = LoadGraph("data/bg_spring_1.png");
 	//m_bg3Handle = LoadGraph("data/bg_winter_1.png");
 	m_mapHandle = LoadGraph("data/mapChip_4.png");
+	
 	// 画像マップチップ数を数える
 	int graphW = 0;
 	int graphH = 0;
@@ -78,6 +80,7 @@ Bg::~Bg()
 	DeleteGraph(m_bg2Handle);
 	DeleteGraph(m_bg3Handle);
 	DeleteGraph(m_mapHandle);
+	
 }
 
 void Bg::Init()
@@ -121,6 +124,7 @@ void Bg::DrawMapChip()
 				srcX, srcY,
 				kChipSize, kChipSize,kChipScale, 0.0f,
 				m_mapHandle, true);
+			
 
 
 //#ifdef _DEBUG

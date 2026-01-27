@@ -19,6 +19,8 @@ private:
 	int m_titleHandle;
 	// タイトルロゴの画像
 	int m_titleLogoHandle;
+	// スタートボタンの画像
+	int m_startHandle;
 	// 桜のエフェクト
 	int m_sakuraEffectsHandle;
 	// タイトルBGM

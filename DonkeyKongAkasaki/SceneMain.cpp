@@ -16,8 +16,10 @@
 
 namespace
 {
-	constexpr float kGoalX = 25000.0f;// リスポーン地点更新位置
-	constexpr float kGoalWidth = 128.0f;// リスポーン位置幅
+	constexpr float kGoalX = 25000.0f;// ゴール位置
+	constexpr float kGoalWidth = 128.0f;// ゴール位置幅
+	constexpr int ktreeX = 24700; // 桜位置X
+	constexpr int ktreeY = 220;  // 桜位置Y
 
 	bool IsHitRect(const Rect& a, const Rect& b)
 	{
@@ -41,6 +43,7 @@ SceneMain::SceneMain()
 	m_bgmHandle = LoadSoundMem("bgm/game_bgm2.mp3");
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
+	m_treeHandle = LoadGraph("data/sakuratree.png");
 }
 
 /// <summary>
@@ -51,7 +54,7 @@ SceneMain::~SceneMain()
 	delete m_pPlayer;
 	delete m_pEnemy;
 	delete m_pCamera;
-
+	DeleteGraph(m_treeHandle);
 	StopSoundMem(m_bgmHandle);
 	DeleteSoundMem(m_bgmHandle);
 }
@@ -239,6 +242,13 @@ void SceneMain::Draw()
 	// プレイヤーの描画
 	m_pPlayer->Draw(*m_pCamera);
 	m_pPlayer->DrawHP();
+
+	// ゴール画像の描画
+	DrawGraph(
+		static_cast<int>(ktreeX-cameraPos.x), 
+		static_cast<int>(ktreeY-cameraPos.y), 
+		m_treeHandle, true);
+
 	
 #ifdef _DEBUG
 
