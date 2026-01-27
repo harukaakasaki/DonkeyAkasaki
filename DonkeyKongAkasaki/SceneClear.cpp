@@ -16,6 +16,7 @@ SceneClear::SceneClear() :
 {
 	m_bgmHandle = LoadSoundMem("bgm/clear_bgm.mp3");
 	m_bgHandle = LoadGraph("data/clear3.png");
+	m_clearHandle = LoadGraph("data/spring_has_come.png");
 	m_playerRunHandle = LoadGraph("data/player_move.png");
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
@@ -65,8 +66,6 @@ void SceneClear::Draw()
 	DrawGraph(-m_scrollX, 0, m_bgHandle, true);
 	DrawGraph(-m_scrollX +bgW,0, m_bgHandle, true);
 
-	DrawString(400, 300, "CLEAR!!", GetColor(0, 255, 255));
-
 	const int kFrameW = 1008/7;
 	const int kFrameH = 144;
 
@@ -82,6 +81,7 @@ void SceneClear::Draw()
 		m_playerRunHandle,
 		true
 	);
+	DrawGraph(0, 0, m_clearHandle, true);
 }
 
 Scene* SceneClear::GetNextScene()

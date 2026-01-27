@@ -76,6 +76,9 @@ private:
 
 	int m_bgmHandle;
 	int m_treeHandle;// ÷‚Ì–Ø‰æ‘œ
+	int m_tutorialMoveHandle;// ˆÚ“®‚µ‚Ä‰æ‘œ
+	int m_tutorialJumpHandle;// ƒWƒƒƒ“ƒv‚µ‚Ä‰æ‘œ
+	int m_tutorialAttackHandle;// UŒ‚‚µ‚Ä‰æ‘œ
 
 //	std::vector<std::shared_ptr<Enemy>>m_pEnemys;
 };

@@ -18,8 +18,15 @@ namespace
 {
 	constexpr float kGoalX = 25000.0f;// ゴール位置
 	constexpr float kGoalWidth = 128.0f;// ゴール位置幅
-	constexpr int ktreeX = 24700; // 桜位置X
-	constexpr int ktreeY = 220;  // 桜位置Y
+	constexpr int kTreeX = 24700; // 桜位置X
+	constexpr int kTreeY = 220;  // 桜位置Y
+	constexpr int kMoveX = 1500; // 移動位置X
+	constexpr int kMoveY = 700;  // 移動位置Y
+	constexpr int kJumpX = 2300; // ジャンプ位置X
+	constexpr int kJumpY = 700;  // ジャンプ位置Y
+	constexpr int kAttackX = 7000; // 攻撃位置X
+	constexpr int kAttackY = 700;  // 攻撃位置Y
+	constexpr float kScale = 0.5f;  // 画像拡大率
 
 	bool IsHitRect(const Rect& a, const Rect& b)
 	{
@@ -35,7 +42,6 @@ namespace
 /// </summary>
 SceneMain::SceneMain()
 {
-	
 	m_pPlayer = new Player;
 	m_pEnemy = new Enemy;
 	m_pCamera = new Camera;
@@ -44,6 +50,9 @@ SceneMain::SceneMain()
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
 	m_treeHandle = LoadGraph("data/sakuratree.png");
+	m_tutorialMoveHandle = LoadGraph("data/tutorial_move.png");
+	m_tutorialJumpHandle = LoadGraph("data/tutorial_jump.png");
+	m_tutorialAttackHandle = LoadGraph("data/tutorial_attack.png");
 }
 
 /// <summary>
@@ -239,15 +248,38 @@ void SceneMain::Draw()
 		golem->Draw(*m_pCamera);
 	}
 
+	// ゴール画像の描画
+	DrawGraph(
+		static_cast<int>(kTreeX - cameraPos.x),
+		static_cast<int>(kTreeY - cameraPos.y),
+		m_treeHandle, true);
+
+	// 移動して画像の描画
+	DrawRotaGraph(
+		static_cast<int>(kMoveX - cameraPos.x),
+		static_cast<int>(kMoveY - cameraPos.y),
+		kScale, 0.0,
+		m_tutorialMoveHandle, true);
+
+	// ジャンプして画像の描画
+	DrawRotaGraph(
+		static_cast<int>(kJumpX - cameraPos.x),
+		static_cast<int>(kJumpY - cameraPos.y),
+		kScale, 0.0,
+		m_tutorialJumpHandle, true);
+
+	// 攻撃して画像の描画
+	DrawRotaGraph(
+		static_cast<int>(kAttackX - cameraPos.x),
+		static_cast<int>(kAttackY - cameraPos.y),
+		kScale, 0.0,
+		m_tutorialAttackHandle, true);
+
 	// プレイヤーの描画
 	m_pPlayer->Draw(*m_pCamera);
 	m_pPlayer->DrawHP();
 
-	// ゴール画像の描画
-	DrawGraph(
-		static_cast<int>(ktreeX-cameraPos.x), 
-		static_cast<int>(ktreeY-cameraPos.y), 
-		m_treeHandle, true);
+	
 
 	
 #ifdef _DEBUG
