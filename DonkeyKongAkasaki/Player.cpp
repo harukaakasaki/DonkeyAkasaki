@@ -177,7 +177,7 @@ void Player::Move()
 		{
 			m_state = PlayerState::Move;
 		}
-
+		
 		m_move.x = kSpeed;
 //		m_pos.y -= 20;// スキップしてるみたいな動きになる
 		m_isRight = true;
@@ -236,7 +236,7 @@ void Player::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 2)// アニメーションスピード
+	if (m_animCount > 3)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		
