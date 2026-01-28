@@ -18,7 +18,7 @@ namespace
 	constexpr int	kAttackHeight	= 90;					// プレイヤーの攻撃高さ
 	constexpr float	kTrapGround		= 930.0f;				// トラップ
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
-	constexpr float kHpSize			= 0.09f;				// HPグラフィックサイズ
+	constexpr float kHpSize			= 0.2f;				    // HPグラフィックサイズ
 	constexpr float kSpeed			= 10.0f;				// スピード
 	constexpr float kNormalFrame    = 7.0f;                 // 通常アニメーションフレーム
 	constexpr float kDamageFrame    = 3.0f;                 // ダメージアニメーションフレーム
@@ -50,7 +50,7 @@ Player::Player():
 	m_moveHandle   = LoadGraph("data/player_move.png");    // 移動時の画像
 	m_deathHandle  = LoadGraph("data/player_death.png");   // プレイヤー死画像
 	m_hitHandle    = LoadGraph("data/player_hit3.png");    // プレイヤーヒット画像
-	m_hpHandle     = LoadGraph("data/hp.png");             // プレイヤーHP画像
+	m_hpHandle     = LoadGraph("data/sakura_hanabira.png");// プレイヤーHP画像
 	// SE
 	m_jumpSe   = LoadSoundMem("bgm/player_jump_se2.mp3");  // ジャンプSE
 	m_attackSe = LoadSoundMem("bgm/player_attack_se2.mp3");// 攻撃SE
