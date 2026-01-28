@@ -4,16 +4,24 @@
 
 namespace
 {
-	constexpr int kIdleAnimNum = 8;                  // プレイヤーのIdleアニメーション
-	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
-	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 90;					 // プレイヤーのグラフィックサイズ（幅）
-	constexpr int kGraphHeight = 64;                 // プレイヤーのグラフィックサイズ（高さ）
-	constexpr int kEffectWidth = 64;                 // ゴーレムのエフェクトサイズ（幅）
-	constexpr int kEffectHeight = 64;                // ゴーレムのエフェクトサイズ（高さ）
-	constexpr int kSpeed = 3;                        // ゴーレムのスピード
-	constexpr float kGraphicsSize = 12.0f;            // グラフィックサイズ
-	constexpr float kEffectSize = 14.0f;              // エフェクトサイズ
+	constexpr int kIdleAnimNum      = 8;    // プレイヤーのIdleアニメーション
+	constexpr int kAnimWaitFrame    = 1;    // ↑ 1コマ当たりのフレーム数
+	constexpr int kGraphicsAngle    = 0;    // グラフィックアングル
+	constexpr int kGraphWidth       = 90;   // プレイヤーのグラフィックサイズ（幅）
+	constexpr int kGraphHeight      = 64;   // プレイヤーのグラフィックサイズ（高さ）
+	constexpr int kEffectWidth      = 64;   // ゴーレムのエフェクトサイズ（幅）
+	constexpr int kEffectHeight     = 64;   // ゴーレムのエフェクトサイズ（高さ）
+	constexpr int kAnimSpeed        = 4;    // ゴーレムのアニメーションスピード
+	constexpr int kSpeed            = 3;    // ゴーレムのスピード
+	constexpr int kMoveTime         = 420;  // ゴーレムの移動時間
+	constexpr float kGraphicsSize   = 12.0f;// グラフィックサイズ
+	constexpr float kEffectSize     = 14.0f;// エフェクトサイズ
+	constexpr float kNormalFrame    = 10.0f;// 通常アニメーションフレーム
+	constexpr float kDamageFrame    = 4.0f; // ダメージアニメーションフレーム
+	constexpr float kDeathFrame     = 11.0f;// 死アニメーションフレーム
+	constexpr float kEffectFrame    = 12.0f;// エフェクトアニメーションフレーム
+	constexpr float kStopTime       = 10.0f;// 停止時間
+	constexpr float kDamageCoolTime = 20.0f;// ダメージクールタイム
 }
 
 EnemyGolem::EnemyGolem():
@@ -21,15 +29,15 @@ EnemyGolem::EnemyGolem():
 	m_animCount(0)
 {
 	// 画像
-	m_handle = LoadGraph("data/golem_run.png");
-	m_hitHandle = LoadGraph("data/golem_hit2.png");
-	m_deathHandle = LoadGraph("data/golem_death2.png");
-	m_effectHandle = LoadGraph("data/explosion2.png");
+	m_handle       = LoadGraph("data/golem_run.png");   // 通常画像
+	m_hitHandle    = LoadGraph("data/golem_hit2.png");  // ヒット画像
+	m_deathHandle  = LoadGraph("data/golem_death2.png");// 死画像
+	m_effectHandle = LoadGraph("data/explosion2.png");  // エフェクト画像
 	// SE
-	m_hitSe = LoadSoundMem("bgm/golem_hit_se.mp3");
-	m_deathSe = LoadSoundMem("bgm/golem_death_se.mp3");
-	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");
-	m_hp = 10;
+	m_hitSe    = LoadSoundMem("bgm/golem_hit_se.mp3");  // ヒットSE
+	m_deathSe  = LoadSoundMem("bgm/golem_death_se.mp3");// 死SE
+	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");       // エフェクトSE
+	
 }
 
 EnemyGolem::~EnemyGolem()
@@ -45,6 +53,8 @@ EnemyGolem::~EnemyGolem()
 
 void EnemyGolem::Init()
 {
+	// HP
+	m_hp = 10;
 	m_state = GolemState::Normal;
 	m_pos = { 300.0f,545.0f };
 	m_isAlive = true;
@@ -70,7 +80,7 @@ void EnemyGolem::Update()
 
 
 	m_moveTimer++;
-	if (m_moveTimer >= 420)
+	if (m_moveTimer >= kMoveTime)
 	{
 		m_moveLeft = !m_moveLeft;
 		m_moveTimer = 0;
@@ -97,7 +107,7 @@ void EnemyGolem::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 4)// アニメーションスピード
+	if (m_animCount > kAnimSpeed)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ
@@ -105,7 +115,7 @@ void EnemyGolem::UpdateState()
 
 	if (m_state == GolemState::Normal)
 	{
-		if (m_animFrame >= 10)// 通常 = 7
+		if (m_animFrame >= kNormalFrame)
 		{
 			m_animFrame = 0;
 
@@ -114,7 +124,7 @@ void EnemyGolem::UpdateState()
 
 	if (m_state == GolemState::Damage)
 	{
-		if (m_animFrame >= 4)// ヒット = 4
+		if (m_animFrame >= kDamageFrame)
 		{
 			
 			m_state = GolemState::Normal;
@@ -125,7 +135,7 @@ void EnemyGolem::UpdateState()
 
 	if (m_state == GolemState::Death)
 	{
-		if (m_animFrame >= 11)// 死 = 11
+		if (m_animFrame >= kDeathFrame)
 		{
 			PlaySoundMem(m_effectSe, DX_PLAYTYPE_BACK);
 			m_state = GolemState::DeathEffect;
@@ -135,7 +145,7 @@ void EnemyGolem::UpdateState()
 	}
 	if (m_state == GolemState::DeathEffect)
 	{
-		if (m_animFrame >= 12)// 死エフェクト = 12
+		if (m_animFrame >= kEffectFrame)// 死エフェクト = 12
 		{
 			Kill();
 			m_animFrame = 0;
@@ -145,34 +155,6 @@ void EnemyGolem::UpdateState()
 }
 
 
-void EnemyGolem::Damage()
-{
-	if (m_damageCoolTime > 0)
-	{
-		return;
-	}
-	PlaySoundMem(m_hitSe, DX_PLAYTYPE_BACK);
-	m_state = GolemState::Damage;
-	m_animFrame = 0;
-	m_animCount = 0;
-
-	m_hp--;
-
-	// 止まる
-	m_stopTimer = 10;
-
-	// 無敵時間
-	m_damageCoolTime = 30;
-
-
-	if (m_hp <= 0)
-	{
-		PlaySoundMem(m_deathSe, DX_PLAYTYPE_BACK);
-		m_state = GolemState::Death;
-		m_animFrame = 0;
-		m_animCount = 0;
-	}
-}
 
 void EnemyGolem::Draw(const Camera& camera)
 {
@@ -208,7 +190,6 @@ void EnemyGolem::Draw(const Camera& camera)
 			m_hitHandle, true, !m_isRight);
 	}
 
-
 	if (m_state == GolemState::Death)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
@@ -223,7 +204,7 @@ void EnemyGolem::Draw(const Camera& camera)
 		int effectSrcX = kEffectWidth * m_animFrame;
 		int effectSrcY = 0;
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
-			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			static_cast<int>(m_pos.y - cam.y),
 			effectSrcX, effectSrcY,
 			kEffectWidth, kEffectHeight, kEffectSize, kGraphicsAngle,
 			m_effectHandle, true, !m_isRight);
@@ -239,8 +220,37 @@ void EnemyGolem::Draw(const Camera& camera)
 #endif // DEBUG
 }
 
+// ダメージ判定
+void EnemyGolem::Damage()
+{
+	if (m_damageCoolTime > 0)
+	{
+		return;
+	}
+	PlaySoundMem(m_hitSe, DX_PLAYTYPE_BACK);
+	m_state = GolemState::Damage;
+	m_animFrame = 0;
+	m_animCount = 0;
+
+	m_hp--;
+
+	// 止まる
+	m_stopTimer = kStopTime;
+
+	// 無敵時間
+	m_damageCoolTime = kDamageCoolTime;
 
 
+	if (m_hp <= 0)
+	{
+		PlaySoundMem(m_deathSe, DX_PLAYTYPE_BACK);
+		m_state = GolemState::Death;
+		m_animFrame = 0;
+		m_animCount = 0;
+	}
+}
+
+// 当たり判定
 Rect EnemyGolem::EnemyGolemHitBox() const
 {
 	if (m_state == GolemState::Death||m_state == GolemState::DeathEffect)

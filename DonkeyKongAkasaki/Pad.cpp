@@ -42,7 +42,7 @@ namespace Pad
 
 	bool Pad::IsRelease(int key)
 	{
-		bool isNow = (nowPad & key);
+		bool isNow  = (nowPad & key);
 		bool isLast = (lastPad & key);
 
 		if (!isNow && isLast)

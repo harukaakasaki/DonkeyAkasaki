@@ -12,16 +12,24 @@ namespace
 	constexpr int	kIdleAnimNum	= 7;				    // プレイヤーのIdleアニメーション
 	constexpr int	kAnimWaitFrame	= 1;					// ↑ 1コマ当たりのフレーム数
 	constexpr int	kGraphicsAngle	= 0;					// グラフィックアングル
-	constexpr int	kGraphWidth		= 1008 / kIdleAnimNum;	// プレイヤーのグラフィックサイズ（幅）
+	constexpr int	kGraphWidth		= 144;	                // プレイヤーのグラフィックサイズ（幅）
 	constexpr int	kGraphHeight	= 144;					// プレイヤーのグラフィックサイズ（高さ）
+	constexpr int	kAttackWidth    = 160;					// プレイヤー攻撃幅
+	constexpr int	kAttackHeight	= 90;					// プレイヤーの攻撃高さ
 	constexpr float	kTrapGround		= 930.0f;				// トラップ
 	constexpr float kGraphicsSize	= 4.8f;					// グラフィックサイズ
 	constexpr float kHpSize			= 0.09f;				// HPグラフィックサイズ
 	constexpr float kSpeed			= 10.0f;				// スピード
+	constexpr float kNormalFrame    = 7.0f;                 // 通常アニメーションフレーム
+	constexpr float kDamageFrame    = 3.0f;                 // ダメージアニメーションフレーム
+	constexpr float kMoveFrame      = 8.0f;                 // 死アニメーションフレーム
+	constexpr float kAttackFrame    = 10.0f;                // 攻撃アニメーションフレーム
+	constexpr float kRespawnFrame   = 18.0f;                // リスポーンアニメーションフレーム
 	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
 	constexpr float knockBackX		= 12.0f;				// ノックバックX
 	constexpr float knockBackY		= 15.0f;				// ノックバックY
+	constexpr float kDamageCoolTime = 30.0f;                // ダメージクールタイム
 }
 
 // コンストラクタ
@@ -36,12 +44,19 @@ Player::Player():
 	m_hitAnim(),
 	m_jumpAnim()
 {
-	m_handle = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
+	// 画像
+	m_handle       = LoadGraph("data/player_img.png");     // 通常時の画像、Level別で色が変わる
 	m_attackHandle = LoadGraph("data/player_attack_1.png");// アタック時の画像
-	m_moveHandle = LoadGraph("data/player_move.png");// 移動時の画像
-	m_deathHandle = LoadGraph("data/player_death.png"); // プレイヤー死画像
-	m_hitHandle = LoadGraph("data/player_hit3.png"); // プレイヤーヒット画像
-	m_hpHandle = LoadGraph("data/hp.png"); // プレイヤーHP画像
+	m_moveHandle   = LoadGraph("data/player_move.png");    // 移動時の画像
+	m_deathHandle  = LoadGraph("data/player_death.png");   // プレイヤー死画像
+	m_hitHandle    = LoadGraph("data/player_hit3.png");    // プレイヤーヒット画像
+	m_hpHandle     = LoadGraph("data/hp.png");             // プレイヤーHP画像
+	// SE
+	m_jumpSe   = LoadSoundMem("bgm/player_jump_se2.mp3");  // ジャンプSE
+	m_attackSe = LoadSoundMem("bgm/player_attack_se2.mp3");// 攻撃SE
+	m_hitSe	   = LoadSoundMem("bgm/player_hit_se.mp3");    // ヒットSE
+	m_deathSe  = LoadSoundMem("bgm/player_death_se2.mp3"); // 死SE
+	m_runSe    = LoadSoundMem("bgm/player_run_se.mp3");    // 走りSE
 }
 
 // デストラクタ
@@ -63,24 +78,15 @@ Player::~Player()
 // 初期化
 void Player::Init()
 {
-	m_jumpSe = LoadSoundMem("bgm/player_jump_se2.mp3");
-	m_attackSe = LoadSoundMem("bgm/player_attack_se2.mp3");
-	m_hitSe = LoadSoundMem("bgm/player_hit_se.mp3");
-	m_deathSe = LoadSoundMem("bgm/player_death_se2.mp3");
-	m_runSe = LoadSoundMem("bgm/player_run_se.mp3");
-
 	m_state = PlayerState::Normal;
 	m_hpMax = 3;
 	m_hp = m_hpMax;
-
 	m_animFrame = 0;
-	
 	m_pos.x = Game::kScreenWidth * 0.5f;
 	m_pos.y = 890.0f;
 	m_spawnPos.x = m_pos.x;
 	m_spawnPos.y = m_pos.y;
 	m_damageCoolTime = 0;
-	
 	m_spawnTimer = 0;
 }
 
@@ -126,20 +132,20 @@ void Player::Update()
 		return;
 	}
 
-		Character::Update();
+	Character::Update();
 
-		if (m_damageCoolTime > 0)
-		{
-			m_damageCoolTime--;
-		}
+	if (m_damageCoolTime > 0)
+	{
+		m_damageCoolTime--;
+	}
 
-		// 入力された状態に変わる
-		HandleInput();
-		// ジャンプする
-		Jump();
-		// 移動する
-		Move();
-		m_pos += m_move;
+	// 入力された状態に変わる
+	HandleInput();
+	// ジャンプする
+	Jump();
+	// 移動する
+	Move();
+	m_pos += m_move;
 		
 	}
 // 移動
@@ -165,7 +171,6 @@ void Player::Move()
 		}
 
 		m_move.x = -kSpeed;
-//		m_pos.y -= 20;// スキップしてるみたいな動きになる
 		m_isRight = false;
 	}
 	else if (Pad::IsPress(PAD_INPUT_RIGHT))// 右入力で右方向に移動
@@ -178,7 +183,6 @@ void Player::Move()
 		}
 		
 		m_move.x = kSpeed;
-//		m_pos.y -= 20;// スキップしてるみたいな動きになる
 		m_isRight = true;
 	}
 	else// 何も入力がなかったら動かない
@@ -252,7 +256,7 @@ void Player::UpdateState()
 
 	if (m_state == PlayerState::Normal)
 	{
-		if (m_animFrame >= 7)// 通常 = 7
+		if (m_animFrame >= kNormalFrame)// 通常 = 7
 		{
 			m_animFrame = 0;
 
@@ -260,7 +264,7 @@ void Player::UpdateState()
 	}
 	if (m_state == PlayerState::Damage)
 	{
-		if (m_animFrame >= 3)// ヒット = 3
+		if (m_animFrame >= kDamageFrame)// ヒット = 3
 		{
 			m_state = PlayerState::Normal;
 			m_animFrame = 0;
@@ -272,7 +276,7 @@ void Player::UpdateState()
 
 	else if (m_state == PlayerState::Move)
 	{
-		if (m_animFrame >= 8)// 移動 = 8
+		if (m_animFrame >= kMoveFrame)// 移動 = 8
 		{
 		// 移動アニメーションが最後まで行ったら、
 		// 自動でNormal状態に戻す
@@ -284,7 +288,7 @@ void Player::UpdateState()
 	{
 		// 攻撃アニメーションが最後まで行ったら、
 		// 自動でNormal状態に戻す
-		if (m_animFrame >= 10)// 攻撃 = 10
+		if (m_animFrame >= kAttackFrame)// 攻撃 = 10
 		{
 			m_state = PlayerState::Normal;
 			m_animFrame = 0;
@@ -292,7 +296,7 @@ void Player::UpdateState()
 	}
 	if (m_state == PlayerState::Respawn)
 	{
-		if (m_animFrame <= 0)// ヒット = 3
+		if (m_animFrame <= 0)
 		{
 			m_state = PlayerState::Normal;
 			m_animFrame = 0;
@@ -328,8 +332,8 @@ void Player::DrawHP()
 
 bool Player::IsAttackHitActive() const
 {
-	// 攻撃アニメーション(10アニメーション中3～5の間だけ攻撃判定)
-	return (m_state == PlayerState::Attack && m_animFrame >= 3 && m_animFrame <= 5);
+	// 攻撃アニメーション(10アニメーション中1～8の間だけ攻撃判定)
+	return (m_state == PlayerState::Attack && m_animFrame >= 1 && m_animFrame <= 8);
 }
 
 // 攻撃当たり判定
@@ -337,8 +341,8 @@ Rect Player::AttackHitBox() const
 {
 	Rect r;
 
-	int attackW = 160;
-	int attackH = 90;
+	int attackW = kAttackWidth;
+	int attackH = kAttackHeight;
 
 	if (m_isRight)
 	{
@@ -383,7 +387,7 @@ void Player::Damage(float hitDir)
 	m_isDamage = true;
 
 	m_hp--;
-	m_damageCoolTime = 30;
+	m_damageCoolTime = kDamageCoolTime;
 
 
 
@@ -421,13 +425,14 @@ void Player::Damage(float hitDir)
 void Player::Respawn()
 {
 	m_pos = m_spawnPos;
-	m_hp = 3;
+	// HP
+	m_hp = m_hpMax;
 	m_state = PlayerState::Respawn;
 
 	m_move = Vec2(0, 0);
 	m_isGround = false;
 
-	m_animFrame = 18;
+	m_animFrame = kRespawnFrame;
 	m_animCount = 0;
 	m_damageCoolTime = 0;
 	m_spawnTimer = 0;
@@ -452,7 +457,7 @@ void Player::Draw(Camera& camera)
 	if (m_state == PlayerState::Respawn)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
@@ -462,7 +467,7 @@ void Player::Draw(Camera& camera)
 	if (m_state == PlayerState::Death)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_deathHandle, true, !m_isRight);
@@ -471,29 +476,10 @@ void Player::Draw(Camera& camera)
 	if (m_state == PlayerState::Damage)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_hitHandle, true, !m_isRight);
-		//if (m_frame / 30 % 2 == 0)
-		//{
-		//	DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-		//		static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
-		//		srcX, srcY,
-		//		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-		//		m_hitHandle, true, !m_isRight);
-		//}
-
-		//else
-		//{
-		//	SetDrawBright(255, 255, 255);
-		//	DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-		//		static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
-		//		srcX, srcY,
-		//		kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
-		//		m_hitHandle, true, !m_isRight);
-		//	SetDrawBright(0, 0, 0);
-		//}
 		
 	}
 	
@@ -501,7 +487,7 @@ void Player::Draw(Camera& camera)
 	if (m_state == PlayerState::Normal)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x)-cameraPos.x,
-			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_handle, true, !m_isRight);
@@ -520,7 +506,7 @@ void Player::Draw(Camera& camera)
 	if (m_state == PlayerState::Move)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_moveHandle, true, !m_isRight);
@@ -536,7 +522,7 @@ void Player::Draw(Camera& camera)
 	if (m_state == PlayerState::Attack)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x) - cameraPos.x,
-			static_cast<int>(m_pos.y - 35) - cameraPos.y,//-35は地面への位置調整
+			static_cast<int>(m_pos.y - 35) - cameraPos.y,
 			srcX, srcY, 
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_attackHandle, true, !m_isRight);

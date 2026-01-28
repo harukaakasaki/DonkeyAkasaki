@@ -16,19 +16,19 @@
 
 namespace
 {
-	constexpr float kGoalX = 23000.0f;// ゴール位置
-	constexpr float kGoalWidth = 128.0f;// ゴール位置幅
-	constexpr int kTreeX = 22700; // 桜位置X
-	constexpr int kTreeY = 220;  // 桜位置Y
-	constexpr int kMoveX = 1500; // 移動位置X
-	constexpr int kMoveY = 700;  // 移動位置Y
-	constexpr int kJumpX = 2300; // ジャンプ位置X
-	constexpr int kJumpY = 700;  // ジャンプ位置Y
-	constexpr int kAttackX = 7000; // 攻撃位置X
-	constexpr int kAttackY = 700;  // 攻撃位置Y
-	constexpr int kTitleX = 1300;  // Back画像位置Y
-	constexpr int kTitleY = 300;  // Back画像位置Y
-	constexpr float kScale = 0.5f;  // 画像拡大率
+	constexpr float kGoalX     = 23000.0f;// ゴール位置
+	constexpr float kGoalWidth = 128.0f;  // ゴール位置幅
+	constexpr int kTreeX       = 22700;   // 桜位置X
+	constexpr int kTreeY       = 220;	  // 桜位置Y
+	constexpr int kMoveX       = 1500;	  // 移動位置X
+	constexpr int kMoveY       = 700;	  // 移動位置Y
+	constexpr int kJumpX       = 2300;	  // ジャンプ位置X
+	constexpr int kJumpY       = 700;	  // ジャンプ位置Y
+	constexpr int kAttackX     = 7000;	  // 攻撃位置X
+	constexpr int kAttackY     = 700;	  // 攻撃位置Y
+	constexpr int kTitleX      = 1300;    // Back画像位置Y
+	constexpr int kTitleY      = 300;	  // Back画像位置Y
+	constexpr float kScale     = 0.5f;	  // 画像拡大率
 
 	bool IsHitRect(const Rect& a, const Rect& b)
 	{
@@ -45,16 +45,14 @@ namespace
 SceneMain::SceneMain()
 {
 	m_pPlayer = new Player;
-	m_pEnemy = new Enemy;
+	m_pEnemy  = new Enemy;
 	m_pCamera = new Camera;
-	m_pBg = new Bg(m_pCamera);
-	m_bgmHandle = LoadSoundMem("bgm/game_bgm2.mp3");
-	ChangeVolumeSoundMem(180, m_bgmHandle);
-	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
-	m_treeHandle = LoadGraph("data/sakuratree.png");
-	m_tutorialMoveHandle = LoadGraph("data/tutorial_move.png");
-	m_tutorialJumpHandle = LoadGraph("data/tutorial_jump.png");
-	m_tutorialAttackHandle = LoadGraph("data/tutorial_attack.png");
+	m_pBg     = new Bg(m_pCamera);
+	m_bgmHandle  = LoadSoundMem("bgm/game_bgm2.mp3");              // BGM
+	m_treeHandle = LoadGraph("data/sakuratree.png");               // 桜の木画像
+	m_tutorialMoveHandle   = LoadGraph("data/tutorial_move.png");  // 移動して画像
+	m_tutorialJumpHandle   = LoadGraph("data/tutorial_jump.png");  // ジャンプして画像
+	m_tutorialAttackHandle = LoadGraph("data/tutorial_attack.png");// 攻撃して画像
 }
 
 /// <summary>
@@ -66,6 +64,9 @@ SceneMain::~SceneMain()
 	delete m_pEnemy;
 	delete m_pCamera;
 	DeleteGraph(m_treeHandle);
+	DeleteGraph(m_tutorialMoveHandle);
+	DeleteGraph(m_tutorialJumpHandle);
+	DeleteGraph(m_tutorialAttackHandle);
 	StopSoundMem(m_bgmHandle);
 	DeleteSoundMem(m_bgmHandle);
 }
@@ -75,6 +76,8 @@ SceneMain::~SceneMain()
 /// </summary>
 void SceneMain::Init()
 {
+	ChangeVolumeSoundMem(180, m_bgmHandle);
+	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
 	m_pPlayer->Init();
 	m_pEnemy->Init();
 	m_pCamera->Init();
@@ -151,21 +154,12 @@ void SceneMain::Update()
 		m_isReset = true;
 		m_pPlayer->ClearJustRespawn();
 	}
-	
-	// ヒットストップ
-	/*if (m_hitStopFrame > 0)
-	{
-		m_hitStopFrame--;
-		return;
-	}*/
 	// Playerがヒットしたら画面が揺れる
 	if (m_pPlayer->IsDamage())
 	{
 		m_pCamera->Shake(30, 10.0f);// 揺れる強さ（時間,揺れ）
 		m_pPlayer->ClearDamage();// 元に戻す
 	}
-
-	
 
 	m_pEnemy->Update();
 	for (auto& bat : m_enemyBats)
@@ -228,10 +222,6 @@ void SceneMain::Draw()
 	
 	// 背景の表示
 	m_pBg->Draw();
-	// 天井の線
-	//DrawLine(0 - cameraPos.x, 640 - cameraPos.y, 5000 - cameraPos.x, 640 - cameraPos.y, GetColor(255, 255, 255));
-	// 地面の線
-	DrawLine(0 - cameraPos.x, -10 - cameraPos.y, 5000 - cameraPos.x, -10 - cameraPos.y, GetColor(255, 255, 255));
 
 	// エネミーの描画
 	m_pEnemy->Draw(*m_pCamera);
@@ -425,13 +415,13 @@ void SceneMain::CheckPlayerAttackCollision()
 	}
 }
 
-// ポジションのリセット
+// エネミーのポジションのリセット
 void SceneMain::ResetEnemies()
 {
 	m_enemyBats.clear();
 	m_enemyMushes.clear();
 	m_enemyGolems.clear();
-
+	// コウモリのリセット位置
 	std::vector<Vec2>batPosition =
 	{
 		{7000.0f,800.0f},
@@ -451,7 +441,7 @@ void SceneMain::ResetEnemies()
 		bat->SetPos(pos);
 		m_enemyBats.push_back(std::move(bat));
 	}
-
+	// キノコのリセット位置
 	std::vector<Vec2>mushPosition =
 	{
 		{13000.0f,805.0f},
@@ -469,7 +459,7 @@ void SceneMain::ResetEnemies()
 		mush->SetPos(pos);
 		m_enemyMushes.push_back(std::move(mush));
 	}
-
+	// ゴーレムのリセット位置
 	std::vector<Vec2>golemPosition =
 	{
 		{20000.0f,520.0f}

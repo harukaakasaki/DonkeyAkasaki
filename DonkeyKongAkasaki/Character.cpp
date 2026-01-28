@@ -7,8 +7,9 @@
 
 namespace
 {
-	constexpr float kGravity = 1.0f;// 重力
-	constexpr float kGround = 1200.0f;// 地面
+	constexpr float kGravity    = 1.0f;    // 重力
+	constexpr float kGround	    = 1200.0f; // 地面
+	constexpr float kChipHeight = 64.0f;   // 地面の幅
 }
 
 /// <summary>
@@ -109,7 +110,7 @@ void Character::ResolveCollision(const Rect& chipRect)
 {
 	if (m_move.y > 0.0f)
 	{
-		m_pos.y = chipRect.top - 64.0f;
+		m_pos.y = chipRect.top - kChipHeight;
 		m_move.y = 0.0f;
 		m_isGround = true;
 	}

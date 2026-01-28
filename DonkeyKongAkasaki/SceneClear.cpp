@@ -6,7 +6,12 @@
 
 namespace
 {
-	int kPlayerScale = 6;
+	constexpr int kPlayerScale   = 6;   // プレイヤースケール
+	constexpr int kPlayerX       = 550; // プレイヤーの位置X
+	constexpr int kPlayerY       = 900; // プレイヤーの位置Y
+	constexpr float kAnimSpeed   = 4.0f;// アニメーションスピード
+	constexpr float kAnimFrame   = 8.0f;// アニメーションフレーム
+	constexpr float kScrollSpeed = 3.0f;// スクロールスピード
 }
 
 SceneClear::SceneClear() :
@@ -14,11 +19,11 @@ SceneClear::SceneClear() :
 	m_animCount(0),
 	m_animFrame(0)
 {
-	m_bgmHandle = LoadSoundMem("bgm/clear_bgm.mp3");
-	m_bgHandle = LoadGraph("data/clear3.png");
-	m_clearHandle = LoadGraph("data/spring_has_come.png");
-	m_endHandle = LoadGraph("data/endButton.png");
-	m_playerRunHandle = LoadGraph("data/player_move.png");
+	m_bgmHandle       = LoadSoundMem("bgm/clear_bgm.mp3");// BGM
+	m_bgHandle        = LoadGraph("data/clear3.png");     // クリア背景画像
+	m_endHandle       = LoadGraph("data/endButton.png");  // 終了ボタン画像
+	m_playerRunHandle = LoadGraph("data/player_move.png");// プレイヤー画像
+	m_clearHandle = LoadGraph("data/spring_has_come.png");// クリア画像
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
 }
@@ -31,7 +36,7 @@ SceneClear::~SceneClear()
 
 void SceneClear::Update()
 {
-	m_scrollX += 3.0f;
+	m_scrollX += kScrollSpeed;
 
 	int bgW, bgH;
 	GetGraphSize(m_bgHandle, &bgW, &bgH);
@@ -42,11 +47,11 @@ void SceneClear::Update()
 	}
 
 	m_animCount++;
-	if (m_animCount > 4)
+	if (m_animCount > kAnimSpeed)
 	{
 		m_animCount = 0;
 		m_animFrame++;
-		if (m_animFrame >= 8)
+		if (m_animFrame >= kAnimFrame)
 		{
 			m_animFrame = 0;
 		}
@@ -71,14 +76,14 @@ void SceneClear::Draw()
 	DrawGraph(-m_scrollX, 0, m_bgHandle, true);
 	DrawGraph(-m_scrollX +bgW,0, m_bgHandle, true);
 
-	const int kFrameW = 1008/7;
+	const int kFrameW = 144;
 	const int kFrameH = 144;
 
 	int srcX = m_animFrame * kFrameW;
 	int srcY = 0;
 
 	DrawRectRotaGraph(
-		550, 900,
+		kPlayerX, kPlayerY,
 		srcX, srcY,
 		kFrameW, kFrameH,
 		kPlayerScale,

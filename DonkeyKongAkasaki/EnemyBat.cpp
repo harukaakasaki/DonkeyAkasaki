@@ -1,21 +1,21 @@
 #include "EnemyBat.h"
 #include "Character.h"
 #include <DxLib.h>
-// Enemyが消えているはずなのに、透明になったまま存在している
 
 namespace
 {
-	constexpr int kIdleAnimNum = 9;                  // プレイヤーのIdleアニメーション
-	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
-	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 64; // コウモリのグラフィックサイズ（幅）
-	constexpr int kGraphHeight = 64;                // プレイヤーのグラフィックサイズ（高さ）
-	constexpr int kSpeed = 3;                        // コウモリのスピード
-	constexpr int kAnimSpeed = 3;                        // コウモリのアニメーションスピード
-	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
-	constexpr float kNormalFrame = 9.0f;            // 通常アニメーションフレーム
-	constexpr float kDeathFrame = 12.0f;            // 通常アニメーションフレーム
-	constexpr float kEffectFrame = 12.0f;            // 通常アニメーションフレーム
+	constexpr int kIdleAnimNum    = 9;    // コウモリのIdleアニメーション
+	constexpr int kAnimWaitFrame  = 1;    // ↑ 1コマ当たりのフレーム数
+	constexpr int kGraphicsAngle  = 0;    // グラフィックアングル
+	constexpr int kGraphWidth     = 64;   // コウモリのグラフィックサイズ（幅）
+	constexpr int kGraphHeight    = 64;   // コウモリのグラフィックサイズ（高さ）
+	constexpr int kSpeed          = 3;    // コウモリのスピード
+	constexpr int kAnimSpeed      = 3;    // コウモリのアニメーションスピード
+	constexpr int kMoveTime       = 100;  // コウモリの移動時間
+	constexpr float kGraphicsSize = 3.0f; // グラフィックサイズ
+	constexpr float kNormalFrame  = 9.0f; // 通常アニメーションフレーム
+	constexpr float kDeathFrame   = 12.0f;// 死アニメーションフレーム
+	constexpr float kEffectFrame  = 12.0f;// エフェクトアニメーションフレーム
 	
 }
 
@@ -24,12 +24,12 @@ EnemyBat::EnemyBat():
 	m_animCount(0)
 {
 	// 画像
-	m_handle = LoadGraph("data/bat.png");
-	m_deathHandle = LoadGraph("data/bat_death2.png");
-	m_effectHandle = LoadGraph("data/explosion1.png");
+	m_handle       = LoadGraph("data/bat.png");         // 通常画像
+	m_deathHandle  = LoadGraph("data/bat_death2.png");  // 死画像
+	m_effectHandle = LoadGraph("data/explosion1.png");  // エフェクト画像
 	// SE
-	m_hitSe = LoadSoundMem("bgm/enemy_death_se.mp3");
-	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");
+	m_hitSe    = LoadSoundMem("bgm/enemy_death_se.mp3");// 死SE
+	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");       // エフェクトSE
 }
 
 EnemyBat::~EnemyBat()
@@ -45,13 +45,12 @@ void EnemyBat::Init()
 {
 	m_state = BatState::Normal;
 	m_pos = { 100.0f,400.0f };
-	m_hp = 2;
+	m_hp = 1;
 	m_isAlive = true;
 }
 
 void EnemyBat::Update()
 {
-	// 状態の更新
 	UpdateState();
 
 	if (!m_isAlive)return;
@@ -62,7 +61,7 @@ void EnemyBat::Update()
 	Character::Update();
 	m_moveTimer++;
 	
-	if (m_moveTimer >= 100)
+	if (m_moveTimer >= kMoveTime)
 	{
 		m_moveLeft = !m_moveLeft;
 		m_moveTimer = 0;
@@ -80,7 +79,7 @@ void EnemyBat::Update()
 
 	
 }
-
+// 状態の更新
 void EnemyBat::UpdateState()
 {
 	m_animCount++;
@@ -93,7 +92,7 @@ void EnemyBat::UpdateState()
 
 	if (m_state == BatState::Normal)
 	{
-		if (m_animFrame >= kNormalFrame)// 通常 = 7
+		if (m_animFrame >= kNormalFrame)// 通常
 		{
 			m_animFrame = 0;
 
@@ -101,7 +100,7 @@ void EnemyBat::UpdateState()
 	}
 	if (m_state == BatState::Death)
 	{
-		if (m_animFrame >= kDeathFrame)// 死 = 12
+		if (m_animFrame >= kDeathFrame)// 死
 		{
 			PlaySoundMem(m_effectSe, DX_PLAYTYPE_BACK);
 			m_state = BatState::DeathEffect;
@@ -112,7 +111,7 @@ void EnemyBat::UpdateState()
 	if (m_state == BatState::DeathEffect)
 	{
 		
-		if (m_animFrame >= kEffectFrame)// 死エフェクト = 12
+		if (m_animFrame >= kEffectFrame)// 死エフェクト
 		{
 			
 			Kill();
@@ -121,7 +120,7 @@ void EnemyBat::UpdateState()
 		
 	}
 }
-
+// 描画
 void EnemyBat::Draw(const Camera& camera)
 {
 	// コウモリが死んでいたら何もしない
@@ -137,6 +136,7 @@ void EnemyBat::Draw(const Camera& camera)
 
 	int w = kGraphWidth * kGraphicsSize;
 	int h = kGraphHeight * kGraphicsSize;
+
 
 	if (m_state == BatState::Normal)
 	{
@@ -174,7 +174,7 @@ void EnemyBat::Draw(const Camera& camera)
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }
-
+// ダメージ判定
 void EnemyBat::Damage()
 {
 	m_hp = -1;
@@ -188,7 +188,7 @@ void EnemyBat::Damage()
 		
 	}
 }
-
+// 当たり判定
 Rect EnemyBat::EnemyBatHitBox() const
 {
 	if (m_state == BatState::Death || m_state == BatState::DeathEffect)

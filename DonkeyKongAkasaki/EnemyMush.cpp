@@ -5,16 +5,24 @@
 
 namespace
 {
-	constexpr int kIdleAnimNum = 7;                  // プレイヤーのIdleアニメーション
-	constexpr int kAnimWaitFrame = 1;                // ↑ 1コマ当たりのフレーム数
-	constexpr int kGraphicsAngle = 0;                // グラフィックアングル
-	constexpr int kGraphWidth = 80;                  // プレイヤーのグラフィックサイズ（幅）
-	constexpr int kGraphHeight = 64;                 // プレイヤーのグラフィックサイズ（高さ）
-	constexpr int kEffectWidth = 64;                 // キノコのエフェクトサイズ（幅）
-	constexpr int kEffectHeight = 64;                // キノコのエフェクトサイズ（高さ）
-	constexpr int kSpeed = 3;                        // キノコのスピード
-	constexpr float kGraphicsSize = 3.0f;            // グラフィックサイズ
-	constexpr float kEffectSize = 4.0f;            // グラフィックサイズ
+	constexpr int kIdleAnimNum      = 7;    // キノコのIdleアニメーション
+	constexpr int kAnimWaitFrame    = 1;    // ↑ 1コマ当たりのフレーム数
+	constexpr int kGraphicsAngle    = 0;    // グラフィックアングル
+	constexpr int kGraphWidth       = 80;   // キノコのグラフィックサイズ（幅）
+	constexpr int kGraphHeight      = 64;   // キノコのグラフィックサイズ（高さ）
+	constexpr int kEffectWidth      = 64;   // キノコのエフェクトサイズ（幅）
+	constexpr int kEffectHeight     = 64;   // キノコのエフェクトサイズ（高さ）
+	constexpr int kAnimSpeed        = 3;    // キノコのアニメーションスピード
+	constexpr int kSpeed            = 3;    // キノコのスピード
+	constexpr int kMoveTime         = 60;   // キノコの移動時間
+	constexpr float kGraphicsSize   = 3.0f; // グラフィックサイズ
+	constexpr float kEffectSize     = 4.0f; // エフェクトサイズ
+	constexpr float kNormalFrame    = 8.0f; // 通常アニメーションフレーム
+	constexpr float kDamageFrame    = 5.0f; // ダメージアニメーションフレーム
+	constexpr float kDeathFrame     = 15.0f;// 死アニメーションフレーム
+	constexpr float kEffectFrame    = 11.0f;// エフェクトアニメーションフレーム
+	constexpr float kStopTime       = 30.0f;// 停止時間
+	constexpr float kDamageCoolTime = 1.0f; // ダメージクールタイム
 
 }
 
@@ -23,15 +31,15 @@ EnemyMush::EnemyMush():
 	m_animCount(0)
 {
 	// 画像
-	m_handle = LoadGraph("data/mush_run.png");
-	m_hitHandle = LoadGraph("data/mush_hit2.png");
-	m_deathHandle = LoadGraph("data/mush_death2.png");
-	m_effectHandle = LoadGraph("data/explosion3.png");
+	m_handle = LoadGraph("data/mush_run.png");         // 通常画像
+	m_hitHandle = LoadGraph("data/mush_hit2.png");     // ヒット画像
+	m_deathHandle = LoadGraph("data/mush_death2.png"); // 死画像
+	m_effectHandle = LoadGraph("data/explosion3.png"); // エフェクト画像
 	// SE
-	m_hitSe = LoadSoundMem("bgm/enemy_hit_se.mp3");
-	m_deathSe = LoadSoundMem("bgm/enemy_death_se.mp3");
-	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");
-	m_hp = 2;
+	m_hitSe = LoadSoundMem("bgm/enemy_hit_se.mp3");    // ヒットSE
+	m_deathSe = LoadSoundMem("bgm/enemy_death_se.mp3");// 死SE
+	m_effectSe = LoadSoundMem("bgm/boom_se.mp3");      // エフェクトSE
+	
 }
 
 EnemyMush::~EnemyMush()
@@ -47,6 +55,8 @@ EnemyMush::~EnemyMush()
 
 void EnemyMush::Init()
 {
+	// HP
+	m_hp = 2;
 	m_state = MushState::Normal;
 	m_pos = { 500.0f,545.0f };
 	m_isAlive = true;
@@ -71,7 +81,7 @@ void EnemyMush::Update()
 	}
 
 	m_moveTimer++;
-	if (m_moveTimer >= 60)
+	if (m_moveTimer >= kMoveTime)
 	{
 		m_moveLeft = !m_moveLeft;
 		m_moveTimer = 0;
@@ -98,7 +108,7 @@ void EnemyMush::UpdateState()
 {
 	m_animCount++;
 
-	if (m_animCount > 3)// アニメーションスピード
+	if (m_animCount > kAnimSpeed)// アニメーションスピード
 	{
 		m_animCount = 0;// はじめに戻す
 		m_animFrame++;  // 次のコマへ
@@ -106,7 +116,7 @@ void EnemyMush::UpdateState()
 
 	if (m_state == MushState::Normal)
 	{
-		if (m_animFrame >= 8)// 通常 = 8
+		if (m_animFrame >= kNormalFrame)// 通常 = 8
 		{
 			m_animFrame = 0;
 		}
@@ -114,7 +124,7 @@ void EnemyMush::UpdateState()
 
 	if (m_state == MushState::Damage)
 	{
-		if (m_animFrame >= 5)// ヒット = 5
+		if (m_animFrame >= kDamageFrame)// ヒット = 5
 		{
 			m_state = MushState::Normal;
 			m_animFrame = 0;
@@ -123,7 +133,7 @@ void EnemyMush::UpdateState()
 
 	if (m_state == MushState::Death)
 	{
-		if (m_animFrame >= 15)// 死 = 15
+		if (m_animFrame >= kDeathFrame)// 死 = 15
 		{
 			PlaySoundMem(m_effectSe, DX_PLAYTYPE_BACK);
 			m_state = MushState::DeathEffect;
@@ -132,15 +142,13 @@ void EnemyMush::UpdateState()
 	}
 	if (m_state == MushState::DeathEffect)
 	{
-		if (m_animFrame >= 11)// 死エフェクト = 12
+		if (m_animFrame >= kEffectFrame)// 死エフェクト = 12
 		{
 			Kill();
 			m_animFrame = 0;
 		}
 	}
 }
-
-
 
 void EnemyMush::Draw(const Camera& camera)
 {
@@ -171,7 +179,7 @@ void EnemyMush::Draw(const Camera& camera)
 	if (m_state == MushState::Damage)
 	{
 		DrawRectRotaGraph(static_cast<int>(m_pos.x - cam.x),
-			static_cast<int>(m_pos.y - cam.y),//-35は地面への位置調整
+			static_cast<int>(m_pos.y - cam.y),
 			srcX, srcY,
 			kGraphWidth, kGraphHeight, kGraphicsSize, kGraphicsAngle,
 			m_hitHandle, true, !m_isRight);
@@ -207,7 +215,7 @@ void EnemyMush::Draw(const Camera& camera)
 		GetColor(255, 0, 0), false);
 #endif // DEBUG
 }
-
+// 攻撃判定
 void EnemyMush::Damage()
 {
 	
@@ -223,10 +231,10 @@ void EnemyMush::Damage()
 	m_hp--;
 
 	// 止まる
-	m_stopTimer = 30;
+	m_stopTimer = kStopTime;
 
 	// 無敵時間
-	m_damageCoolTime = 10;
+	m_damageCoolTime = kDamageCoolTime;
 
 
 	if (m_hp <= 0)
@@ -237,7 +245,7 @@ void EnemyMush::Damage()
 		m_animCount = 0;
 	}
 }
-
+// 当たり判定
 Rect EnemyMush::EnemyMushHitBox() const
 {
 

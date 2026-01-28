@@ -5,28 +5,22 @@
 #include <DxLib.h>
 #include <EffekseerForDXLib.h>
 
-
-namespace
-{
-	//constexpr float kScreenWidth = 1600.0f;// スクリーンの幅
-	//constexpr float kScreenHeight = 900.0f;// スクリーンの高さ
-}
-
 SceneTitle::SceneTitle()
 {
-	m_titleHandle = LoadGraph("data/title.png");
-	m_titleLogoHandle = LoadGraph("data/title_logo.png");
-	m_startHandle = LoadGraph("data/press_start.png");
+	// 画像
+	m_titleHandle     = LoadGraph("data/title.png");      // タイトル画像
+	m_titleLogoHandle = LoadGraph("data/title_logo.png"); // タイトルロゴ画像
+	m_startHandle     = LoadGraph("data/press_start.png");// Start画像
 
 	// BGM
-	m_bgmHandle = LoadSoundMem("bgm/title_bgm.mp3");
-	m_selectSe = LoadSoundMem("bgm/select_se.mp3");
+	m_bgmHandle = LoadSoundMem("bgm/title_bgm.mp3");// タイトルbgm
+	m_selectSe  = LoadSoundMem("bgm/select_se.mp3");// セレクトSE
 
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
 	
 
-	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura3.efkefc");
+	m_sakuraEffectsHandle= LoadEffekseerEffect("data/sakura3.efkefc");// 桜のエフェクト
 	// エフェクトを再生する。
 	m_sakuraEffectsHandle = PlayEffekseer2DEffect(m_sakuraEffectsHandle);
 	// Effekseerで作成したエフェクトは2D表示の場合、小さすぎることが殆どなので必ず拡大する。
@@ -41,6 +35,9 @@ SceneTitle::~SceneTitle()
 	DeleteSoundMem(m_bgmHandle);
 	// エフェクトリソースを削除する。(Effekseer終了時に破棄されるので削除しなくてもいい)
 	DeleteEffekseerEffect(m_sakuraEffectsHandle);
+	DeleteGraph(m_startHandle);
+	DeleteGraph(m_titleLogoHandle);
+	DeleteGraph(m_titleHandle);
 }
 
 void SceneTitle::Update()

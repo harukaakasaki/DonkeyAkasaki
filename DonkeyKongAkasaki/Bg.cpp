@@ -6,20 +6,18 @@
 
 namespace
 {
-	constexpr int kChipSize = 32;// マップチップの大きさ
 	// マップチップを置く数
-	constexpr int kChipNumX = 400;
-	constexpr int kChipNumY = 19;
-	
+	constexpr int kChipNumX       = 400;     // 横
+	constexpr int kChipNumY       = 19;		 // 縦
+	constexpr int kChipSize       = 32;      // マップチップの大きさ
+	constexpr int kHitChipNum     = 4;	     // 当たり判定のあるマップチップ番号
+	constexpr float kScreenWidth  = 1920.0f; // スクリーンの幅
+	constexpr float kScreenHeight = 1080.0f; // スクリーンの高さ
+	constexpr float kChipScale    = 2.0f;    // マップチップの大きさ
+	constexpr float kMapWidth     = 32000.0f;// マップ全体の幅
+	constexpr float kMapHeight    = 1080.0f; // マップ全体の高さ
 
-	
-	
-	constexpr float kScreenWidth = 1920.0f;// スクリーンの幅
-	constexpr float kScreenHeight = 1080.0f;// スクリーンの高さ
-	constexpr float kChipScale = 2.0f;// マップチップの大きさ
-	constexpr float kMapWidth = 32000.0f;// マップ全体の幅
-	constexpr float kMapHeight = 1080.0f;// マップ全体の高さ
-
+	// マップ
 	constexpr int kChipData[kChipNumY][kChipNumX] =
 	{
 		{74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74},
@@ -57,17 +55,15 @@ Bg::Bg(Camera* pCamera):
 	m_mapChipNumY(0)
 {
 	// 背景のイラスト
-	m_bg1Handle = LoadGraph("data/bg_spring1.png");
-	m_bg2Handle = LoadGraph("data/bg_spring2.png");
-	m_bg3Handle = LoadGraph("data/bg_spring_1.png");
-	//m_bg3Handle = LoadGraph("data/bg_winter_1.png");
-	m_mapHandle = LoadGraph("data/mapChip_4.png");
+	m_bg1Handle = LoadGraph("data/bg_spring1.png"); // 背景画像レイヤー1
+	m_bg2Handle = LoadGraph("data/bg_spring2.png"); // 背景画像レイヤー2
+	m_bg3Handle = LoadGraph("data/bg_spring_1.png");// 背景画像レイヤー3
+	m_mapHandle = LoadGraph("data/mapChip_4.png");  // 背景画像
 	
 	// 画像マップチップ数を数える
 	int graphW = 0;
 	int graphH = 0;
 	GetGraphSize(m_mapHandle, &graphW, &graphH);
-
 	m_mapChipNumX = graphW / kChipSize;
 	m_mapChipNumY = graphH / kChipSize;
 	
@@ -99,7 +95,6 @@ void Bg::Draw()
 
 void Bg::DrawMapChip()
 {
-	/*DrawGraph(0, 0, m_mapHandle, true);*/
 
 	for (int y = 0; y < kChipNumY; y++)
 	{
@@ -123,15 +118,6 @@ void Bg::DrawMapChip()
 				srcX, srcY,
 				kChipSize, kChipSize,kChipScale, 0.0f,
 				m_mapHandle, true);
-			
-
-
-//#ifdef _DEBUG
-//
-//			DrawBoxAA(posX, posY, posX + kChipSize * kChipScale, posY + kChipSize * kChipScale, 0x00ff00, false);
-//
-//#endif // _DEBUG
-
 		}
 	}
 }
@@ -139,10 +125,6 @@ void Bg::DrawMapChip()
 int Bg::GetScrollX()
 {
 	int result = static_cast<int>(m_pCamera->GetPos().x);
-	//if (result < 0)
-	//{
-	//	result = 0;// ← はじめはスクロールしないようにしている
-	//}
 
 	if (result > kMapWidth - kScreenWidth)
 	{
@@ -180,7 +162,7 @@ bool Bg::IsCollision(const Rect& rect, Rect& chipRect)
 		{
 			int chipNo = kChipData[y][x];
 
-			if (chipNo != 4)continue;
+			if (chipNo != kHitChipNum)continue;
 
 			float left = x * chipW;
 			float top = y * chipW;
@@ -220,8 +202,4 @@ void Bg::DrawBg()
 		DrawGraph(i * bgSize.width - scrollBg, drawY, m_bg2Handle, true);
 		DrawGraph(i * bgSize.width - scrollBg, drawY, m_bg3Handle, true);
 	}
-	 
-	/*DrawGraph(-scrollBg, m_pos.y, m_bg1Handle, true);
-	DrawGraph(-scrollBg, m_pos.y, m_bg2Handle, true);
-	DrawGraph(-scrollBg, m_pos.y, m_bg3Handle, true);*/
 }

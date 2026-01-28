@@ -3,6 +3,12 @@
 #include <DxLib.h>
 #include "Game.h"
 
+namespace
+{
+	constexpr int kFadeSpeed     = 5;     // フェードスピード
+	constexpr float kFadeOutTime = 360.0f;// フェードアウト時間
+}
+
 void SceneController::Init()
 {
 	m_pScene = new SceneTitle();
@@ -30,10 +36,10 @@ void SceneController::Update()
 		if (m_isFadeOut)
 		{
 			// フェードアウト
-			m_fadeAlpha += 5;
-			if (m_fadeAlpha >= 255)
+			m_fadeAlpha += kFadeSpeed;
+			if (m_fadeAlpha >= kFadeOutTime)
 			{
-				m_fadeAlpha = 255;
+				m_fadeAlpha = kFadeOutTime;
 
 				// シーン切り替え
 				delete m_pScene;
@@ -46,7 +52,7 @@ void SceneController::Update()
 		}
 		else
 		{
-			m_fadeAlpha -= 5;
+			m_fadeAlpha -= kFadeSpeed;
 			if (m_fadeAlpha <= 0)
 			{
 				m_fadeAlpha = 0;
@@ -70,7 +76,7 @@ void SceneController::Draw()
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_fadeAlpha);
 		DrawBox(0, 0,
 			Game::kScreenWidth,Game::kScreenHeight,
-			GetColor(0, 0, 0),
+			GetColor(255, 255, 255),
 			TRUE);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
