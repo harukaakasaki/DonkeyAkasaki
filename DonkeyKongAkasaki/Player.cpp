@@ -25,7 +25,9 @@ namespace
 	constexpr float kMoveFrame      = 8.0f;                 // 死アニメーションフレーム
 	constexpr float kAttackFrame    = 10.0f;                // 攻撃アニメーションフレーム
 	constexpr float kRespawnFrame   = 18.0f;                // リスポーンアニメーションフレーム
-	constexpr float kJumpPower		= 20.0f;				// ジャンプ力
+	constexpr float kJumpPower      = 12.0f;	   			// ジャンプ力
+	constexpr float kJumpHoldPower  = 1.0f;	   			    // 長押しジャンプ力
+	constexpr float kMaxJumpHold    = 20.0f;	   			// ジャンプ限界
 	constexpr float kAnimSpeed		= 2.0f;					// アニメーションスピード
 	constexpr float knockBackX		= 12.0f;				// ノックバックX
 	constexpr float knockBackY		= 15.0f;				// ノックバックY
@@ -88,6 +90,8 @@ void Player::Init()
 	m_spawnPos.y = m_pos.y;
 	m_damageCoolTime = 0;
 	m_spawnTimer = 0;
+	m_jumpHoldFrame = 0;
+	m_isJumping = false;
 }
 
 // 更新
@@ -193,20 +197,30 @@ void Player::Move()
 // ジャンプ
 void Player::Jump()
 {
-	// 地面にいない場合、複数飛ぶことはできない
-	if (!m_isGround)
-	{
-		return;
-	}
-
 	// XキーorPADのBボタンを押す
-	if (Pad::IsTrigger(PAD_INPUT_1))
+	// ジャンプ開始
+	if (m_isGround && Pad::IsTrigger(PAD_INPUT_1))
 	{
 		m_move.y = -kJumpPower;
 		m_isGround = false;
+		m_isJumping = true;
+		m_jumpHoldFrame = 0;
 
 		ChangeVolumeSoundMem(150, m_jumpSe);
 		PlaySoundMem(m_jumpSe, DX_PLAYTYPE_BACK);
+	}
+	// ジャンプの長押し
+	if (m_isJumping && Pad::IsPress(PAD_INPUT_1))
+	{
+		if (m_jumpHoldFrame < kMaxJumpHold)
+		{
+			m_move.y -= kJumpHoldPower;
+			m_jumpHoldFrame++;
+		}
+	}
+	else
+	{
+		m_isJumping = false;
 	}
 }
 

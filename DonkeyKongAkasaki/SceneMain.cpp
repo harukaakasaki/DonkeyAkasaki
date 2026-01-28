@@ -16,9 +16,9 @@
 
 namespace
 {
-	constexpr float kGoalX     = 23000.0f;// ゴール位置
+	constexpr float kGoalX     = 24500.0f;// ゴール位置
 	constexpr float kGoalWidth = 128.0f;  // ゴール位置幅
-	constexpr int kTreeX       = 22700;   // 桜位置X
+	constexpr int kTreeX       = 24200;   // 桜位置X
 	constexpr int kTreeY       = 220;	  // 桜位置Y
 	constexpr int kMoveX       = 1500;	  // 移動位置X
 	constexpr int kMoveY       = 700;	  // 移動位置Y
@@ -93,7 +93,11 @@ void SceneMain::Init()
 		{16000.0f,700.0f},
 		{17300.0f,400.0f},
 		{18000.0f,200.0f},
-		{18500.0f,500.0f}
+		{18500.0f,500.0f},
+		{19100.0f,800.0f},
+		{19400.0f,700.0f},
+		{19700.0f,600.0f},
+		{20000.0f,500.0f}
 	};
 	// コウモリのスポーン地点
 	for (auto& pos : batPosition)
@@ -128,7 +132,7 @@ void SceneMain::Init()
 	// ゴーレムのスポーン地点
 	std::vector<Vec2>golemPosition =
 	{
-		{20000.0f,520.0f}
+		{22000.0f,520.0f}
 	};
 	// ゴーレムのスポーン地点
 	for (auto& pos : golemPosition)
@@ -432,7 +436,11 @@ void SceneMain::ResetEnemies()
 		{16000.0f,700.0f},
 		{17300.0f,400.0f},
 		{18000.0f,200.0f},
-		{18500.0f,500.0f}
+		{18500.0f,500.0f},
+		{19100.0f,800.0f},
+		{19400.0f,700.0f},
+		{19700.0f,600.0f},
+		{20000.0f,500.0f}
 	};
 	for (auto& pos : batPosition)
 	{
@@ -462,7 +470,7 @@ void SceneMain::ResetEnemies()
 	// ゴーレムのリセット位置
 	std::vector<Vec2>golemPosition =
 	{
-		{20000.0f,520.0f}
+		{22000.0f,520.0f}
 	};
 	for (auto& pos : golemPosition)
 	{

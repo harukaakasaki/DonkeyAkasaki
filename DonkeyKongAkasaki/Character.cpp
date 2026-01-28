@@ -65,6 +65,11 @@ void Character::Gravity()
 	// d—Í•ªA‰º‚É—Ž‚¿‚é
 	m_move.y += kGravity;
 
+	if (m_move.y > 0)
+	{
+		m_move.y += 1.5f;
+	}
+
 	if (m_pos.y >= kGround)
 	{
 		// ’n–Ê‚É‚¢‚éŽž‚Ìˆ—

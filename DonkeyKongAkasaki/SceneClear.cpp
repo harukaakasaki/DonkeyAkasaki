@@ -2,6 +2,7 @@
 #include "SceneTitle.h"
 #include "Pad.h"
 #include <DxLib.h>
+#include <cmath>
 
 
 namespace
@@ -26,6 +27,7 @@ SceneClear::SceneClear() :
 	m_clearHandle = LoadGraph("data/spring_has_come.png");// クリア画像
 	ChangeVolumeSoundMem(180, m_bgmHandle);
 	PlaySoundMem(m_bgmHandle, DX_PLAYTYPE_LOOP);
+	m_blinkAngle = 0.0f;
 }
 
 SceneClear::~SceneClear()
@@ -37,6 +39,8 @@ SceneClear::~SceneClear()
 void SceneClear::Update()
 {
 	m_scrollX += kScrollSpeed;
+
+	m_blinkAngle += 0.05f;
 
 	int bgW, bgH;
 	GetGraphSize(m_bgHandle, &bgW, &bgH);
@@ -92,7 +96,11 @@ void SceneClear::Draw()
 		true
 	);
 	DrawGraph(0, 0, m_clearHandle, true);
+	// スタートボタンを点滅させる
+	int alpha = static_cast<int>((sinf(m_blinkAngle) * 0.5f + 0.5f) * 255);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
 	DrawGraph(0, 0, m_endHandle, true);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 Scene* SceneClear::GetNextScene()

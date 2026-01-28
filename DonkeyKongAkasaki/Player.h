@@ -95,6 +95,9 @@ private:
 
 	int m_hpHandle; // ‘Ì—Í‰æ‘œ
 
+	int m_jumpHoldFrame;
+	bool m_isJumping;
+
 	/// <summary>
 	/// ˆÚ“®
 	/// </summary>
