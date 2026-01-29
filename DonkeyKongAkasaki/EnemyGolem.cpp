@@ -12,8 +12,8 @@ namespace
 	constexpr int kEffectWidth      = 64;   // ゴーレムのエフェクトサイズ（幅）
 	constexpr int kEffectHeight     = 64;   // ゴーレムのエフェクトサイズ（高さ）
 	constexpr int kAnimSpeed        = 4;    // ゴーレムのアニメーションスピード
-	constexpr int kSpeed            = 3;    // ゴーレムのスピード
-	constexpr int kMoveTime         = 420;  // ゴーレムの移動時間
+	constexpr int kSpeed            = 5;    // ゴーレムのスピード
+	constexpr int kMoveTime         = 240;  // ゴーレムの移動時間
 	constexpr float kGraphicsSize   = 12.0f;// グラフィックサイズ
 	constexpr float kEffectSize     = 14.0f;// エフェクトサイズ
 	constexpr float kNormalFrame    = 10.0f;// 通常アニメーションフレーム
