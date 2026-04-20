@@ -60,11 +60,6 @@ void SceneController::Update()
 			}
 		}
 	}
-
-	
-
-	
-	
 }
 
 void SceneController::Draw()
