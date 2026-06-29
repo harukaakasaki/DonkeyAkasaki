@@ -58,7 +58,7 @@ Bg::Bg(Camera* pCamera):
 	m_bg1Handle = LoadGraph("data/bg_spring1.png"); // 背景画像レイヤー1
 	m_bg2Handle = LoadGraph("data/bg_spring2.png"); // 背景画像レイヤー2
 	m_bg3Handle = LoadGraph("data/bg_spring_1.png");// 背景画像レイヤー3
-	m_mapHandle = LoadGraph("data/mapChip_4.png");  // 背景画像
+	m_mapHandle = LoadGraph("data/mapChip.png");  // マップチップ画像
 	
 	// 画像マップチップ数を数える
 	int graphW = 0;
