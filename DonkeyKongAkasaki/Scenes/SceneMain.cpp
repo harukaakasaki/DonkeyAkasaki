@@ -1,18 +1,18 @@
 #include "SceneClear.h"
 #include "SceneTitle.h"
 #include "SceneMain.h"
-#include "Game.h"
-#include "Enemy.h"
-#include "EnemyBat.h"
-#include "EnemyMush.h"
-#include "EnemyGolem.h"
+#include "../Systems/Game.h"
+#include "../GameObjects/Enemy.h"
+#include "../GameObjects/EnemyBat.h"
+#include "../GameObjects/EnemyMush.h"
+#include "../GameObjects/EnemyGolem.h"
 #include <DxLib.h>
-#include "Player.h"
-#include "Pad.h"
-#include "Vec2.h"
-#include "Camera.h"
+#include "../GameObjects/Player.h"
+#include "../Systems/Pad.h"
+#include "../Systems/Vec2.h"
+#include "../Systems/Camera.h"
 #include <memory>
-#include "Bg.h"
+#include "../GameObjects/Bg.h"
 
 namespace
 {

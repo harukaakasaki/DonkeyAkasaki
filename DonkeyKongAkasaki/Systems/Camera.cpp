@@ -2,8 +2,8 @@
 #include <DxLib.h>
 #include "Camera.h"
 #include "Game.h"
-#include "Character.h"
-#include "Player.h"
+#include "../GameObjects/Character.h"
+#include "../GameObjects/Player.h"
 
 // ƒ‰[ƒv
 // ŠŠ‚ç‚©‚É“®‚­‚æ‚¤‚É‚·‚é

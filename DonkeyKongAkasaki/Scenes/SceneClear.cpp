@@ -1,6 +1,6 @@
 #include "SceneClear.h"
 #include "SceneTitle.h"
-#include "Pad.h"
+#include "../Systems/Pad.h"
 #include <DxLib.h>
 #include <cmath>
 

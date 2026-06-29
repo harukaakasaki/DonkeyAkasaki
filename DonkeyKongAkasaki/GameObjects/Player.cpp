@@ -1,11 +1,11 @@
 #include "Player.h"
 #include <DxLib.h>
-#include "Pad.h"
+#include "../Systems/Pad.h"
 #include "Character.h"
-#include "SceneMain.h"
-#include "Vec2.h"
-#include "Camera.h"
-#include "Game.h"
+#include "../Scenes/SceneMain.h"
+#include "../Systems/Vec2.h"
+#include "../Systems/Camera.h"
+#include "../Systems/Game.h"
 
 namespace
 {

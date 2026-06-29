@@ -1,7 +1,7 @@
 #include "SceneController.h"
 #include "SceneTitle.h"
 #include <DxLib.h>
-#include "Game.h"
+#include "../Systems/Game.h"
 
 namespace
 {

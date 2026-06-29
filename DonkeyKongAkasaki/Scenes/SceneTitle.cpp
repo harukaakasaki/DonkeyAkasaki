@@ -1,6 +1,6 @@
 #include "SceneTitle.h"
-#include "Pad.h"
-#include "Game.h"
+#include "../Systems/Pad.h"
+#include "../Systems/Game.h"
 #include "SceneMain.h"
 #include <DxLib.h>
 #include <EffekseerForDXLib.h>

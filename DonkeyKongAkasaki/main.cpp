@@ -1,10 +1,10 @@
 #include <DxLib.h>
-#include "SceneController.h"
-#include "Game.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "SceneMain.h"
-#include "Pad.h"
+#include "../Scenes/SceneController.h"
+#include "../Systems/Game.h"
+#include "../GameObjects/Player.h"
+#include "../GameObjects/Enemy.h"
+#include "../Scenes/SceneMain.h"
+#include "../Systems/Pad.h"
 #include "EffekseerForDXLib.h"
 
 // ƒvƒƒOƒ‰ƒ€‚Í WinMain ‚©‚çn‚Ü‚è‚Ü‚·

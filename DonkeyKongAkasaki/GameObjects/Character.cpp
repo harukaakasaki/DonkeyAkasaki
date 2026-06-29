@@ -1,8 +1,8 @@
 #include "Character.h"
 #include <DxLib.h>
 #include "Player.h"
-#include "Camera.h"
-#include "Vec2.h"
+#include "../Systems/Camera.h"
+#include "../Systems/Vec2.h"
 
 
 namespace

@@ -3,7 +3,7 @@
 // エネミーベースの制作完了
 // 次に3種類のエネミーを作りたい
 #include "Character.h"
-#include "Camera.h"
+#include "../Systems/Camera.h"
 
 class Enemy:public Character
 {

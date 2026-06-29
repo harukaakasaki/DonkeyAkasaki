@@ -1,8 +1,8 @@
 #include "Bg.h"
 #include <DxLib.h>
 #include "Player.h"
-#include "Camera.h"
-#include "Game.h"
+#include "../Systems/Camera.h"
+#include "../Systems/Game.h"
 
 namespace
 {
